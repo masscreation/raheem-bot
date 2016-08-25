@@ -1,0 +1,81 @@
+{
+  "STEP:1_GET_STARTED_PAYLOAD": {
+    "nextMessage":"greeting"
+  },
+
+  "greeting": {
+    "type": "message",
+    "text": "Hello!",
+    "responseType": "text",
+    "nextMessage": "question_1"
+  },
+  
+  "question_1": {
+    "type": "message",
+    "text": "What is your name?",
+    "responseType": "text",
+    "responseKey": "name",
+    "nextMessage": "name_confirmation"
+  },
+
+  "name_confirmation": {
+    "type": "message",
+    "text": "Nice to meet you ${'name'}",
+    "responseType": "text",
+    "nextMessage": "question_2"
+  },
+
+  "question_2": {
+    "type": "message",
+    "text": "How old are you?",
+    "responseType": "int",
+    "responseKey": "age",
+    "nextMessage": "age_confirmation"
+  },
+
+  "age_confirmation": {
+    "type": "message",
+    "text": "Wow ${'age'} years old!",
+    "responseType": "text",
+    "nextMessage": "question_3"
+  },
+
+  "question_3": {
+    "type": "button",
+    "text": "How are you today?",
+    "options": [{
+      "title": "Good",
+      "data": "good"
+      },
+      {
+      "title": "Bad",
+      "data": "bad"
+      }
+    ],
+    "botResponse": {
+      "good": "positive_response",
+      "bad": "negative_response"
+    }
+  },
+
+  "positive_response": {
+    "type": "message",
+    "text": "I am glad to hear that!",
+    "response_type": "text",
+    "nextMessage": "goodbye"
+  },
+
+  "negative_response": {
+    "type": "message",
+    "text": "I am sorry to hear that :(",
+    "response_type": "text",
+    "nextMessage": "goodbye"
+  },
+
+  "goodbye": {
+    "type": "message",
+    "text": "Thanks for talking to me today, Goodbye!",
+    "response_type": "text",
+    "nextMessage": "nil"
+  }
+}
