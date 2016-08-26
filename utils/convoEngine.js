@@ -1,7 +1,8 @@
 'use strict'
 
 const content = require('../content');
-const fb = require('./services/fbMessengerSendApi');
+const stateMachine = require('./stateMachine');
+const store = require('./store')
 
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
 let currentState = initialState;
@@ -17,15 +18,10 @@ module.exports = {
   // 3. Get the next piece of content
   // 4. Send out next piece of content
 
-  nextState() {
-    currentState = content[currentState].nextMessage;
-    console.log("currentState: ", currentState);
-  },
-
   send(recipientID, message) {
     console.log("message received that could be sent back: ", message);
-    this.nextState();
-    fb.sendTextMessage(recipientID, content[currentState].text || null);
+    stateMachine.nextState();
+    router.out(recipientID, message);
   }
 
 };

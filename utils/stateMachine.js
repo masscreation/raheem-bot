@@ -6,16 +6,9 @@
  */
 module.exports = {
 
-  set(turn) {
-
-  },
-
-  get() {
-
-  },
-
-  goTo() {
-
+  nextState() {
+    currentState = content[currentState].nextMessage;
+    console.log("currentState: ", currentState);
   }
 
 };

@@ -5,10 +5,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const request = require('request')
+const router = require('./utils/router.js')
 const app = express()
-
-const Message = require('./models/message')
-
 
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -88,32 +86,7 @@ app.post('/webhook', function (req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
-				if (messagingEvent.optin) {
-					console.log("receivedAuthentication");
-          // receivedAuthentication(messagingEvent);
-        } else if (messagingEvent.message) {
-					console.log(messagingEvent.message)
-					let message = new Message(messagingEvent);
-          message.received();
-        } else if (messagingEvent.delivery) {
-					console.log(" receivedDeliveryConfirmation");
-          // receivedDeliveryConfirmation(messagingEvent);
-        } else if (messagingEvent.postback) {
-					let message = new Message(messagingEvent);
-          message.received();
-        } else if (messagingEvent.read) {
-					console.log('receivedMessageRead');
-          // receivedMessageRead(messagingEvent);
-        // } else if (messagingEvent.account_linking) {
-          // receivedAccountLink(messagingEvent);
-        } else {
-          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-        }
-
-
-
-
-
+				router.in(messagingEvent)
 			});
 
     });
