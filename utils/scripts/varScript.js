@@ -2,19 +2,32 @@
 
 const store = require('../store')
 
-swapVar = function(message, userInput){
-  let iOne = message["text"].indexOf('${') + 3;
-  let iTwo = message["text"].indexOf('}') - 1;
-  let dynamicContent = message["text"].substr(iOne, (iTwo - iOne));
-  let finalResponse = message["text"].replace("${'" + dynamicContent + "'}", varStore[dynamicContent]);
+function swapVar(message, userInput){
+  console.log(message)
+  let iOne = message.indexOf('${') + 3;
+  let iTwo = message.indexOf('}') - 1;
+  let dynamicContent = message.substr(iOne, (iTwo - iOne));
+  let finalResponse = message.replace("${'" + dynamicContent + "'}", store[dynamicContent]);
   return finalResponse
 }
 
-saveVar = function(key, message){
-  store[key] = variable;
+function saveVar(key, message){
+  store[key] = message;
 }
 
 module.exports = function(currentFrame, userInput){
-  saveVar(currentFrame.["responseKey"], userInput) if currentFrame["responseKey"];
-  return swapVar(currentFrame["text"], userInput) if message["text"].includes("${");
+
+  if (currentFrame["responseKey"]) {
+    saveVar(currentFrame["responseKey"], userInput);
+    console.log("saved variable to store")
+  }
+
+
+  if (currentFrame["text"] && currentFrame["text"].includes("${")){
+    currentFrame["text"] = swapVar(currentFrame["text"], userInput) ;
+    return currentFrame
+  } else {
+    return userInput
+  }
+
 }

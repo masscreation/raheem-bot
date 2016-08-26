@@ -3,6 +3,9 @@
 const content = require('../content');
 const state = require('./stateMachine');
 const store = require('./store')
+const varScript = require('./scripts/varScript')
+
+let currentState
 
 
 /*
@@ -28,16 +31,28 @@ module.exports = {
 
       if (incomingPayload) {
         console.log("incomingPayload: ", incomingPayload);
-        state.next();
 
-        let currentState = state.get();
+        currentState = state.get();
+
+        //run varscript
+        varScript(content[currentState], incomingPayload);
+        console.log('here')
+
+        state.next();
+        
+        currentState = state.get();
+
         console.log("STATE: ", currentState);
         // this is where the smarts is gonna happen, do we call a script
         // or send to wit.ai  or something else
         // what do we send back: text, objects, etc.
 
         let outgoingObj = content[currentState];
+
+        outgoingObj = varScript(content[currentState], outgoingObj);
+
         console.log("Outgoing Object: ", outgoingObj);
+
         resolve(outgoingObj);
 
       } else {
