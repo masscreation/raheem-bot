@@ -45,24 +45,11 @@ function callSendAPI(messageData) {
  */
 module.exports = {
 
-  sendTextMessage(recipientID, payload) {
+  send(messageData) {
 
-    if (payload !== null) {
-
-      var messageData = {
-        recipient: {
-          id: recipientID
-        },
-        message: {
-          text: payload,
-          metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-      };
-
+    if (messageData !== null) {
       callSendAPI(messageData);
+    };
+ },
 
-    }
-
- }
-
-}
+};

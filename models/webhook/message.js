@@ -8,12 +8,12 @@ module.exports = class Message {
     this.timeOfMessage = event.timestamp;
 
     // types of messages
-    this.message = event.message || 0;
+    this.message = event.message || false;
 
     // message meta data
-    this.isEcho = this.message.is_echo || 0;
-    this.messageId = this.message.mid || 0;
-    this.appId = this.message.app_id || 0;
+    this.isEcho = this.message.is_echo || false;
+    this.messageId = this.message.mid || false;
+    this.appId = this.message.app_id || false;
     this.metadata = this.message.metadata || {};
 
     // You may get a text or attachment but not both
@@ -21,6 +21,6 @@ module.exports = class Message {
   }
 
   isValid(){
-    !this.echo && this.userContent;
+    return !this.isEcho && this.userContent;
   }
 }

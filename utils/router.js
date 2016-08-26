@@ -1,29 +1,68 @@
 'use strict';
 
 const fb = require('./services/fbMessengerSendApi');
-const Message = require('../models/message.js');
-const Postback = require('../models/postback.js');
+const convoEngine = require('./convoEngine');
+const Message = require('../models/webhook/message');
+const Postback = require('../models/webhook/postback');
+const messageTemplate = require('../models/templates/message');
+const buttonTemplate = require('../models/templates/button');
 
-module.exports = {
 
-  in(messagingEvent){
+function createTemplate(recipientID, obj) {
+  if (obj.type === "message") {
+    return messageTemplate(recipientID, obj.text);
+  } else if (content.type === "button") {
+    return buttonTemplate(recipientID, obj.text);
+  }
+};
+
+module.exports = function(messagingEvent) {
+
     if (messagingEvent.optin) {
       console.log("receivedAuthentication");
       // receivedAuthentication(messagingEvent);
 
     } else if (messagingEvent.message) {
       console.log(messagingEvent.message);
+
       let message = new Message(messagingEvent);
-      convoEngine.send(message.senderID, message.userContent) if message.isValid();
+      console.log("ECHO: ", message.isValid());
+      if (message.isValid()) {
+
+        let senderID = message.senderID;
+        convoEngine.send(message.userContent).then(function(outgoingObj){
+
+          // send user back a message
+          fb.send(createTemplate(senderID, outgoingObj));
+
+        }).catch(function(err) {
+
+          console.log(err.message);
+
+        });
+      }
 
     } else if (messagingEvent.delivery) {
       console.log(" receivedDeliveryConfirmation");
       // receivedDeliveryConfirmation(messagingEvent);
 
     } else if (messagingEvent.postback) {
+
       console.log(messagingEvent.postback);
+
       let postback = new Postback(messagingEvent);
-      convoEngine.send(postback.senderID, postback.userContent)
+      let senderID = postback.senderID;
+
+      convoEngine.send(postback.userContent).then(function(outgoingObj){
+
+        // send user back something
+        fb.send(createTemplate(senderID, outgoingObj));
+
+      }).catch(function(err) {
+
+        console.log(err.message);
+
+      });
 
     } else if (messagingEvent.read) {
       console.log('receivedMessageRead');
@@ -31,15 +70,4 @@ module.exports = {
     } else {
       console.log("Webhook received unknown messagingEvent: ", messagingEvent);
     }
-  }
-
-  out(recipientID, content){
-    if (content.type === "message"){
-      fb.send(messageOut(recipientID, content));
-
-    } elseIf (content.type === "button"){
-      fb.send(postbackOut(recipientID, content));
-
-    }
-  }
 }
