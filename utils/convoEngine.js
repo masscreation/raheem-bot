@@ -4,9 +4,9 @@ const content = require('../content');
 const state = require('./stateMachine');
 const store = require('./store')
 const varScript = require('./scripts/varScript')
+const messageThread = require('./scripts/messageThread')
 
-let currentState
-
+let currentState;
 
 /*
  * Collection of methods to managing the convo
@@ -30,16 +30,15 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 
       if (incomingPayload) {
-        console.log("incomingPayload: ", incomingPayload);
+        console.log("Incoming Payload: ", incomingPayload);
 
         currentState = state.get();
 
-        //run varscript
+        // save incoming !!!
         varScript(content[currentState], incomingPayload);
-        console.log('here')
 
         state.next();
-        
+
         currentState = state.get();
 
         console.log("STATE: ", currentState);
@@ -47,13 +46,18 @@ module.exports = {
         // or send to wit.ai  or something else
         // what do we send back: text, objects, etc.
 
-        let outgoingObj = content[currentState];
+        let outgoingMessageObj = content[currentState];
 
-        outgoingObj = varScript(content[currentState], outgoingObj);
+        // update object if there is content to grab from store
+        outgoingMessageObj = varScript(content[currentState], outgoingMessageObj);
 
-        console.log("Outgoing Object: ", outgoingObj);
+        console.log("Outgoing Payload: ", outgoingMessageObj);
 
-        resolve(outgoingObj);
+        // check if bot needs to send pieces of content
+        let outgoingMessages = messageThread.set(outgoingMessageObj);
+
+        console.log("we should get here");
+        resolve(outgoingMessages);
 
       } else {
         reject(new Error('something went wrong in the convoEngine'))

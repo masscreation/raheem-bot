@@ -11,7 +11,7 @@ const buttonTemplate = require('../models/templates/button');
 function createTemplate(recipientID, obj) {
   if (obj.type === "message") {
     return messageTemplate(recipientID, obj.text);
-  } else if (content.type === "button") {
+  } else if (obj.type === "button") {
     return buttonTemplate(recipientID, obj.text);
   }
 };
@@ -33,10 +33,12 @@ module.exports = function(messagingEvent) {
         convoEngine.send(message.userContent).then(function(outgoingObj){
 
           // send user back a message
-          fb.send(createTemplate(senderID, outgoingObj));
+          outgoingObj.forEach(function(obj) {
+            fb.send(createTemplate(senderID, obj));
+          });
+
 
         }).catch(function(err) {
-
           console.log(err.message);
 
         });
@@ -56,12 +58,15 @@ module.exports = function(messagingEvent) {
       convoEngine.send(postback.userContent).then(function(outgoingObj){
 
         // send user back something
-        fb.send(createTemplate(senderID, outgoingObj));
+        for (let i = 0, len = outgoingObj.length; i < len; i++) {
+          let obj = outgoingObj[i];
+          // delay for multi-threaded messages
+          fb.send(createTemplate(senderID, obj));
+          setTimeout(function(){}, 1000);
+        };
 
       }).catch(function(err) {
-
         console.log(err.message);
-
       });
 
     } else if (messagingEvent.read) {
