@@ -2,8 +2,7 @@
 
 const store = require('../store')
 
-function swapVar(message, userInput){
-  console.log(message)
+function swapVar(message){
   let iOne = message.indexOf('${') + 3;
   let iTwo = message.indexOf('}') - 1;
   let dynamicContent = message.substr(iOne, (iTwo - iOne));
@@ -17,14 +16,13 @@ function saveVar(key, message){
 
 module.exports = function(currentFrame, userInput){
 
-  if (currentFrame["responseKey"]) {
+  if (currentFrame["type"] !== "button" && currentFrame["responseKey"]) {
     saveVar(currentFrame["responseKey"], userInput);
     console.log("saved variable to store")
   }
 
-
   if (currentFrame["text"] && currentFrame["text"].includes("${")){
-    currentFrame["text"] = swapVar(currentFrame["text"], userInput) ;
+    currentFrame["text"] = swapVar(currentFrame["text"]);
     return currentFrame
   } else {
     return userInput

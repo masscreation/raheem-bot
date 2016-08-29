@@ -10,8 +10,8 @@ let currentState = initialState;
  */
 module.exports = {
 
-  next() {
-    currentState = content[currentState].nextMessage;
+  next(incomingPayload) {
+    currentState = content[currentState].nextMessage 
     console.log("currentState: ", currentState);
   },
 

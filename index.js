@@ -1,21 +1,21 @@
 'use strict'
 
-const config = require('config')
-const express = require('express')
-const bodyParser = require('body-parser')
-const crypto = require('crypto')
-const request = require('request')
-const router = require('./utils/router.js')
-const app = express()
+const config = require('config');
+const express = require('express');
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+const request = require('request');
+const router = require('./utils/router.js');
+const app = express();
 
-app.set('port', (process.env.PORT || 5000))
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json({ verify: verifyRequestSignature }))
+app.set('port', (process.env.PORT || 5000));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // index
 app.get('/', function (req, res) {
-	res.send('hello world i am a secret bot')
-})
+	res.send('hello world i am a secret bot');
+});
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -86,7 +86,8 @@ app.post('/webhook', function (req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
-				router(messagingEvent)
+				console.log(messagingEvent);
+				router(messagingEvent);
 			});
 
     });

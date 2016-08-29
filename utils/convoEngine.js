@@ -5,13 +5,15 @@ const state = require('./stateMachine');
 const store = require('./store')
 const varScript = require('./scripts/varScript')
 const messageThread = require('./scripts/messageThread')
+const scriptEngine = require('./scriptEngine')
 
-let currentState;
+let currentState, outgoingMessageObj;
 
 /*
  * Collection of methods to managing the convo
  *
  */
+
 module.exports = {
 
   // 1. Consult the conversation state
@@ -31,36 +33,24 @@ module.exports = {
 
       if (incomingPayload) {
         console.log("Incoming Payload: ", incomingPayload);
+        currentState = state.get();
+        
+        scriptEngine.digest(content[currentState], incomingPayload);
+
+        state.next(incomingPayload);
 
         currentState = state.get();
-
-        // save incoming !!!
-        varScript(content[currentState], incomingPayload);
-
-        state.next();
-
-        currentState = state.get();
-
         console.log("STATE: ", currentState);
-        // this is where the smarts is gonna happen, do we call a script
-        // or send to wit.ai  or something else
-        // what do we send back: text, objects, etc.
 
-        let outgoingMessageObj = content[currentState];
-
-        // update object if there is content to grab from store
-        outgoingMessageObj = varScript(content[currentState], outgoingMessageObj);
-
+        outgoingMessageObj = scriptEngine.format(content[currentState], content[currentState]);
         console.log("Outgoing Payload: ", outgoingMessageObj);
 
-        // check if bot needs to send pieces of content
         let outgoingMessages = messageThread.set(outgoingMessageObj);
-
-        console.log("we should get here");
         resolve(outgoingMessages);
 
       } else {
-        reject(new Error('something went wrong in the convoEngine'))
+        reject(new Error('something went wrong in the convoEngine'));
+
       }
 
     });
