@@ -10,6 +10,8 @@ module.exports = {
 
   set(obj) {
 
+    console.log(obj)
+
     // if multiple messages at same time
     while (obj.waitForUser === false){
       messagesArray.push(obj);
@@ -21,9 +23,9 @@ module.exports = {
     messagesArray.push(obj);
     let outgoingMessages = messagesArray;
 
+    console.log("outgoing message", messagesArray)
     // reset
     messagesArray = [];
-
     return outgoingMessages;
   }
 

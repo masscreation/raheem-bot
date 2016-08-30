@@ -1,7 +1,8 @@
 'use strict';
 
 let scripts = [
-  "varScript"
+  "varScript",
+  "locationScript"
 ];
 
 let scriptArray = [];
@@ -24,7 +25,8 @@ module.exports = {
 
   format(content, message) {
     scriptArray.forEach(function(script){
-      message = script(content, message);
+      let new_message = script(content, message);
+      new_message ? message = new_message : null
     });
 
     return message;

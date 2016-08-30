@@ -11,11 +11,19 @@ let currentState = initialState;
 module.exports = {
 
   next(incomingPayload) {
-    currentState = content[currentState].nextMessage 
-    console.log("currentState: ", currentState);
+    console.log("NEXT")
+
+    currentState = content[currentState].nextMessage
   },
 
-  get() {
+  get(incomingPayload) {
+    //Check if currentState is a button, if so set currentState by user input
+    //Better if stored and references like
+    // TODO: Rethink naming of variables and objects in state
+    if (currentState[incomingPayload] && typeof currentState === 'object'){
+      console.log("GET")
+      currentState = currentState[incomingPayload];
+    }
     return currentState;
   }
 

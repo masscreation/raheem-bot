@@ -16,12 +16,13 @@ function saveVar(key, message){
 
 module.exports = function(currentFrame, userInput){
 
-  if (currentFrame["type"] !== "button" && currentFrame["responseKey"]) {
+  if (currentFrame["responseKey"]) {
     saveVar(currentFrame["responseKey"], userInput);
     console.log("saved variable to store")
   }
 
-  if (currentFrame["text"] && currentFrame["text"].includes("${")){
+  if (currentFrame["text"] &&
+      currentFrame["text"].includes("${")){
     currentFrame["text"] = swapVar(currentFrame["text"]);
     return currentFrame
   } else {

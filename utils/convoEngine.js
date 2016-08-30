@@ -33,13 +33,15 @@ module.exports = {
 
       if (incomingPayload) {
         console.log("Incoming Payload: ", incomingPayload);
-        currentState = state.get();
-        
+        currentState = state.get(incomingPayload);
+
         scriptEngine.digest(content[currentState], incomingPayload);
+        console.log(store['locationQueryResults'])
+        console.log("DIGESTED")
 
-        state.next(incomingPayload);
+        state.next();
 
-        currentState = state.get();
+        currentState = state.get(incomingPayload);
         console.log("STATE: ", currentState);
 
         outgoingMessageObj = scriptEngine.format(content[currentState], content[currentState]);
