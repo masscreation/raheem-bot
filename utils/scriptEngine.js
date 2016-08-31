@@ -1,5 +1,10 @@
 'use strict';
 
+
+const Promise = require("bluebird");
+const state = require("./stateMachine");
+const messageThread = require("./messageThread");
+
 let scripts = [
   "varScript",
   "locationScript"
@@ -7,28 +12,67 @@ let scripts = [
 
 let scriptArray = [];
 
+
 let loadScripts = function(){
   scripts.forEach(function(script){
     scriptArray.push(require(`./scripts/${script}`));
   });
 }
 
+let currentState, outgoingMessage, output;
+
 loadScripts();
 
 module.exports = {
 
-  digest(content, message) {
-    scriptArray.forEach(function(script){
-      script(content, message);
+
+    digest(message) {
+      return new Promise(function(resolve, reject){
+        console.log("DIGEST MESSAGE")
+        //Grab state from previous turn
+        currentState = state.get(message);
+        //If the currentState includes scripts, iterate through and execute them
+          return Promise.each(scriptArray, function(script){
+            if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+              return script.digest(currentState, message)
+
+            } else {
+              return Promise.resolve()
+
+            }
+          }).then(function(){
+            resolve(message)
+          });
     });
   },
 
-  format(content, message) {
-    scriptArray.forEach(function(script){
-      let new_message = script(content, message);
-      new_message ? message = new_message : null
-    });
+  format(message) {
+    return new Promise(function(resolve, reject){
+      console.log("FORMAT MESSAGE", message)
 
-    return message;
+      state.next()
+      currentState = state.get(message);
+
+      if (currentState.scripts){
+        scriptArray.forEach(function(script){
+          if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+            let newOutgoingMessage = script.format(currentState);
+            newOutgoingMessage ? output = newOutgoingMessage : output = currentState
+            console.log("OUTPUT", output)
+          }
+        });
+
+        let outgoingMessages = messageThread.set(output);
+
+        resolve(outgoingMessages)
+      } else {
+
+        console.log("CURRENT STATE", currentState)
+
+        let outgoingMessages = messageThread.set(currentState);
+
+        resolve(outgoingMessages)
+      }
+    })
   }
 }

@@ -1,51 +1,57 @@
 {
   "STEP:1_GET_STARTED_PAYLOAD": {
-    "nextMessage":"greeting"
+    "nextMessage": "STEP:GREETING"
   },
 
-  "greeting": {
+  "STEP:GREETING": {
     "type": "message",
     "text": "Hello!",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "question_1"
+    "nextMessage": "STEP:NAME_QUERY"
   },
 
-  "question_1": {
+  "STEP:NAME_QUERY": {
     "type": "message",
     "text": "What is your name?",
     "responseType": "text",
-    "responseKey": "name",
-    "nextMessage": "name_confirmation"
+    "scripts": ["varScript"],
+    "responseKey": "userName",
+    "nextMessage": "STEP:NAME_CONFIRMATION"
   },
 
-  "name_confirmation": {
+  "STEP:NAME_CONFIRMATION": {
     "type": "message",
-    "text": "Nice to meet you ${'name'}!",
+    "text": "Nice to meet you ${'userName'}!",
+    "scripts": ["varScript"],
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "question_2"
+    "nextMessage": "STEP:AGE_QUERY"
   },
 
-  "question_2": {
+  "STEP:AGE_QUERY": {
     "type": "message",
     "text": "How old are you?",
     "responseType": "int",
-    "responseKey": "age",
-    "nextMessage": "age_confirmation"
+    "scripts": ["varScript"],
+    "responseKey": "userAge",
+    "nextMessage": "STEP:AGE_CONFIRMATION"
   },
 
-  "age_confirmation": {
+  "STEP:AGE_CONFIRMATION": {
     "type": "message",
-    "text": "Wow ${'age'} years old!",
+    "text": "Wow ${'userAge'} years old!",
+    "scripts": ["varScript"],
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "question_3"
+    "nextMessage": "STEP:MOOD_QUERY"
   },
 
-  "question_3": {
+  "STEP:MOOD_QUERY": {
     "type": "button",
     "text": "How are you today?",
+    "scripts": ["varScript"],
+    "responseKey": "userMood",
     "options": [{
       "title": "Good",
       "data": "good"
@@ -56,63 +62,83 @@
       }
     ],
     "nextMessage": {
-      "good": "positive_response",
-      "bad": "negative_response"
+      "good": "STEP:POSITIVE_RESPONSE",
+      "bad": "STEP:NEGATIVE_RESPONSE"
     }
   },
 
-  "positive_response": {
+  "STEP:POSITIVE_RESPONSE": {
     "type": "message",
     "text": "I am glad to hear that!",
     "response_type": "text",
     "waitForUser": false,
-    "nextMessage": "question_4"
+    "nextMessage": "STEP:FAVORITE_COLOR_QUERY"
   },
 
-  "negative_response": {
+  "STEP:NEGATIVE_RESPONSE": {
     "type": "message",
     "text": "I am sorry to hear that :(",
     "response_type": "text",
     "waitForUser": false,
-    "nextMessage": "question_4"
+    "nextMessage": "STEP:FAVORITE_COLOR_QUERY"
   },
 
-  "question_4": {
+  "STEP:FAVORITE_COLOR_QUERY": {
+    "type": "quickReply",
+    "text": "What is your favorite color?",
+    "scripts": ["varScript"],
+    "responseKey": "userFavoriteColor",
+    "options": [{
+      "title": "Green",
+      "data": "Green"
+      },
+      {
+      "title": "Blue",
+      "data": "Blue"
+    }],
+    "nextMessage":"STEP:FAVORITE_COLOR_CONFIRMATION"
+  },
+
+  "STEP:FAVORITE_COLOR_CONFIRMATION": {
+    "type": "message",
+    "text": "${'userFavoriteColor'} is truly the worst color, you are the worst.",
+    "scripts": ["varScript"],
+    "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:LOCATION_QUERY": {
     "type": "message",
     "text": "Where do you live?",
     "responseType": "text",
-    "scripts": [
-      "location"
-    ],
-    "state": "question",
-    "responseKey": "location",
-    "nextMessage": "location_selection"
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:LOCATION_PROMT"
   },
 
-  "location_selection": {
+  "STEP:LOCATION_PROMT": {
     "type": "generic",
-    "scripts": [
-      "location"
-    ],
-    "state": "selection",
-    "nextMessage": "location_confirmation"
+    "responseKey": "userLocation",
+    "scripts": ["locationScript", "varScript"],
+    "nextMessage": "STEP:LOCATION_CONFIRMATION"
   },
 
-  "location_confirmation": {
-    "text": "You selected ${location}!",
+  "STEP:LOCATION_CONFIRMATION": {
+    "type": "message",
+    "text": "You selected ${'userLocation'}!",
     "responseType": "text",
-    "scripts": [
-      "location"
-    ],
-    "state": "confirmation",
+    "scripts": ["varScript"],
     "waitForUser": false,
-    "nextMessage": "goodbye"
+    "nextMessage": "STEP:GOODBYE"
   },
 
-  "goodbye": {
+  "STEP:GOODBYE": {
     "type": "message",
     "text": "Thanks for talking to me today, Goodbye!",
     "response_type": "text",
+    "nextMessage": "FINAL:TERMINATE"
+  },
+
+  "FINAL:TERMINATE": {
     "nextMessage": "nil"
   }
 }

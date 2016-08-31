@@ -8,29 +8,26 @@ module.exports = function (recipientID, payload) {
         "recipient": {
           "id": recipientID
         },
-          "message": {
-            "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": createElements(payload)
-                }
-              }
+        "message": {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "generic",
+              "elements": createElements(payload.options)
             }
           }
         }
       }
+    }
+  }
 
 function createElements(elements) {
-  console.log(elements)
-  let elementsArray = [];
-  elements.forEach(function(elements) {
+  let elementArray = [];
+  elements.forEach(function(element) {
     elementArray.push(
       {
         "title": element.title,
-        "image_url": element.imageUrl ? element.imageUrl : null,
-        "type": element.subtitle ? element.subtitle : null,
-        "buttons": createElements(element.buttons)
+        "buttons": createButtons(element.buttons)
       }
     )
   });
@@ -38,15 +35,17 @@ function createElements(elements) {
 }
 
 function createButtons(buttons) {
+  console.log("BUTTONS", buttons)
   let buttonArray = [];
   buttons.forEach(function(button) {
     buttonArray.push(
       {
         "type": button.type,
-        "text": button.text,
-        "payload": button.data
+        "title": "confirm",
+        "payload": button.payload
       }
     )
   });
+  console.log("BUTTON FORMATTED", buttonArray)
   return buttonArray;
 }

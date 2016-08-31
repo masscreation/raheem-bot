@@ -15,8 +15,7 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
  */
 
 function callSendAPI(messageData) {
-  console.log("HERE", messageData)
-
+  console.log(messageData)
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -32,7 +31,7 @@ function callSendAPI(messageData) {
         console.log("Successfully sent message with id %s to recipient %s",
           messageId, recipientId);
       } else {
-      console.log("Successfully called Send API for recipient %s",
+        console.log("Successfully called Send API for recipient %s",
         recipientId);
       }
     } else {

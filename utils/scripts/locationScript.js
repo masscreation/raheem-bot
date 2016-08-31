@@ -9,40 +9,65 @@ const store = require('../store');
  * Collection of methods related to getting the users location
  *
  */
-module.exports = function(currentFrame, message){
+module.exports = {
 
-	return new Promise(function(resolve, reject) {
+	type(){
+		return 'locationScript'
+	},
 
-	let finalResults;
-
-		if (currentFrame.scripts && currentFrame.scripts.indexOf('location') !== -1){
-			console.log("SELECTION", message);
-			console.log("currentFrame", currentFrame);
-			console.log("Current State", currentFrame.state)
-
-			if (currentFrame.state === 'question'){
-
-				getPredictions(message).then(function(results){
-					let formattedResults = formatLocationResults(results);
-					store['locationQueryResults'] = formattedResults;
-					resolve();
-				}).catch(function(err) {
-					reject(err.message)
-					console.log(err.message);
-				});
-
-			} else if (currentFrame.state === 'selection'){
-				finalResults = store['locationQueryResults'];
-				if (finalResults) {
-					resolve(finalResults);
-				} else {
-					reject(new Error('could not get results froms store'));
+	digest(currentFrame, message){
+		return googlePlacesApi.callPlaceAutocompleteService(message).then(function(predictions){
+				if (predictions) {
+					store["locationQueryResults"] = predictions;
+					console.log(store["locationQueryResults"])
 				}
-				return finalResults;
-			}
+			});
+	},
+
+	format(currentFrame, message){
+			currentFrame["options"] = formatLocationResults(store['locationQueryResults'])
+			return currentFrame;
 		}
-	});
-}
+	}
+
+
+
+
+
+// function(currentFrame, message){
+//
+// 	return new Promise(function(resolve, reject) {
+//
+// 	let finalResults;
+//
+// 		if (currentFrame.scripts && currentFrame.scripts.indexOf('location') !== -1){
+// 			console.log("SELECTION", message);
+// 			console.log("currentFrame", currentFrame);
+// 			console.log("Current State", currentFrame.state)
+//
+// 			if (currentFrame.state === 'question'){
+//
+// 				getPredictions(message).then(function(results){
+// 					let formattedResults = formatLocationResults(results);
+// 					store['locationQueryResults'] = formattedResults;
+// 					resolve();
+// 				}).catch(function(err) {
+// 					reject(err.message)
+// 					console.log(err.message);
+// 				});
+//
+// 			} else if (currentFrame.state === 'selection'){
+// 				finalResults = store['locationQueryResults'];
+// 				if (finalResults) {
+// 					resolve(finalResults);
+// 				} else {
+// 					reject(new Error('could not get results froms store'));
+// 				}
+// 				return finalResults;
+// 			}
+// 		}
+// 	});
+// }
 
 	/*
 	 * Create a generic template from an array of location predictions
@@ -50,26 +75,19 @@ module.exports = function(currentFrame, message){
 	 */
 
 function getPredictions(query) {
-	return new Promise(function(resolve, reject) {
-		let results = googlePlacesApi.callPlaceAutocompleteService(query);
-		if (results){
-			resolve(results);
-		} else {
-			reject(new Error('something went wrong in the google places api'))
-		}
-	});
+	return googlePlacesApi.callPlaceAutocompleteService(query);
 }
 
 function formatLocationResults(results){
 	return results.map(function(result){
 		return {
 			"title": result.description,
-			"buttons": {
+			"buttons": [{
 				"type": "postback",
 				"contentType": "text",
 				"text": result.description,
-				"payload": "CONTENT"
-			}
+				"payload": result.description
+			}]
 		}
 	});
 }
