@@ -346,7 +346,41 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INCIDENT_DATE",
-    "text": "What day did the incident occur? (ex: mm/dd/yyyy)",
+    "text": "What day did the incident occur?",
+    "response_type": "text",
+    "nextMessage": "STEP:INCIDENT_DATE_CONFIRMATION"
+  },
+
+
+  "STEP:INIT_INCIDENT_DETAILS": {
+    "type": "button",
+    "scripts": ["varScript"],
+    "text": "What day did the incident occur?",
+    "options": [{
+      "title": "Today",
+      "data": "today"
+      },
+      {
+      "title": "Yesterday",
+      "data": "yesterday"
+      },
+      {
+      "title": "Input Date",
+      "data": "input_date"
+    }],
+    "nextMessage": {
+      "yes": "STEP:INCIDENT_DATE_CONFIRMATION",
+      "no": "STEP:INCIDENT_DATE_CONFIRMATION",
+      "input_date": "STEP:MANUAL_DATE_INPUT"
+    }
+  },
+
+  "STEP:MANUAL_DATE_INPUT": {
+    "type": "message",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "INCIDENT_DATE",
+    "text": "What day did the incident occur?",
     "response_type": "text",
     "nextMessage": "STEP:INCIDENT_DATE_CONFIRMATION"
   },
@@ -354,7 +388,7 @@
   "STEP:INCIDENT_DATE_CONFIRMATION": {
     "type": "button",
     "scripts": ["varScript"],
-    "text": "Incident occured on ${'INCIDENT_DATE'}, Correct?",
+    "text": "Incident occured ${'INCIDENT_DATE'}, Correct?",
     "options": [{
       "title": "Yes",
       "data": "yes"
