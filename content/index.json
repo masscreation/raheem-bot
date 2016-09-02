@@ -341,21 +341,11 @@
     "nextMessage": "STEP:INCIDENT_DATE_QUERY"
   },
 
-  "STEP:INIT_INCIDENT_DETAILS": {
-    "type": "message",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "INCIDENT_DATE",
-    "text": "What day did the incident occur?",
-    "response_type": "text",
-    "nextMessage": "STEP:INCIDENT_DATE_CONFIRMATION"
-  },
-
-
-  "STEP:INIT_INCIDENT_DETAILS": {
+  "STEP:INCIDENT_DATE_QUERY": {
     "type": "button",
     "scripts": ["varScript"],
     "text": "What day did the incident occur?",
+    "responseKey": "INCIDENT_DATE",
     "options": [{
       "title": "Today",
       "data": "today"
@@ -369,8 +359,8 @@
       "data": "input_date"
     }],
     "nextMessage": {
-      "yes": "STEP:INCIDENT_DATE_CONFIRMATION",
-      "no": "STEP:INCIDENT_DATE_CONFIRMATION",
+      "today": "STEP:INCIDENT_DATE_CONFIRMATION",
+      "yesterday": "STEP:INCIDENT_DATE_CONFIRMATION",
       "input_date": "STEP:MANUAL_DATE_INPUT"
     }
   },
