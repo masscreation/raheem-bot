@@ -12,13 +12,15 @@ const quickReplyTemplate = require('../models/templates/quickReply');
 module.exports = function(messagingEvent) {
 
     if (messagingEvent.optin) {
-      console.log("receivedAuthentication");
+      console.log("Received Authentication");
       // receivedAuthentication(messagingEvent);
 
     } else if (messagingEvent.message) {
+      console.log("Recieved Message");
+      console.log("SEQ", messagingEvent.message.seq)
+      console.log("Timestamp:", messagingEvent.timestamp)
 
       let message = new Message(messagingEvent);
-      console.log("ECHO: ", message.isValid());
       if (message.isValid()) {
         // If message is not an echo and has a payload, send it to the format/send process.
 
@@ -28,10 +30,13 @@ module.exports = function(messagingEvent) {
       }
 
     } else if (messagingEvent.delivery) {
-      console.log(" receivedDeliveryConfirmation");
+      console.log("Received Delivery Confirmation");
       // receivedDeliveryConfirmation(messagingEvent);
 
     } else if (messagingEvent.postback) {
+      console.log("Recieved Postback")
+      console.log("Timestamp:", messagingEvent.timestamp)
+
       let postback = new Postback(messagingEvent);
       let senderID = postback.senderID;
       // Send payload to the format/send process
@@ -39,7 +44,7 @@ module.exports = function(messagingEvent) {
       formatAndSend(postback.userContent, senderID);
 
     } else if (messagingEvent.read) {
-      console.log('receivedMessageRead');
+      console.log('Received Message Read');
 
     } else {
       console.log("Webhook received unknown messagingEvent: ", messagingEvent);
@@ -71,13 +76,16 @@ function formatAndSend(message, senderID){
 function createTemplate(recipientID, obj) {
   //figure out what type of message the obj will be and return the formatted result
   if (obj.type === "message") {
+    console.log("FORMATTING MESSAGE");
     return messageTemplate(recipientID, obj.text);
   } else if (obj.type === "button") {
+    console.log("FORMATTING BUTTON");
     return buttonTemplate(recipientID, obj);
   } else if (obj.type === "generic") {
-    console.log("GENERIC");
+    console.log("FORMATTING GENERIC");
     return genericTemplate(recipientID, obj)
   } else if (obj.type === "quickReply") {
+    console.log("FORMATTING QUICKREPLY")
     return quickReplyTemplate(recipientID, obj)
   }
 };

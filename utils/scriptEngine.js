@@ -7,7 +7,8 @@ const messageThread = require("./messageThread");
 
 let scripts = [
   "varScript",
-  "locationScript"
+  "locationScript",
+  "dbScript"
 ];
 
 let scriptArray = [];
@@ -28,7 +29,7 @@ module.exports = {
 
     digest(message) {
       return new Promise(function(resolve, reject){
-        console.log("DIGEST MESSAGE")
+        console.log("DIGEST MESSAGE START");
         //Grab state from previous turn
         currentState = state.get(message);
         //If the currentState includes scripts, iterate through and execute them
@@ -48,7 +49,7 @@ module.exports = {
 
   format(message) {
     return new Promise(function(resolve, reject){
-      console.log("FORMAT MESSAGE", message)
+      console.log("FORMAT MESSAGE START");
 
       state.next()
       currentState = state.get(message);
@@ -58,7 +59,6 @@ module.exports = {
           if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
             let newOutgoingMessage = script.format(currentState);
             newOutgoingMessage ? output = newOutgoingMessage : output = currentState
-            console.log("OUTPUT", output)
           }
         });
 
@@ -67,7 +67,6 @@ module.exports = {
         resolve(outgoingMessages)
       } else {
 
-        console.log("CURRENT STATE", currentState)
 
         let outgoingMessages = messageThread.set(currentState);
 

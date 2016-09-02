@@ -3,11 +3,17 @@
 const store = require('../store')
 
 function swapVar(message){
-  let iOne = message.indexOf('${') + 3;
-  let iTwo = message.indexOf('}') - 1;
-  let dynamicContent = message.substr(iOne, (iTwo - iOne));
-  let finalResponse = message.replace("${'" + dynamicContent + "'}", store[dynamicContent]);
-  return finalResponse
+  let messageArray = message.split(" ");
+  messageArray =  messageArray.map(function(word){
+    if (word.includes("${")){
+      let iOne = word.indexOf('${') + 3;
+      let iTwo = word.indexOf('}') - 1;
+      let dynamicContent = word.substr(iOne, (iTwo - iOne));
+      word = store[dynamicContent];
+    }
+    return word
+  });
+  return messageArray.join(" ");
 }
 
 module.exports = {
@@ -20,7 +26,7 @@ module.exports = {
     return new Promise(function(resolve, reject){
       if (currentFrame["responseKey"]) {
         store[currentFrame["responseKey"]] = message;
-        console.log("SAVE VAR", store[currentFrame["responseKey"]])
+        console.log("VARIABLE SAVED: ", store[currentFrame["responseKey"]])
       }
       resolve();
     })
@@ -28,8 +34,9 @@ module.exports = {
 
   format(currentFrame){
     if (currentFrame["text"] && currentFrame["text"].includes("${")){
+      currentFrame = Object.assign({}, currentFrame);
       currentFrame["text"] = swapVar(currentFrame["text"]);
-      console.log("SWAPVAR", currentFrame);
+      console.log("VARIABLE SWAPPED, NEW MESSAGE: ", currentFrame["text"]);
       return currentFrame
     } else {
       return currentFrame

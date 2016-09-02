@@ -12,7 +12,7 @@ let currentState = initialState;
 module.exports = {
 
   next() {
-    console.log("NEXT")
+    console.log("NEXT STATE");
 
     currentState = content[currentState].nextMessage
   },
@@ -24,7 +24,7 @@ module.exports = {
     if (currentState[message] && typeof currentState === 'object'){
       currentState = currentState[message];
     }
-    console.log("GET", content[currentState])
+    console.log("CURRENT STATE", currentState);
     return content[currentState];
   }
 

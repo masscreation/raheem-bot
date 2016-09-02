@@ -1,7 +1,7 @@
 
 {
-    "appSecret": "0ab0fdfb555e34f1999b264e584c682f",
-    "pageAccessToken": "EAAIBRAY18ukBAOt7zrMsQz32tubRbPR69IZAo3jA0x8G2d62XEtzpmkxGFSceFTgXdnYIqU4zlUo9uYtUjsGoBRh28M7DdwJVMklt2LcVrgavW0NfmeQk2zhbsarHCUr630IHodZAg5ZAwRVkaQlmGPfzL290fjhZAnZAXhtMRQZDZD",
+    "appSecret": "287dde7ef803603c539660c791b152fa",
+    "pageAccessToken": "EAAR69CbuHH8BAHlg2g2iRux2LUzYAKOvvxCgYyxgbIZAImOz9BC56IcNy9PafV1IaKN1BjTKp0zXq37Yldhu5eLgkyaNjDDC2TUol8khqYlXx8zucWVvTijZCYViLQUbyxFrcXWA0rPVEX4Fr9zcMZA0SMLE1ZAv3L1RO4sfdQZDZD",
     "validationToken": "this_is_a_verify_token",
     "serverURL": "",
     "googlePlacesApiKey": "AIzaSyBbixdJQVlTOQ4rHBifvQTOBw5FfJ_Tkhs"

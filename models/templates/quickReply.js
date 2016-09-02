@@ -25,7 +25,7 @@ function createQuickReplies(quickReplies) {
         "title": quickReply.title,
         "payload": quickReply.data
       }
-    )
+    ); 
   });
   return quickReplyArray;
 }

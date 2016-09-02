@@ -19,7 +19,7 @@ module.exports = {
 		return googlePlacesApi.callPlaceAutocompleteService(message).then(function(predictions){
 				if (predictions) {
 					store["locationQueryResults"] = predictions;
-					console.log(store["locationQueryResults"])
+					console.log(`FOUND ${store['locationQueryResults'].length} LOCATION RESULTS`)
 				}
 			});
 	},
