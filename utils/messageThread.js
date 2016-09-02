@@ -1,8 +1,8 @@
 'use strict'
 
-const content = require('../../content');
-const convoEngine = require('../convoEngine');
-const state = require('../stateMachine');
+const content = require('../content');
+const convoEngine = require('./convoEngine');
+const state = require('./stateMachine');
 
 let messagesArray = [];
 
@@ -14,16 +14,14 @@ module.exports = {
     while (obj.waitForUser === false){
       messagesArray.push(obj);
       state.next();
-      let currentState = state.get();
-      obj = content[currentState];
+      obj = state.get();
     };
 
     messagesArray.push(obj);
     let outgoingMessages = messagesArray;
-
+    
     // reset
     messagesArray = [];
-
     return outgoingMessages;
   }
 

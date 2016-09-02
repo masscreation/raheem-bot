@@ -1,21 +1,21 @@
 'use strict'
 
-const config = require('config')
-const express = require('express')
-const bodyParser = require('body-parser')
-const crypto = require('crypto')
-const request = require('request')
-const router = require('./utils/router.js')
-const app = express()
+const config = require('config');
+const express = require('express');
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+const request = require('request');
+const router = require('./utils/router.js');
+const app = express();
 
-app.set('port', (process.env.PORT || 5000))
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json({ verify: verifyRequestSignature }))
+app.set('port', (process.env.PORT || 6000));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // index
 app.get('/', function (req, res) {
-	res.send('hello world i am a secret bot')
-})
+	res.send('hello world i am a secret bot');
+});
 
 /*
  * Be sure to setup your config values before running this code. You can
@@ -86,7 +86,7 @@ app.post('/webhook', function (req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
-				router(messagingEvent)
+				router(messagingEvent);
 			});
 
     });
@@ -95,7 +95,7 @@ app.post('/webhook', function (req, res) {
     //
     // You must send back a 200, within 20 seconds, to let us know you've
     // successfully received the callback. Otherwise, the request will time out.
-    res.sendStatus(200);
+		res.sendStatus(200);
   }
 });
 

@@ -1,7 +1,9 @@
 'use strict'
 
+const store = require('./store')
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
+const stateStore = ["STEP:1_GET_STARTED_PAYLOAD"]
 let currentState = initialState;
 
 /*
@@ -10,13 +12,40 @@ let currentState = initialState;
  */
 module.exports = {
 
-  next() {
-    currentState = content[currentState].nextMessage;
-    console.log("currentState: ", currentState);
+  next(message) {
+    currentState = content[currentState].nextMessage
+
+    if (typeof currentState === 'object' && currentState[message.toLowerCase()]){
+      currentState = currentState[message.toLowerCase()];
+    } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
+      currentState = "STEP:UNKNOWN_INPUT";
+    } else if (currentState === "STEP:LAST_STEP"){
+      stateStore.forEach(function(state){
+        if (content[state]["anchor"] && content[state]["anchor"] === true){
+          currentState = state;
+        }
+      });
+    }
+    stateStore.push(currentState);
+
+  },
+
+  reRoute(message){
+    if (message === "menu"){
+      currentState = "STEP:QUE_NAV_MENU"
+    } else if (message === "Search Again"){
+      currentState = "STEP:QUE_LOCATION_RETRY";
+    } else if (message === "resume" && currentState !== "NAV_MENU"){
+      let lastStateIndex = stateStore.length
+      currentState = stateStore[lastStateIndex - 2];
+    } else if (message.toLowerCase() === "restart"){
+      currentState = stateStore[0];
+    }
+    console.log("GET STATE", currentState)
   },
 
   get() {
-    return currentState;
+    return content[currentState];
   }
 
 };

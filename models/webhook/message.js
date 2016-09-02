@@ -9,6 +9,7 @@ module.exports = class Message {
 
     // types of messages
     this.message = event.message || false;
+    this.message.quick_reply = event.message.quick_reply || false;
 
     // message meta data
     this.isEcho = this.message.is_echo || false;
@@ -17,7 +18,7 @@ module.exports = class Message {
     this.metadata = this.message.metadata || {};
 
     // You may get a text or attachment but not both
-    this.userContent = this.message.text
+    this.userContent = this.message.quick_reply ? this.message.quick_reply.payload : this.message.text;
   }
 
   isValid(){
