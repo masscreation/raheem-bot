@@ -29,9 +29,10 @@ module.exports = {
 
     digest(message) {
       return new Promise(function(resolve, reject){
-        console.log("DIGEST MESSAGE START");
+        console.log("DIGEST MESSAGE", message);
         //Grab state from previous turn
-        currentState = state.get(message);
+        state.reRoute(message)
+        currentState = state.get();
         //If the currentState includes scripts, iterate through and execute them
           return Promise.each(scriptArray, function(script){
             if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
@@ -51,8 +52,8 @@ module.exports = {
     return new Promise(function(resolve, reject){
       console.log("FORMAT MESSAGE START");
 
-      state.next()
-      currentState = state.get(message);
+      state.next(message);
+      currentState = state.get();
 
       if (currentState.scripts){
         scriptArray.forEach(function(script){
@@ -66,7 +67,6 @@ module.exports = {
 
         resolve(outgoingMessages)
       } else {
-
 
         let outgoingMessages = messageThread.set(currentState);
 

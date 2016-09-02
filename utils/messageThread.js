@@ -19,7 +19,7 @@ module.exports = {
 
     messagesArray.push(obj);
     let outgoingMessages = messagesArray;
-
+    
     // reset
     messagesArray = [];
     return outgoingMessages;

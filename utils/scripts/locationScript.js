@@ -5,6 +5,7 @@
 // const content = require('../content')
 const googlePlacesApi = require('../services/googlePlacesApi');
 const store = require('../store');
+const locationStore = {}
 /*
  * Collection of methods related to getting the users location
  *
@@ -18,14 +19,14 @@ module.exports = {
 	digest(currentFrame, message){
 		return googlePlacesApi.callPlaceAutocompleteService(message).then(function(predictions){
 				if (predictions) {
-					store["locationQueryResults"] = predictions;
-					console.log(`FOUND ${store['locationQueryResults'].length} LOCATION RESULTS`)
+					locationStore["locationQueryResults"] = predictions;
+					console.log(`FOUND ${locationStore['locationQueryResults'].length} LOCATION RESULTS`)
 				}
 			});
 	},
 
 	format(currentFrame, message){
-			currentFrame["options"] = formatLocationResults(store['locationQueryResults'])
+			currentFrame["options"] = formatLocationResults(locationStore['locationQueryResults'])
 			return currentFrame;
 		}
 	}
@@ -79,16 +80,25 @@ function getPredictions(query) {
 }
 
 function formatLocationResults(results){
-	return results.map(function(result){
+	results = results.map(function(result){
 		return {
 			"title": result.description,
 			"buttons": [{
 				"type": "postback",
 				"contentType": "text",
-				"text": result.description,
+				"text": "Confirm",
 				"payload": result.description
 			}]
 		}
 	});
+	results.push({
+		"title": "Location Not Listed",
+		"buttons": [{
+			"type": "postback",
+			"text": "Search Again",
+			"payload": "Search Again"
+		}]
+	});
+	return results;
 }
 // };

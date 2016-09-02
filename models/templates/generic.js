@@ -41,7 +41,7 @@ function createButtons(buttons) {
     buttonArray.push(
       {
         "type": button.type,
-        "title": "confirm",
+        "title": button.text,
         "payload": button.payload
       }
     )

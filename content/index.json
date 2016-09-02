@@ -5,6 +5,7 @@
 
   "STEP:GREETING": {
     "type": "button",
+    "anchor": true,
     "text": "Hi there!, Is there a police interaction you would like to report?",
     "options": [{
       "title": "Yes",
@@ -23,7 +24,7 @@
 
   "STEP:START_REPORT_PAYLOAD": {
     "type": "message",
-    "text": "OK, great! I'll be asking you a couple questions. You can restart at anypoint from the menu below.",
+    "text": "OK, great! I'll be asking you a couple questions. You can restart at anypoint by typing 'restart' in the chatbox!",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:NATURE_OF_ENCOUNTER"
@@ -31,6 +32,7 @@
 
   "STEP:NATURE_OF_ENCOUNTER": {
     "type": "button",
+    "anchor": true,
     "text": "Was the experience Positive or Negative?",
     "scripts": ["varScript"],
     "responseKey": "NATURE_OF_ENCOUNTER",
@@ -65,6 +67,7 @@
 
   "STEP:LOCATION_QUERY": {
     "type": "message",
+    "anchor": true,
     "text": "Where did the incident occur? (ex: Oakland)",
     "responseType": "text",
     "scripts": ["locationScript"],
@@ -76,6 +79,10 @@
     "responseKey": "ENCOUNTER_LOCATION",
     "scripts": ["locationScript", "varScript"],
     "nextMessage": "STEP:LOCATION_CONFIRMATION"
+  },
+
+  "STEP:QUE_LOCATION_RETRY": {
+    "nextMessage": "STEP:LOCATION_RETRY"
   },
 
   "STEP:LOCATION_RETRY": {
@@ -103,6 +110,7 @@
 
   "STEP:BADGE_NUMBER_REQUEST": {
     "type": "button",
+    "anchor": true,
     "text": "Do you have the police officers badge #?",
     "options": [{
       "title": "Yes",
@@ -121,6 +129,7 @@
 
   "STEP:BADGE_NUMBER_QUERY": {
     "type": "message",
+    "anchor": true,
     "responseKey": "OFFICER_BADGE_NUMBER",
     "scripts": ["varScript"],
     "text": "What is the officer's badge number?",
@@ -157,6 +166,7 @@
 
   "STEP:OFFICER_ETHNICITY": {
     "type": "quickReply",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_ETHNICITY",
     "text": "What was the officer's ethnicity?",
@@ -201,6 +211,7 @@
 
   "STEP:OFFICER_AGE": {
     "type": "quickReply",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_AGE",
     "text": "What was the officer's age?",
@@ -245,6 +256,7 @@
 
   "STEP:OFFICER_SEX": {
     "type": "button",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_SEX",
     "text": "What was the officer's sex?",
@@ -285,6 +297,7 @@
 
   "STEP:OFFICER_CHARACTERISTICS": {
     "type": "button",
+    "anchor": true,
     "scripts": "varScript",
     "text": "Can you remember any further personal characteristics of the officer?",
     "options": [{
@@ -304,6 +317,7 @@
 
   "STEP:OFFICER_CHARACTERISTICS_QUERY": {
     "type": "message",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "ADDITIONAL_OFFICER_DESCRIPTION",
     "text": "Can you remember any other personal characteristics about the officer involved? You can just write free form.",
@@ -329,6 +343,7 @@
 
   "STEP:INIT_INCIDENT_DETAILS": {
     "type": "message",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INCIDENT_DATE",
     "text": "What day did the incident occur? (ex: mm/dd/yyyy)",
@@ -357,6 +372,7 @@
 
   "STEP:INCIDENT_TIME_QUERY": {
     "type": "message",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INCIDENT_TIME",
     "text": "About what time did the incident occur? (ex: 12:15pm)",
@@ -385,6 +401,7 @@
 
   "STEP:INCIDENT_DESCRIPTION_QUERY": {
     "type": "message",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INCIDENT_DESCRIPTION",
     "text": "Thanks. You said this was a ${'NATURE_OF_ENCOUNTER'} experience with the police. Can you elaborate on why? Feel free to type as little or as much as you would like.",
@@ -402,6 +419,7 @@
 
   "STEP:INCIDENT_DESCRIPTION_QUERY": {
     "type": "message",
+    "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "ADDITION_DETAILS",
     "text": "You've made it this far. Is there anything else you would like to add. Just keep writing, we'll add it to the police complaint.",
@@ -411,6 +429,7 @@
 
   "STEP:DATABASE_REVIEW": {
     "type": "message",
+    "waitForUser": false,
     "scripts": ["dbScript"],
     "text": "Review of your answers:\n",
     "nextMessage": "STEP:GOODBYE"
@@ -425,5 +444,35 @@
 
   "FINAL:TERMINATE": {
     "nextMessage": "nil"
+  },
+
+  "STEP:QUE_NAV_MENU": {
+    "nextMessage": "STEP:NAV_MENU"
+  },
+
+  "STEP:NAV_MENU": {
+    "type": "button",
+    "text": "Nav Menu",
+    "options": [{
+      "title": "Restart Survey",
+      "data": "restart"
+      },
+      {
+      "title": "Resume Survey",
+      "data": "resume"
+      }
+    ],
+    "nextMessage": {
+      "restart": "STEP:GREETING",
+      "resume": "STEP:LAST_STEP"
+    }
+  },
+
+  "STEP:UNKNOWN_INPUT": {
+    "type": "message",
+    "text": "Sorry, I didnt recognize that, try again?",
+    "waitForUser": false,
+    "response_type": "text",
+    "nextMessage": "STEP:LAST_STEP"
   }
 }
