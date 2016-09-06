@@ -51,6 +51,48 @@
     "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on.",
     "responseType": "text",
     "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:LOCATION_QUERY": {
+    "type": "message",
+    "text": "What city did your encounter happen in? (ex: Oakland)",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:LOCATION_PROMT"
+  },
+
+  "STEP:LOCATION_PROMT": {
+    "type": "generic",
+    "responseKey": "ENCOUNTER_LOCATION",
+    "scripts": ["locationScript", "varScript"],
+    "nextMessage": "STEP:DATE_QUERY"
+  },
+
+  "STEP:QUE_LOCATION_RETRY": {
+    "nextMessage": "STEP:LOCATION_RETRY"
+  },
+
+  "STEP:LOCATION_RETRY": {
+    "type": "message",
+    "text": "Ok let's try again. Try and be more precise.",
+    "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:DATE_QUERY": {
+    "type": "message",
+    "text": "And what month and day did it happen on? (ex: 12/32/2015)",
+    "responseType": "text",
+    "scripts": ["dateScript"],
+    "nextMessage": "STEP:TIME_QUERY"
+  },
+
+  "STEP:TIME_QUERY": {
+    "type": "message",
+    "text": "Got it. Around what time that day?",
+    "responseType": "text",
+    "scripts": ["timeScript"],
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
 
@@ -337,7 +379,7 @@
     "type": "message",
     "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
     "waitForUser": false,
-    "nextMessage": "STEP:OFFICER_BADGE_QUERY_ENTRY"
+    "nextMessage": "STEP:FURTHER_OFFICER_DETAILS_ENTRY"
   },
 
   "STEP:FURTHER_OFFICER_DETAILS_ENTRY": {
@@ -345,53 +387,6 @@
     "text": "Type as little or as much as you would like, otherwise type 'skip' to move to the next step.",
     "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
   },
-
-
-
-
-  "STEP:LOCATION_QUERY": {
-    "type": "message",
-    "text": "What city did it happen in? (ex: Oakland)",
-    "responseType": "text",
-    "scripts": ["locationScript"],
-    "nextMessage": "STEP:LOCATION_PROMT"
-  },
-
-  "STEP:LOCATION_PROMT": {
-    "type": "generic",
-    "responseKey": "ENCOUNTER_LOCATION",
-    "scripts": ["locationScript", "varScript"],
-    "nextMessage": "STEP:DATE_QUERY"
-  },
-
-  "STEP:QUE_LOCATION_RETRY": {
-    "nextMessage": "STEP:LOCATION_RETRY"
-  },
-
-  "STEP:LOCATION_RETRY": {
-    "type": "message",
-    "text": "Ok let's try again. Try and be more precise.",
-    "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-  "STEP:DATE_QUERY": {
-    "type": "message",
-    "text": "And what month and day did it happen on? (ex: 12/32/2015)",
-    "responseType": "text",
-    "scripts": ["dateScript"],
-    "nextMessage": "STEP:TIME_QUERY"
-  },
-
-  "STEP:TIME_QUERY": {
-    "type": "message",
-    "text": "Got it. Around what time that day?",
-    "responseType": "text",
-    "scripts": ["timeScript"],
-    "nextMessage": "STEP:EMERGENCY_QUERY"
-  },
-
-
 
   "STEP:OFFICER_ENCOUNTER_START": {
     "type": "message",
@@ -568,7 +563,7 @@
     "nextMessage": "STEP:END_THANK_YOU"
   },
 
-  "STEP:OFFICER_ENCOUNTER_START": {
+  "STEP:END_THANK_YOU": {
     "type": "message",
     "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
     "options": [{
