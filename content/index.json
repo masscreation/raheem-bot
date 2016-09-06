@@ -271,7 +271,7 @@
     "nextMessage": "STEP:OFFICER_GENDER_ENTRY"
   },
 
-  "STEP:OFFICER_GENER_ENTRY": {
+  "STEP:OFFICER_GENDER_ENTRY": {
     "type": "quickReply",
     "text": "What about the officer's gender?",
     "options": [{
