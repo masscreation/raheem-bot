@@ -177,7 +177,7 @@
   },
 
   "STEP:OFFICER_BADGE_QUERY": {
-    "type": "message",
+    "type": "button",
     "text": "Do you remember the officers badge number?",
     "options": [{
         "title": "Yes",
@@ -201,7 +201,7 @@
   },
 
   "STEP:OFFICER_NAME_QUERY": {
-    "type": "message",
+    "type": "button",
     "text": "Do you happen to remember the officers name?",
     "options": [{
         "title": "Yes",
@@ -228,11 +228,11 @@
     "type": "quickReply",
     "text": "Cool. Were you able to tell the officer’s race?",
     "options": [{
-        "title": "Black/African-descent",
+        "title": "Black",
         "data": "black/african-descent"
       },
       {
-        "title": "Hispanic / Latino",
+        "title": "Hispanic/Latino",
         "data": "hispanic/latino"
       },
       {
