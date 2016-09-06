@@ -8,7 +8,7 @@ const request = require('request');
 const router = require('./utils/router.js');
 const app = express();
 
-app.set('port', (process.env.PORT || 6000));
+app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
