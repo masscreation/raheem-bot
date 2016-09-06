@@ -58,15 +58,15 @@
     "type": "quickReply",
     "text": "Which one of these things happened?",
     "options": [{
-        "title": "You called the police",
+        "title": "I called the police",
         "data": "1"
       },
       {
-        "title": "The police approached you",
+        "title": "Police contacted me",
         "data": "2"
       },
       {
-        "title": "You witnessed an encounter",
+        "title": "I was a witness",
         "data": "3"
       }
     ],
