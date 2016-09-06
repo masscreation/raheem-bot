@@ -119,7 +119,6 @@
     }
   },
 
-
   "STEP:USER_INITIATED_ENCOUNTER": {
     "type": "message",
     "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “stop”. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
@@ -389,7 +388,7 @@
   },
 
   "STEP:OFFICER_ENCOUNTER_START": {
-    "type": "message",
+    "type": "button",
     "text": "When the police officer was interacting with you, did it go like it expected it to?",
     "options": [{
         "title": "Yes",
@@ -468,12 +467,14 @@
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
     "type": "message",
     "text": "Thank you for sharing so much good information. This is great. We’re almost done.",
+    "waitForUser": false,
     "nextMessage": "STEP:USER_DETAILS_START"
   },
 
   "STEP:USER_DETAILS_START": {
     "type": "message",
     "text": "If you’re okay with it, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+    "waitForUser": false,
     "nextMessage": "STEP:USER_RACE_ENTRY"
   },
 
@@ -481,11 +482,11 @@
     "type": "quickReply",
     "text": "What is your race?",
     "options": [{
-        "title": "Black/African-descent",
+        "title": "Black",
         "data": "black/african-descent"
       },
       {
-        "title": "Hispanic / Latino",
+        "title": "Hispanic/Latino",
         "data": "hispanic/latino"
       },
       {
@@ -564,7 +565,7 @@
   },
 
   "STEP:END_THANK_YOU": {
-    "type": "message",
+    "type": "button",
     "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
     "options": [{
         "title": "End this chat",
