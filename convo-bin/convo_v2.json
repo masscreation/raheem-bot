@@ -3,7 +3,7 @@
     "nextMessage": "STEP:GREETING"
   },
 
-  "STEP:GREETING": {
+  "STEP:FIRST_TIME_GREETING": {
     "type": "text",
     "text": "Hey. I hope everything’s okay. This conversation is private. if you want to learn more about this bot thing, just type “what is this?”.",
     "waitForUser": false,
@@ -55,7 +55,7 @@
   },
 
   "STEP:INITIAL_CONTACT_QUERY": {
-    "type": "quickReply",
+    "type": "button",
     "text": "Which one of these things happened?",
     "options": [{
         "title": "You called the police",
@@ -66,9 +66,9 @@
         "data": "2"
       },
       {
-        "title": "You witnessed an encounter",
+        "title": "You witnessed the police with someone else",
         "data": "3"
-      }
+      },
     ],
     "nextMessage": {
       "1": "STEP:USER_INITIATED_ENCOUNTER",
@@ -126,7 +126,7 @@
       {
         "title": "Over 30 minutes",
         "data": "5"
-      }
+      },
     ],
     "nextMessage": {
       "1": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
@@ -266,7 +266,7 @@
       {
         "title": "Couldn't tell",
         "data": "couldn't tell"
-      }
+      },
     ],
     "nextMessage": "STEP:OFFICER_GENDER_ENTRY"
   },
@@ -520,7 +520,7 @@
       {
         "title": "Other",
         "data": "other"
-      }
+      },
     ],
     "nextMessage": "STEP:USER_GENDER_ENTRY"
   },
