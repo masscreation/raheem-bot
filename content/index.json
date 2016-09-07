@@ -730,7 +730,7 @@
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any). Click 'I'm finished' when complete.",
+    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Distant",
         "data": "distant"
@@ -768,8 +768,8 @@
         "data": "used abusive language"
       },
       {
-        "title": "Im finished",
-        "data": "im finished"
+        "title": "Done",
+        "data": "done"
       }
     ],
     "nextMessage": {
@@ -782,7 +782,7 @@
       "too forceful": "STEP:NEGATIVE_OFFICER_SELECTION",
       "failed to self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
       "used abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "im finished": "STEP:FURTHER_ENCOUNTER_DETAILS"
+      "done": "STEP:FURTHER_ENCOUNTER_DETAILS"
     }
   },
 
