@@ -666,13 +666,20 @@
       "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
-      "im finished": "STEP:POSITIVE_OFFICER_SELECTION"
+      "im finished": "STEP:FURTHER_OFFICER_SELECTION_DETAILS"
     }
+  },
+
+  "STEP:FURTHER_OFFICER_SELECTION_DETAILS": {
+    "type": "Thanks.",
+    "waitForUser": false,
+    "text": "Type in more detail about what you felt about it, or respond 'I dont want to'.",
+    "nextMessage": "STEP:POSITIVE_OFFICER_SELECTION"
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
     "type": "quickReply",
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'Done' when complete.",
+    "text": "To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -710,7 +717,7 @@
         "data": "professional"
       },
       {
-        "title": "done",
+        "title": "Done",
         "data": "done"
       }
     ],
