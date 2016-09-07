@@ -450,20 +450,20 @@
     "responseKey": "OFFICER_GENDER",
     "text": "What about the officer's gender?",
     "options": [{
-        "title": "Man",
-        "data": "man"
-      },
-      {
         "title": "Woman",
         "data": "woman"
       },
       {
-        "title": "Trans Man",
-        "data": "trans man"
+        "title": "Man",
+        "data": "man"
       },
       {
         "title": "Trans Woman",
         "data": "trans woman"
+      },
+      {
+        "title": "Trans Man",
+        "data": "trans man"
       },
       {
         "title": "Genderqueer",
@@ -893,20 +893,20 @@
     "responseKey": "USER_GENDER",
     "text": "What is your gender?",
     "options": [{
-        "title": "Man",
-        "data": "man"
-      },
-      {
         "title": "Woman",
         "data": "woman"
       },
       {
-        "title": "Trans Man",
-        "data": "trans man"
+        "title": "Man",
+        "data": "man"
       },
       {
         "title": "Trans Woman",
         "data": "trans woman"
+      },
+      {
+        "title": "Trans Man",
+        "data": "trans man"
       },
       {
         "title": "Genderqueer",
