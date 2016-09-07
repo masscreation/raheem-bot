@@ -666,15 +666,8 @@
       "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
-      "im finished": "STEP:FURTHER_OFFICER_SELECTION_DETAILS"
+      "im finished": "STEP:POSITIVE_OFFICER_SELECTION"
     }
-  },
-
-  "STEP:FURTHER_OFFICER_SELECTION_DETAILS": {
-    "type": "Thanks.",
-    "waitForUser": false,
-    "text": "Type in more detail about what you felt about it, or respond 'I dont want to'.",
-    "nextMessage": "STEP:POSITIVE_OFFICER_SELECTION"
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
@@ -767,12 +760,12 @@
         "data": "too forceful"
       },
       {
-        "title": "Failed to self-identify",
-        "data": "failed to self-identify"
+        "title": "Didn't self-identify",
+        "data": "didn't self-identify"
       },
       {
-        "title": "Used abusive language",
-        "data": "used abusive language"
+        "title": "Abusive language",
+        "data": "abusive language"
       },
       {
         "title": "Done",
@@ -787,8 +780,8 @@
       "suspicious": "STEP:NEGATIVE_OFFICER_SELECTION",
       "distracted": "STEP:NEGATIVE_OFFICER_SELECTION",
       "too forceful": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "failed to self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "used abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "didn't self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
       "done": "STEP:FURTHER_ENCOUNTER_DETAILS"
     }
   },
