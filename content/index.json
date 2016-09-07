@@ -5,6 +5,7 @@
 
   "STEP:GREETING": {
     "type": "text",
+    "anchor": true,
     "text": "Hey. I hope everything’s okay. This conversation is private. if you want to learn more about this bot thing, just type “what is this?”.",
     "waitForUser": false,
     "nextMessage": "STEP:SUBMIT_REPORT_QUERY"
@@ -12,6 +13,7 @@
 
   "STEP:SUBMIT_REPORT_QUERY": {
     "type": "button",
+    "anchor": true,
     "text": "Did you want to tell us about having contact with the police?",
     "options": [{
         "title": "Yes",
@@ -30,6 +32,7 @@
 
   "STEP:SAFE_QUERY": {
     "type": "button",
+    "anchor": true,
     "text": "All right. First, are you safe? ",
     "options": [{
         "title": "Yes",
@@ -63,6 +66,7 @@
 
   "STEP:INITIAL_CONTACT_QUERY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Which one of these things happened?",
     "options": [{
         "title": "I called the police",
@@ -99,6 +103,7 @@
 
   "STEP:INITIAL_POLICE_CONTACT_QUERY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "What ended up happening? They...",
     "options": [{
         "title": "wanted information",
@@ -150,6 +155,7 @@
 
   "STEP:INITIAL_USER_CONTACT_QUERY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "What ended up happening?",
     "options": [{
         "title": "They resolved it",
@@ -177,6 +183,7 @@
 
   "STEP:EMERGENCY_QUERY": {
     "type": "button",
+    "anchor": true,
     "text": "Did you call because of an emergency?",
     "options": [{
         "title": "Yes",
@@ -195,6 +202,7 @@
 
   "STEP:EMERGENCY_RESPONSE_TIME": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Okay. How long it take for them to get there to help?",
     "options": [{
         "title": "Less than 2 minutes",
@@ -247,6 +255,7 @@
 
   "STEP:LOCATION_QUERY": {
     "type": "message",
+    "anchor": true,
     "text": "What city did your encounter happen in? (ex: Oakland)",
     "responseType": "text",
     "scripts": ["locationScript"],
@@ -273,6 +282,7 @@
 
   "STEP:DATE_QUERY": {
     "type": "message",
+    "anchor": true,
     "text": "And what month and day did it happen on? (ex: 12/32/2015)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
@@ -280,6 +290,7 @@
 
   "STEP:TIME_QUERY": {
     "type": "message",
+    "anchor": true,
     "text": "Got it. Around what time that day? (ex: 12:15 AM)",
     "responseType": "text",
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
@@ -287,12 +298,14 @@
 
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
     "type": "message",
+    "anchor": true,
     "text": "About how many officers were at the scene? (ex: 3)",
     "nextMessage": "STEP:BEGIN_OFFICER_IDENTIFICATION"
   },
 
   "STEP:BEGIN_OFFICER_IDENTIFICATION": {
     "type": "button",
+    "anchor": true,
     "text": "Did you talk to one officer specifically?",
     "options": [{
         "title": "Yes",
@@ -318,6 +331,7 @@
 
   "STEP:OFFICER_BADGE_QUERY": {
     "type": "button",
+    "anchor": true,
     "text": "Do you remember the officers badge number?",
     "options": [{
         "title": "Yes",
@@ -342,6 +356,7 @@
 
   "STEP:OFFICER_NAME_QUERY": {
     "type": "button",
+    "anchor": true,
     "text": "Do you happen to remember the officers name?",
     "options": [{
         "title": "Yes",
@@ -360,12 +375,14 @@
 
   "STEP:OFFICER_NAME_ENTRY": {
     "type": "message",
+    "anchor": true,
     "text": "Go ahead and type the officers name in. (Last Name, First Name)",
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
   },
 
   "STEP:OFFICER_RACE_ENTRY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Cool. Were you able to tell the officer’s race?",
     "options": [{
         "title": "Black",
@@ -413,6 +430,7 @@
 
   "STEP:OFFICER_GENDER_ENTRY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "What about the officer's gender?",
     "options": [{
         "title": "Male",
@@ -448,6 +466,7 @@
 
   "STEP:OFFICER_AGE_ENTRY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "You’re doing great. About how old would you say the officer is?",
     "options": [{
         "title": "20-30",
@@ -475,6 +494,7 @@
 
   "STEP:FURTHER_OFFICER_DETAILS": {
     "type": "message",
+    "anchor": true,
     "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
     "waitForUser": false,
     "nextMessage": "STEP:FURTHER_OFFICER_DETAILS_ENTRY"
@@ -488,6 +508,7 @@
 
   "STEP:OFFICER_ENCOUNTER_START": {
     "type": "button",
+    "anchor": true,
     "text": "When the police officer was interacting with you, did it go like it expected it to?",
     "options": [{
         "title": "Yes",
@@ -503,6 +524,7 @@
 
   "STEP:OFFICER_ENCOUNTER_SENTIMENT": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Help me understand how it felt to you.",
     "options": [{
         "title": "It was good",
@@ -565,6 +587,7 @@
 
   "STEP:POSITIVE_FEELING_SELECTION": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Choose as many of these that apply to how you felt (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Protected",
@@ -613,6 +636,7 @@
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Choose as many of these that apply to how you felt (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Threatened",
@@ -656,6 +680,7 @@
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
     "type": "quickReply",
+    "anchor": true,
     "text": "To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Approachable",
@@ -714,6 +739,7 @@
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
+    "anchor": true,
     "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Distant",
@@ -779,6 +805,7 @@
 
   "STEP:USER_RACE_ENTRY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "What is your race?",
     "options": [{
         "title": "Black",
@@ -826,6 +853,7 @@
 
   "STEP:USER_GENDER_ENTRY": {
     "type": "quickReply",
+    "anchor": true,
     "text": "What is your gender?",
     "options": [{
         "title": "Male",
@@ -861,6 +889,7 @@
 
   "STEP:USER_BIRTH_DATE_ENTRY": {
     "type": "message",
+    "anchor": true,
     "text": "And your birth date? (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:END_THANK_YOU"
@@ -868,6 +897,7 @@
 
   "STEP:END_THANK_YOU": {
     "type": "button",
+    "anchor": true,
     "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
     "options": [{
         "title": "End this chat",
