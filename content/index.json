@@ -243,8 +243,6 @@
   },
 
 
-
-
   "STEP:OFFICER_INCIDENT_DETAILS": {
     "type": "message",
     "text": "This information is very helpful. Thank you. There’s a few details about the incident, as well as the officer or officers that we’d like to gather.",
@@ -256,7 +254,7 @@
   "STEP:LOCATION_QUERY": {
     "type": "message",
     "anchor": true,
-    "text": "What city did your encounter happen in? (ex: Oakland)",
+    "text": "What city did your encounter happen in?",
     "responseType": "text",
     "scripts": ["locationScript"],
     "nextMessage": "STEP:LOCATION_PROMT"
@@ -618,8 +616,8 @@
         "data": "not listed here"
       },
       {
-        "title": "I'm finished",
-        "data": "im finished"
+        "title": "Done",
+        "data": "done"
       }
     ],
     "nextMessage": {
@@ -630,7 +628,7 @@
       "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
       "heard": "STEP:POSITIVE_FEELING_SELECTION",
       "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
-      "im finished": "STEP:NEGATIVE_FEELING_SELECTION"
+      "done": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
@@ -663,8 +661,12 @@
         "data": "ignored"
       },
       {
-        "title": "Im finished",
-        "data": "im finished"
+        "title": "Not listed here",
+        "data": "not listed here"
+      },
+      {
+        "title": "Done",
+        "data": "done"
       }
     ],
     "nextMessage": {
@@ -674,7 +676,8 @@
       "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
-      "im finished": "STEP:POSITIVE_OFFICER_SELECTION"
+      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
+      "done": "STEP:POSITIVE_OFFICER_SELECTION"
     }
   },
 
