@@ -618,12 +618,12 @@
       }
     ],
     "nextMessage": {
-      "protected": "STEP:FEELING_SELECTION",
-      "relieved": "STEP:FEELING_SELECTION",
-      "safe": "STEP:FEELING_SELECTION",
-      "comforted": "STEP:FEELING_SELECTION",
-      "taken care of": "STEP:FEELING_SELECTION",
-      "heard": "STEP:FEELING_SELECTION",
+      "protected": "STEP:POSITIVE_FEELING_SELECTION",
+      "relieved": "STEP:POSITIVE_FEELING_SELECTION",
+      "safe": "STEP:POSITIVE_FEELING_SELECTION",
+      "comforted": "STEP:POSITIVE_FEELING_SELECTION",
+      "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
+      "heard": "STEP:NEGATIVE_FEELING_SELECTION",
       "im finished": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
@@ -661,12 +661,12 @@
       }
     ],
     "nextMessage": {
-      "threatened": "STEP:FEELING_SELECTION",
-      "disrespected": "STEP:FEELING_SELECTION",
-      "intimidated": "STEP:FEELING_SELECTION",
-      "angry": "STEP:FEELING_SELECTION",
-      "ignored": "STEP:FEELING_SELECTION",
-      "im finished": "STEP:FURTHER_ENCOUNTER_DETAILS"
+      "threatened": "STEP:NEGATIVE_FEELING_SELECTION",
+      "disrespected": "STEP:NEGATIVE_FEELING_SELECTION",
+      "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
+      "angry": "STEP:NEGATIVE_FEELING_SELECTION",
+      "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
+      "im finished": "STEP:POSITIVE_OFFICER_SELECTION"
     }
   },
 
@@ -733,7 +733,7 @@
     }
   },
 
-  "STEP:POSITIVE_OFFICER_SELECTION": {
+  "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
     "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any)...",
     "options": [{
