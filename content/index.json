@@ -61,8 +61,56 @@
     "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on.",
     "responseType": "text",
     "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:LOCATION_QUERY": {
+    "type": "message",
+    "anchor": true,
+    "text": "What city did your encounter happen in?",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:LOCATION_PROMT"
+  },
+
+  "STEP:LOCATION_PROMT": {
+    "type": "generic",
+    "responseKey": "ENCOUNTER_LOCATION",
+    "scripts": ["locationScript", "varScript"],
+    "nextMessage": "STEP:DATE_QUERY"
+  },
+
+  "STEP:QUE_LOCATION_RETRY": {
+    "nextMessage": "STEP:LOCATION_RETRY"
+  },
+
+  "STEP:LOCATION_RETRY": {
+    "type": "message",
+    "text": "Ok let's try again. Try and be more precise.",
+    "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:DATE_QUERY": {
+    "type": "message",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "DATE_OF_INCIDENT",
+    "text": "And what month and day did it happen on? (ex: 12/09/2015)",
+    "responseType": "text",
+    "nextMessage": "STEP:TIME_QUERY"
+  },
+
+  "STEP:TIME_QUERY": {
+    "type": "message",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "TIME_OF_INCIDENT",
+    "text": "Got it. Around what time that day? (ex: 12:15 AM)",
+    "responseType": "text",
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
+
 
   "STEP:INITIAL_CONTACT_QUERY": {
     "type": "quickReply",
@@ -97,7 +145,7 @@
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "All right. Just a couple of questions to make sure we can help you best. Please be as honest and specific as you feel like you can.",
+    "text": "All right. Just a couple of questions to make sure we can help you best.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
@@ -144,12 +192,12 @@
     "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
+    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
 
   "STEP:USER_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "Thanks. I’m gonna get into some details now. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
+    "text": "Thanks. I’m gonna get into some details now. I just need to go through what happened so I can help.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_USER_CONTACT_QUERY"
@@ -162,14 +210,6 @@
     "responseKey": "POLICE_ACTION",
     "text": "What ended up happening?",
     "options": [{
-        "title": "They resolved it",
-        "data": "they resolved it"
-      },
-      {
-        "title": "We talked",
-        "data": "we talked"
-      },
-      {
         "title": "I was ticketed",
         "data": "i was ticketed"
       },
@@ -256,55 +296,12 @@
     "text": "This information is very helpful. Thank you. There’s a few details about the incident, as well as the officer or officers that we’d like to gather.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-  "STEP:LOCATION_QUERY": {
-    "type": "message",
-    "anchor": true,
-    "text": "What city did your encounter happen in?",
-    "responseType": "text",
-    "scripts": ["locationScript"],
-    "nextMessage": "STEP:LOCATION_PROMT"
-  },
-
-  "STEP:LOCATION_PROMT": {
-    "type": "generic",
-    "responseKey": "ENCOUNTER_LOCATION",
-    "scripts": ["locationScript", "varScript"],
-    "nextMessage": "STEP:DATE_QUERY"
-  },
-
-  "STEP:QUE_LOCATION_RETRY": {
-    "nextMessage": "STEP:LOCATION_RETRY"
-  },
-
-  "STEP:LOCATION_RETRY": {
-    "type": "message",
-    "text": "Ok let's try again. Try and be more precise.",
-    "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-  "STEP:DATE_QUERY": {
-    "type": "message",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "DATE_OF_INCIDENT",
-    "text": "And what month and day did it happen on? (ex: 12/09/2015)",
-    "responseType": "text",
-    "nextMessage": "STEP:TIME_QUERY"
-  },
-
-  "STEP:TIME_QUERY": {
-    "type": "message",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "TIME_OF_INCIDENT",
-    "text": "Got it. Around what time that day? (ex: 12:15 AM)",
-    "responseType": "text",
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
+
+
+
+
 
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
     "type": "message",
@@ -453,20 +450,20 @@
     "responseKey": "OFFICER_GENDER",
     "text": "What about the officer's gender?",
     "options": [{
-        "title": "Male",
-        "data": "male"
+        "title": "Man",
+        "data": "man"
       },
       {
-        "title": "Female",
-        "data": "female"
+        "title": "Woman",
+        "data": "woman"
       },
       {
-        "title": "Trans Male",
-        "data": "trans male"
+        "title": "Trans Man",
+        "data": "trans man"
       },
       {
-        "title": "Trans Female",
-        "data": "trans female"
+        "title": "Trans Woman",
+        "data": "trans woman"
       },
       {
         "title": "Genderqueer",
@@ -896,20 +893,20 @@
     "responseKey": "USER_GENDER",
     "text": "What is your gender?",
     "options": [{
-        "title": "Male",
-        "data": "male"
+        "title": "Man",
+        "data": "man"
       },
       {
-        "title": "Female",
-        "data": "female"
+        "title": "Woman",
+        "data": "woman"
       },
       {
-        "title": "Trans Male",
-        "data": "trans male"
+        "title": "Trans Man",
+        "data": "trans man"
       },
       {
-        "title": "Trans Female",
-        "data": "trans female"
+        "title": "Trans Woman",
+        "data": "trans woman"
       },
       {
         "title": "Genderqueer",
