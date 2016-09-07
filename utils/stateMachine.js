@@ -41,7 +41,7 @@ module.exports = {
     } else if (message.toLowerCase() === "restart"){
       currentState = stateStore[0];
     } else if (message.toLowerCase() === "new report"){
-      currentState = "STEP:START_CONVERSATION";
+      currentState = "STEP:GREETING";
     }
     console.log("GET STATE", currentState)
   },
