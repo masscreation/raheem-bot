@@ -67,7 +67,7 @@
   "STEP:LOCATION_QUERY": {
     "type": "message",
     "anchor": true,
-    "text": "What city did your encounter happen in?",
+    "text": "What city did your interaction happen in?",
     "responseType": "text",
     "scripts": ["locationScript"],
     "nextMessage": "STEP:LOCATION_PROMT"
@@ -92,11 +92,37 @@
   },
 
   "STEP:DATE_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "DATE_OF_INCIDENT",
+    "text": "What day did the incident occur?",
+    "options": [{
+        "title": "Today",
+        "data": "today"
+      },
+      {
+        "title": "Yesterday",
+        "data": "yesterday"
+      },
+      {
+        "title": "Input Date",
+        "data": "input date"
+      }
+    ],
+    "nextMessage": {
+      "today": "STEP:TIME_QUERY",
+      "yesterday": "STEP:TIME_QUERY",
+      "input date": "STEP:MANUAL_DATE_QUERY"
+    }
+  },
+
+  "STEP:MANUAL_DATE_QUERY": {
     "type": "message",
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "And what month and day did it happen on? (ex: 12/09/2015)",
+    "text": "Please enter the date the incident occured on. (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
   },
@@ -123,8 +149,8 @@
         "data": "i called the police"
       },
       {
-        "title": "Police contacted me",
-        "data": "police contacted me"
+        "title": "Police approached me",
+        "data": "police approached me"
       },
       {
         "title": "I was a witness",
@@ -204,7 +230,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening?",
+    "text": "What ended up happening in your interaction?",
     "options": [{
         "title": "I was helped",
         "data": "i was helped"
@@ -287,21 +313,16 @@
     "text": "That’s really awful.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:OFFICER_INCIDENT_DETAILS"
+    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
-
 
   "STEP:OFFICER_INCIDENT_DETAILS": {
     "type": "message",
-    "text": "This information is very helpful. Thank you. There’s a few details about the incident, as well as the officer or officers that we’d like to gather.",
+    "text": "There’s a few details about the interaction as well as the officers involved that we’d like to gather.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
-
-
-
-
 
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
     "type": "message",
@@ -548,7 +569,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "ENCOUNTER_SENTIMENT",
-    "text": "Help me understand how it felt to you.",
+    "text": "Help me understand how the interaction felt to you.",
     "options": [{
         "title": "It really was good",
         "data": "excellent"
@@ -616,7 +637,7 @@
   "STEP:POSITIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Choose as many of these that apply to how you felt (if any). Click 'Done' when complete.",
+    "text": "Choose as many of these that apply to how you felt during the interaction (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Protected",
         "data": "protected"
@@ -665,7 +686,7 @@
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Choose as many of these that apply to how you felt (if any). Click 'Done' when complete.",
+    "text": "Choose as many of these that apply to how you felt during the interaction (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Threatened",
         "data": "threatened"
