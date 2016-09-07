@@ -140,7 +140,7 @@
     "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:OFFICER_INCIDENT_DETAILS"
+    "nextMessage": "STEP:LOCATION_QUERY"
   },
 
 
