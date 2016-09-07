@@ -674,7 +674,7 @@
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
     "type": "quickReply",
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any)...",
+    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -712,12 +712,8 @@
         "data": "professional"
       },
       {
-        "title": "Not listed here.",
-        "data": "not listed here"
-      },
-      {
-        "title": "Done",
-        "data": "done"
+        "title": "Im finished",
+        "data": "im finished"
       }
     ],
     "nextMessage": {
@@ -730,14 +726,13 @@
       "accommodating": "STEP:POSITIVE_OFFICER_SELECTION",
       "friendly": "STEP:POSITIVE_OFFICER_SELECTION",
       "professional": "STEP:POSITIVE_OFFICER_SELECTION",
-      "not listed here": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "done": "STEP:NEGATIVE_OFFICER_SELECTION"
+      "im finished": "STEP:NEGATIVE_OFFICER_SELECTION"
     }
   },
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any)...",
+    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Distant",
         "data": "distant"
@@ -775,12 +770,8 @@
         "data": "used abusive language"
       },
       {
-        "title": "Not listed here.",
-        "data": "not listed here"
-      },
-      {
-        "title": "Done",
-        "data": "done"
+        "title": "Im finished",
+        "data": "im finished"
       }
     ],
     "nextMessage": {
@@ -793,8 +784,7 @@
       "too forceful": "STEP:NEGATIVE_OFFICER_SELECTION",
       "failed to self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
       "used abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "not listed here": "STEP:FURTHER_ENCOUNTER_DETAILS",
-      "done": "STEP:FURTHER_ENCOUNTER_DETAILS"
+      "im finished": "STEP:FURTHER_ENCOUNTER_DETAILS"
     }
   },
 
