@@ -577,7 +577,7 @@
 
   "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Type in more about what you felt about it, or respond 'I dont want to'.",
+    "text": "Type in more detail about what you felt about it, or respond 'I dont want to'.",
     "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
   },
 
@@ -663,6 +663,7 @@
     "nextMessage": {
       "threatened": "STEP:NEGATIVE_FEELING_SELECTION",
       "disrespected": "STEP:NEGATIVE_FEELING_SELECTION",
+      "scared": "STEP:NEGATIVE_FEELING_SELECTION",
       "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
