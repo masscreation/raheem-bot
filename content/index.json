@@ -170,10 +170,6 @@
         "data": "arrested me"
       },
       {
-        "title": "something different",
-        "data": "something different"
-      },
-      {
         "title": "Other",
         "data": "other"
       }
@@ -210,6 +206,10 @@
     "responseKey": "POLICE_ACTION",
     "text": "What ended up happening?",
     "options": [{
+        "title": "I was helped",
+        "data": "i was helped"
+      },
+      {
         "title": "I was ticketed",
         "data": "i was ticketed"
       },
