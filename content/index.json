@@ -8,10 +8,10 @@
     "anchor": true,
     "text": "Hey. I hope everything’s okay. This conversation is private. if you want to learn more about this bot thing, just type “what is this?”.",
     "waitForUser": false,
-    "nextMessage": "STEP:SUBMIT_REPORT_QUERY"
+    "nextMessage": "STEP:START_CONVERSATION"
   },
 
-  "STEP:SUBMIT_REPORT_QUERY": {
+  "STEP:START_CONVERSATION": {
     "type": "button",
     "anchor": true,
     "text": "Did you want to tell us about having contact with the police?",
@@ -53,7 +53,7 @@
     "type": "message",
     "text": "Please call 9-1-1 right now then. You have to make sure you get safe.",
     "waitForUser": false,
-    "nextMessage": "STEP:END_THANK_YOU"
+    "nextMessage": "STEP:END_THANK_YOU_SUSPENDED"
   },
 
   "STEP:START_REPORT": {
@@ -919,6 +919,25 @@
     "nextMessage": {
       "1": "STEP:GOODBYE",
       "2": "STEP:SUBMIT_REPORT_QUERY"
+      }
+  },
+
+  "STEP:END_THANK_YOU_SUSPENDED": {
+    "type": "button",
+    "anchor": true,
+    "text": "Would you like to report what just happend?",
+    "options": [{
+        "title": "No, end this chat",
+        "data": "1"
+      },
+      {
+        "title": "Yes, start a report.",
+        "data": "2"
+      }
+    ],
+    "nextMessage": {
+      "1": "STEP:GOODBYE",
+      "2": "STEP:INITIAL_CONTACT_QUERY"
       }
   },
 

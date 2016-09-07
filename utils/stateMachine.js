@@ -40,6 +40,8 @@ module.exports = {
       currentState = stateStore[lastStateIndex - 2];
     } else if (message.toLowerCase() === "restart"){
       currentState = stateStore[0];
+    } else if (message.toLowerCase() === "new report"){
+      currentState = "STEP:START_CONVERSATION";
     }
     console.log("GET STATE", currentState)
   },
