@@ -95,7 +95,7 @@
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "All right. Just a couple of questions to make sure we can help you best. Please be as honest and specific as you feel like you can. If you need to stop, just type 'stop'.",
+    "text": "All right. Just a couple of questions to make sure we can help you best. Please be as honest and specific as you feel like you can.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
@@ -147,7 +147,7 @@
 
   "STEP:USER_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “stop”. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
+    "text": "Thanks. I’m gonna get into some details now. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_USER_CONTACT_QUERY"
