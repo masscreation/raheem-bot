@@ -958,5 +958,13 @@
     "waitForUser": false,
     "response_type": "text",
     "nextMessage": "STEP:LAST_STEP"
+  },
+
+  "STEP:RESTART_CONVO": {
+    "type": "message",
+    "text": "",
+    "waitForUser": false,
+    "response_type": "text",
+    "nextMessage": "STEP:SAFE_QUERY"
   }
 }
