@@ -291,7 +291,6 @@
     "type": "message",
     "text": "And what month and day did it happen on? (ex: 12/32/2015)",
     "responseType": "text",
-    "scripts": ["dateScript"],
     "nextMessage": "STEP:TIME_QUERY"
   },
 
@@ -299,7 +298,6 @@
     "type": "message",
     "text": "Got it. Around what time that day? (ex: 12:15 AM)",
     "responseType": "text",
-    "scripts": ["timeScript"],
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
 
@@ -323,7 +321,7 @@
     ],
     "nextMessage": {
       "yes": "STEP:OFFICER_IDENTIFICATION",
-      "no": "STEP:GOODBYE"
+      "no": "STEP:OFFICER_ENCOUNTER_START"
     }
   },
 
