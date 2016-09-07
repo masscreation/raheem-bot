@@ -50,7 +50,7 @@
     "type": "message",
     "text": "Please call 9-1-1 right now then. You have to make sure you get safe.",
     "waitForUser": false,
-    "nextMessage": "STEP:GOODBYE"
+    "nextMessage": "STEP:END_THANK_YOU"
   },
 
   "STEP:START_REPORT": {
@@ -605,7 +605,7 @@
       "safe": "STEP:POSITIVE_FEELING_SELECTION",
       "comforted": "STEP:POSITIVE_FEELING_SELECTION",
       "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
-      "heard": "STEP:NEGATIVE_FEELING_SELECTION",
+      "heard": "STEP:POSITIVE_FEELING_SELECTION",
       "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
       "im finished": "STEP:NEGATIVE_FEELING_SELECTION"
     }
@@ -861,7 +861,7 @@
 
   "STEP:USER_BIRTH_DATE_ENTRY": {
     "type": "message",
-    "text": "And your birth date?",
+    "text": "And your birth date? (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:END_THANK_YOU"
   },
