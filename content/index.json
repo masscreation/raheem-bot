@@ -672,7 +672,7 @@
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
     "type": "quickReply",
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'I'm finished' when complete.",
+    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'Done' when complete.",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -710,8 +710,8 @@
         "data": "professional"
       },
       {
-        "title": "Im finished",
-        "data": "im finished"
+        "title": "done",
+        "data": "done"
       }
     ],
     "nextMessage": {
@@ -724,7 +724,7 @@
       "accommodating": "STEP:POSITIVE_OFFICER_SELECTION",
       "friendly": "STEP:POSITIVE_OFFICER_SELECTION",
       "professional": "STEP:POSITIVE_OFFICER_SELECTION",
-      "im finished": "STEP:NEGATIVE_OFFICER_SELECTION"
+      "done": "STEP:NEGATIVE_OFFICER_SELECTION"
     }
   },
 
