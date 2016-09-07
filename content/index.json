@@ -91,15 +91,7 @@
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "All right. Just a couple of questions to make sure we can help you best.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:POLICE_INITIATED_ENCOUNTER_CONTINUED"
-  },
-
-  "STEP:POLICE_INITIATED_ENCOUNTER_CONTINUED": {
-    "type": "message",
-    "text": "Please be as honest and specific as you feel like you can. If you need to stop, just type “stop”.",
+    "text": "All right. Just a couple of questions to make sure we can help you best. Please be as honest and specific as you feel like you can. If you need to stop, just type 'stop'.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
@@ -247,15 +239,7 @@
 
   "STEP:OFFICER_INCIDENT_DETAILS": {
     "type": "message",
-    "text": "This information is very helpful. Thank you.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:OFFICER_INCIDENT_DETAILS_CONT"
-  },
-
-  "STEP:OFFICER_INCIDENT_DETAILS_CONT": {
-    "type": "message",
-    "text": "There’s a few details about the incident, as well as the officer or officers that we’d like to gather.",
+    "text": "This information is very helpful. Thank you. There’s a few details about the incident, as well as the officer or officers that we’d like to gather.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:LOCATION_QUERY"
@@ -788,14 +772,7 @@
 
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Thank you for sharing so much good information. This is great. We’re almost done.",
-    "waitForUser": false,
-    "nextMessage": "STEP:USER_DETAILS_START"
-  },
-
-  "STEP:USER_DETAILS_START": {
-    "type": "message",
-    "text": "If you’re okay with it, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+    "text": "Thank you for sharing so much good information. This is great. We’re almost done. If you’re okay with it, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
     "waitForUser": false,
     "nextMessage": "STEP:USER_RACE_ENTRY"
   },
@@ -838,6 +815,10 @@
       {
         "title": "Other",
         "data": "other"
+      },
+      {
+        "title": "Opt out",
+        "data": "opt out"
       }
     ],
     "nextMessage": "STEP:USER_GENDER_ENTRY"
