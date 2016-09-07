@@ -131,7 +131,7 @@
     ],
     "nextMessage": {
       "wanted information": "STEP:OFFICER_INCIDENT_DETAILS",
-      "ticeted me": "STEP:OFFICER_INCIDENT_DETAILS",
+      "ticketed me": "STEP:OFFICER_INCIDENT_DETAILS",
       "arrested me": "STEP:USER_ARRESTED",
       "something different": "STEP:OFFICER_INCIDENT_DETAILS",
       "other": "STEP:OFFICER_INCIDENT_DETAILS"
@@ -583,7 +583,7 @@
 
   "STEP:POSITIVE_FEELING_SELECTION": {
     "type": "quickReply",
-    "text": "Choose as many of these that apply to how you felt (if any)...",
+    "text": "Choose as many of these that apply to how you felt (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Protected",
         "data": "protected"
@@ -609,8 +609,8 @@
         "data": "heard"
       },
       {
-        "title": "Other",
-        "data": "other"
+        "title": "Not listed here",
+        "data": "not listed here"
       },
       {
         "title": "I'm finished",
@@ -624,13 +624,14 @@
       "comforted": "STEP:POSITIVE_FEELING_SELECTION",
       "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
       "heard": "STEP:NEGATIVE_FEELING_SELECTION",
+      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
       "im finished": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
-    "text": "Choose as many of these that apply to how you felt (if any)...",
+    "text": "Choose as many of these that apply to how you felt (if any). Click 'I'm finished' when complete.",
     "options": [{
         "title": "Threatened",
         "data": "threatened"
@@ -783,15 +784,15 @@
       }
     ],
     "nextMessage": {
-      "approachable": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "respectful": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "caring": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "helpul": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "trustworthy": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "calm": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "accommodating": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "friendly": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "professional": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "distant": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "discriminatory": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "not in control": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "harassing": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "suspicious": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "distracted": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "too forceful": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "failed to self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "used abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
       "not listed here": "STEP:FURTHER_ENCOUNTER_DETAILS",
       "done": "STEP:FURTHER_ENCOUNTER_DETAILS"
     }
