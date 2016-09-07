@@ -143,8 +143,6 @@
     "nextMessage": "STEP:LOCATION_QUERY"
   },
 
-
-
   "STEP:USER_INITIATED_ENCOUNTER": {
     "type": "message",
     "text": "Thanks. I’m gonna get into some details now. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
