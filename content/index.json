@@ -918,7 +918,7 @@
     ],
     "nextMessage": {
       "1": "STEP:GOODBYE",
-      "2": "STEP:SUBMIT_REPORT_QUERY"
+      "2": "STEP:SAFE_QUERY"
       }
   },
 
