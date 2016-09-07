@@ -281,7 +281,7 @@
   "STEP:DATE_QUERY": {
     "type": "message",
     "anchor": true,
-    "text": "And what month and day did it happen on? (ex: 12/32/2015)",
+    "text": "And what month and day did it happen on? (ex: 12/09/2015)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
   },
@@ -507,7 +507,7 @@
   "STEP:OFFICER_ENCOUNTER_START": {
     "type": "button",
     "anchor": true,
-    "text": "When the police officer was interacting with you, did it go like it expected it to?",
+    "text": "When the police officer was interacting with you, did it go like you expected it to?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -525,6 +525,10 @@
     "anchor": true,
     "text": "Help me understand how it felt to you.",
     "options": [{
+        "title": "It really was good",
+        "data": "excellent"
+      },
+      {
         "title": "It was good",
         "data": "good"
       },
@@ -542,6 +546,7 @@
       }
     ],
     "nextMessage": {
+      "excellent": "STEP:OFFICER_ENCOUNTER_GOOD",
       "good": "STEP:OFFICER_ENCOUNTER_GOOD",
       "neutral": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
       "bad": "STEP:OFFICER_ENCOUNTER_BAD",
