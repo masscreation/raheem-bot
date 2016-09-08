@@ -132,7 +132,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "TIME_OF_INCIDENT",
-    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'}? (ex: 12:15 AM)",
+    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'} ? (ex: 12:15 AM)",
     "responseType": "text",
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
