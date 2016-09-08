@@ -674,7 +674,7 @@
       "comforted": "STEP:POSITIVE_FEELING_SELECTION",
       "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
       "heard": "STEP:POSITIVE_FEELING_SELECTION",
-      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
+      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
@@ -718,7 +718,7 @@
       "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
-      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
+      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
