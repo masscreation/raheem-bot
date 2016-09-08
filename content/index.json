@@ -653,6 +653,7 @@
   "STEP:POSITIVE_FEELING_SELECTION_TRANSITION": {
     "type": "message",
     "text": "Alright moving on...",
+    "waitForUser": false,
     "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
   },
 
