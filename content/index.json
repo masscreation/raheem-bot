@@ -6,7 +6,7 @@
   "STEP:GREETING": {
     "type": "message",
     "anchor": true,
-    "text": "Hey. I hope everything’s okay. This conversation is private. if you want to learn more about this bot thing, just type “what is this?”.",
+    "text": "Hey. I hope everything’s okay. This conversation is private.",
     "waitForUser": false,
     "nextMessage": "STEP:START_CONVERSATION"
   },
@@ -51,7 +51,7 @@
 
   "STEP:CALL_911": {
     "type": "message",
-    "text": "Please call 9-1-1 right now then. You have to make sure you get safe.",
+    "text": "Please ensure you are okay and in a safe environment immedietly.",
     "waitForUser": false,
     "nextMessage": "STEP:END_THANK_YOU_SUSPENDED"
   },
@@ -107,7 +107,7 @@
       },
       {
         "title": "Input Date",
-        "data": "input date"
+        "data": "that day"
       }
     ],
     "nextMessage": {
@@ -121,7 +121,7 @@
     "type": "message",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "DATE_OF_INCIDENT",
+    "responseKey": "HARDCODED_DATE_OF_INCIDENT",
     "text": "Please enter the date the incident occured on. (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
@@ -132,7 +132,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "TIME_OF_INCIDENT",
-    "text": "Got it. Around what time that day? (ex: 12:15 AM)",
+    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'}? (ex: 12:15 AM)",
     "responseType": "text",
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
@@ -165,8 +165,15 @@
       "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
       "i was a witness": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:OFFICER_INCIDENT_DETAILS"
+      "other": "STEP:INITIAL_CONTACT_ELABORATE"
     }
+  },
+
+  "STEP:INITIAL_CONTACT_ELABORATE": {
+    "type": "message",
+    "text": "Can you offer more detail about what occured?",
+    "responseType": "text",
+    "nextMessage": "STEP:POLICE_INITIATED_ENCOUNTER"
   },
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
@@ -630,7 +637,7 @@
 
   "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "I want to hear more about how you felt. If you want to tell me more, just start typing. If not, type 'next'.",
+    "text": "Can you tell me more about how this interaction made you feel? If yes, just start typing. If no, type 'next.'",
     "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
   },
 
@@ -667,13 +674,22 @@
         "data": "not listed here"
       }
     ],
-    "nextMessage": "STEP:NEGATIVE_FEELING_SELECTION"
+    "nextMessage": {
+      "protected": "STEP:NEGATIVE_FEELING_SELECTION",
+      "relieved": "STEP:NEGATIVE_FEELING_SELECTION",
+      "safe": "STEP:NEGATIVE_FEELING_SELECTION",
+      "comforted": "STEP:NEGATIVE_FEELING_SELECTION",
+      "taken care of": "STEP:NEGATIVE_FEELING_SELECTION",
+      "heard": "STEP:NEGATIVE_FEELING_SELECTION",
+      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
+    }
   },
+
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Choose which of these most closely reflects your feelings about the interaction. (if any)?",
+    "text": "Okay. How about any of these?",
     "options": [{
         "title": "Threatened",
         "data": "threatened"
@@ -757,7 +773,7 @@
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "What word below best describes the officer's behavior (if any)?",
+    "text": "How about any of these?",
     "options": [{
         "title": "Distant",
         "data": "distant"
@@ -800,7 +816,7 @@
 
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Thank you for sharing so much good information. This is great. We’re almost done. If you’re okay with it, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+    "text": "Thank you for sharing so much good information. This is great. We’re almost done. If you’re okay with it, I just want to ask for a little information about you.",
     "waitForUser": false,
     "nextMessage": "STEP:USER_RACE_ENTRY"
   },
@@ -810,7 +826,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "USER_RACE",
-    "text": "What is your race?",
+    "text": "Don’t worry, your identity is always gonna be confidential. What is your race?",
     "options": [{
         "title": "Black",
         "data": "black/african-descent"
@@ -898,7 +914,7 @@
     "scripts": ["varScript"],
     "responseKey": "USER_BIRTHDATE",
     "anchor": true,
-    "text": "And your birth date? (mm/dd/yyyy)",
+    "text": "And your birth year?",
     "responseType": "text",
     "nextMessage": "STEP:END_THANK_YOU"
   },
@@ -937,7 +953,7 @@
     ],
     "nextMessage": {
       "1": "STEP:GOODBYE",
-      "2": "STEP:INITIAL_CONTACT_QUERY"
+      "2": "STEP:SAFE_QUERY"
       }
   },
 
