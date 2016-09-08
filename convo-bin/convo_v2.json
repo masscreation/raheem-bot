@@ -1,0 +1,607 @@
+{
+  "STEP:1_GET_STARTED_PAYLOAD": {
+    "nextMessage": "STEP:GREETING"
+  },
+
+  "STEP:FIRST_TIME_GREETING": {
+    "type": "text",
+    "text": "Hey. I hope everything’s okay. This conversation is private. if you want to learn more about this bot thing, just type “what is this?”.",
+    "waitForUser": false,
+    "nextMessage": "STEP:SUBMIT_REPORT_QUERY"
+  },
+
+  "STEP:SUBMIT_REPORT_QUERY": {
+    "type": "button",
+    "text": "Did you want to tell us about having contact with the police?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:SAFE_QUERY",
+      "no": "STEP:GOODBYE"
+    }
+  },
+
+  "STEP:SAFE_QUERY": {
+    "type": "button",
+    "text": "All right. First, are you safe? ",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:START_REPORT",
+      "no": "STEP:CALL_911"
+    }
+  },
+
+  "STEP:START_REPORT": {
+    "type": "message",
+    "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on.",
+    "responseType": "text",
+    "waitForUser": false,
+    "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
+  },
+
+  "STEP:INITIAL_CONTACT_QUERY": {
+    "type": "button",
+    "text": "Which one of these things happened?",
+    "options": [{
+        "title": "You called the police",
+        "data": "1"
+      },
+      {
+        "title": "The police approached you",
+        "data": "2"
+      },
+      {
+        "title": "You witnessed the police with someone else",
+        "data": "3"
+      },
+    ],
+    "nextMessage": {
+      "1": "STEP:USER_INITIATED_ENCOUNTER",
+      "2": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "3": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    }
+  },
+
+
+  "STEP:USER_INITIATED_ENCOUNTER": {
+    "type": "message",
+    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “stop”. I just need to go through what happened so I can help. Please be as honest and specific as you feel like you can.",
+    "responseType": "text",
+    "waitForUser": false,
+    "nextMessage": "STEP:EMERGENCY_RESPONSE_TIME"
+  },
+
+  "STEP:EMERGENCY_QUERY": {
+    "type": "button",
+    "text": "Did you call because of an emergency?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:EMERGENCY_RESPONSE_TIME",
+      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    }
+  },
+
+  "STEP:EMERGENCY_RESPONSE_TIME": {
+    "type": "quickReply",
+    "text": "Okay. How long it take for them to get there to help?",
+    "options": [{
+        "title": "Less than 2 minutes",
+        "data": "1"
+      },
+      {
+        "title": "2-5 minutes",
+        "data": "2"
+      },
+      {
+        "title": "5-10 minutes",
+        "data": "3"
+      },
+      {
+        "title": "10-30 minutes",
+        "data": "4"
+      },
+      {
+        "title": "Over 30 minutes",
+        "data": "5"
+      },
+    ],
+    "nextMessage": {
+      "1": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "2": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "3": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
+      "4": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
+      "5": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
+    }
+  },
+
+  "STEP:SLOW_RESPONSE_TIME_SENTIMENT": {
+    "type": "message",
+    "text": "That’s really awful.",
+    "responseType": "text",
+    "waitForUser": false,
+    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+  },
+
+  "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
+    "type": "message",
+    "text": "About how many officers were at the scene? (ex: 3)",
+    "nextMessage": "STEP:BEGIN_OFFICER_IDENTIFICATION"
+  },
+
+  "STEP:BEGIN_OFFICER_IDENTIFICATION": {
+    "type": "button",
+    "text": "Did you talk to one officer specifically?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:OFFICER_IDENTIFICATION",
+      "no": "STEP:GOODBYE"
+    }
+  },
+
+  "STEP:OFFICER_IDENTIFICATION": {
+    "type": "message",
+    "text": "All right, I got a few questions about what you remember about that officer...",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_BADGE_QUERY"
+  },
+
+  "STEP:OFFICER_BADGE_QUERY": {
+    "type": "message",
+    "text": "Do you remember the officers badge number?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:OFFICER_BADGE_ENTRY",
+      "no": "STEP:OFFICER_NAME_QUERY"
+    }
+  },
+
+  "STEP:OFFICER_BADGE_ENTRY": {
+    "type": "message",
+    "text": "Great! Not many people remember to get that, go ahead and type it in below... (ex: 123456)",
+    "nextMessage": "STEP:OFFICER_NAME_QUERY"
+  },
+
+  "STEP:OFFICER_NAME_QUERY": {
+    "type": "message",
+    "text": "Do you happen to remember the officers name?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:OFFICER_NAME_ENTRY",
+      "no": "STEP:OFFICER_RACE_ENTRY"
+    }
+  },
+
+  "STEP:OFFICER_NAME_ENTRY": {
+    "type": "message",
+    "text": "Go ahead and type the officers name in. (Last Name, First Name)",
+    "nextMessage": "STEP:OFFICER_RACE_ENTRY"
+  },
+
+  "STEP:OFFICER_RACE_ENTRY": {
+    "type": "quickReply",
+    "text": "Cool. Were you able to tell the officer’s race?",
+    "options": [{
+        "title": "Black/African-descent",
+        "data": "black/african-descent"
+      },
+      {
+        "title": "Hispanic / Latino",
+        "data": "hispanic/latino"
+      },
+      {
+        "title": "Asian",
+        "data": "asian"
+      },
+      {
+        "title": "Arab",
+        "data": "arab"
+      },
+      {
+        "title": "Native American",
+        "data": "native american"
+      },
+      {
+        "title": "Pacific Islander",
+        "data": "pacific islander"
+      },
+      {
+        "title": "South Asain",
+        "data": "south asain"
+      },
+      {
+        "title": "White/Caucasian",
+        "data": "white/caucasian"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      },
+      {
+        "title": "Couldn't tell",
+        "data": "couldn't tell"
+      },
+    ],
+    "nextMessage": "STEP:OFFICER_GENDER_ENTRY"
+  },
+
+  "STEP:OFFICER_GENER_ENTRY": {
+    "type": "quickReply",
+    "text": "What about the officer's gender?",
+    "options": [{
+        "title": "Male",
+        "data": "male"
+      },
+      {
+        "title": "Female",
+        "data": "female"
+      },
+      {
+        "title": "Trans Male",
+        "data": "trans male"
+      },
+      {
+        "title": "Trans Female",
+        "data": "trans female"
+      },
+      {
+        "title": "Genderqueer",
+        "data": "genderqueer"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      },
+      {
+        "title": "Couldn't tell",
+        "data": "couldnt't tell"
+      }
+    ],
+    "nextMessage": "STEP:OFFICER_AGE_ENTRY"
+  },
+
+  "STEP:OFFICER_AGE_ENTRY": {
+    "type": "quickReply",
+    "text": "You’re doing great. About how old would you say the officer is?",
+    "options": [{
+        "title": "20-30",
+        "data": "20-30"
+      },
+      {
+        "title": "31-40",
+        "data": "31-40"
+      },
+      {
+        "title": "41-50",
+        "data": "41-50"
+      },
+      {
+        "title": "Over 50",
+        "data": "over 50"
+      },
+      {
+        "title": "Couldn't tell",
+        "data": "couldn't tell"
+      }
+    ],
+    "nextMessage": "STEP:FURTHER_OFFICER_DETAILS"
+  },
+
+  "STEP:FURTHER_OFFICER_DETAILS": {
+    "type": "message",
+    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_BADGE_QUERY_ENTRY"
+  },
+
+  "STEP:FURTHER_OFFICER_DETAILS_ENTRY": {
+    "type": "message",
+    "text": "Type as little or as much as you would like, otherwise type 'skip' to move to the next step.",
+    "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
+  },
+
+
+
+
+  "STEP:LOCATION_QUERY": {
+    "type": "message",
+    "text": "What city did it happen in? (ex: Oakland)",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:LOCATION_PROMT"
+  },
+
+  "STEP:LOCATION_PROMT": {
+    "type": "generic",
+    "responseKey": "ENCOUNTER_LOCATION",
+    "scripts": ["locationScript", "varScript"],
+    "nextMessage": "STEP:DATE_QUERY"
+  },
+
+  "STEP:QUE_LOCATION_RETRY": {
+    "nextMessage": "STEP:LOCATION_RETRY"
+  },
+
+  "STEP:LOCATION_RETRY": {
+    "type": "message",
+    "text": "Ok let's try again. Try and be more precise.",
+    "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:DATE_QUERY": {
+    "type": "message",
+    "text": "And what month and day did it happen on? (ex: 12/32/2015)",
+    "responseType": "text",
+    "scripts": ["dateScript"],
+    "nextMessage": "STEP:TIME_QUERY"
+  },
+
+  "STEP:TIME_QUERY": {
+    "type": "message",
+    "text": "Got it. Around what time that day?",
+    "responseType": "text",
+    "scripts": ["timeScript"],
+    "nextMessage": "STEP:EMERGENCY_QUERY"
+  },
+
+
+
+  "STEP:OFFICER_ENCOUNTER_START": {
+    "type": "message",
+    "text": "When the police officer was interacting with you, did it go like it expected it to?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": "STEP:OFFICER_ENCOUNTER_SENTIMENT"
+  },
+
+  "STEP:OFFICER_ENCOUNTER_SENTIMENT": {
+    "type": "quickReply",
+    "text": "Help me understand how it felt to you.",
+    "options": [{
+        "title": "It was good",
+        "data": "good"
+      },
+      {
+        "title": "It went okay",
+        "data": "neutral"
+      },
+      {
+        "title": "It wasn't good",
+        "data": "bad"
+      },
+      {
+        "title": "Really bad",
+        "data": "terrible"
+      }
+    ],
+    "nextMessage": {
+      "good": "STEP:OFFICER_ENCOUNTER_GOOD",
+      "neutral": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
+      "bad": "STEP:OFFICER_ENCOUNTER_BAD",
+      "terrible": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
+    }
+  },
+
+  "STEP:OFFICER_ENCOUNTER_GOOD": {
+    "type": "message",
+    "text": "Glad to hear that.",
+    "waitForUser": false,
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:OFFICER_ENCOUNTER_NEUTRAL": {
+    "type": "message",
+    "text": "All right.",
+    "waitForUser": false,
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:OFFICER_ENCOUNTER_BAD": {
+    "type": "message",
+    "text": "Sorry to hear that.",
+    "waitForUser": false,
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:OFFICER_ENCOUNTER_TERRIBLE": {
+    "type": "message",
+    "text": "Damn, I'm sorry. We're working on doing something about that.",
+    "waitForUser": false,
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:FURTHER_ENCOUNTER_DETAILS": {
+    "type": "message",
+    "text": "Type in more about what you felt about it.",
+    "nextMessage": "STEP:ENCOUNTER_DETAILS_WRAPUP"
+  },
+
+  "STEP:FURTHER_ENCOUNTER_DETAILS": {
+    "type": "message",
+    "text": "Thank you for sharing so much good information. This is great. We’re almost done.",
+    "nextMessage": "STEP:USER_DETAILS_START"
+  },
+
+  "STEP:USER_DETAILS_START": {
+    "type": "message",
+    "text": "If you’re okay with it, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+    "nextMessage": "STEP:USER_RACE_ENTRY"
+  },
+
+  "STEP:USER_RACE_ENTRY": {
+    "type": "quickReply",
+    "text": "What is your race?",
+    "options": [{
+        "title": "Black/African-descent",
+        "data": "black/african-descent"
+      },
+      {
+        "title": "Hispanic / Latino",
+        "data": "hispanic/latino"
+      },
+      {
+        "title": "Asian",
+        "data": "asian"
+      },
+      {
+        "title": "Arab",
+        "data": "arab"
+      },
+      {
+        "title": "Native American",
+        "data": "native american"
+      },
+      {
+        "title": "Pacific Islander",
+        "data": "pacific islander"
+      },
+      {
+        "title": "South Asain",
+        "data": "south asain"
+      },
+      {
+        "title": "White/Caucasian",
+        "data": "white/caucasian"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      },
+    ],
+    "nextMessage": "STEP:USER_GENDER_ENTRY"
+  },
+
+  "STEP:USER_GENDER_ENTRY": {
+    "type": "quickReply",
+    "text": "What is your gender?",
+    "options": [{
+        "title": "Male",
+        "data": "male"
+      },
+      {
+        "title": "Female",
+        "data": "female"
+      },
+      {
+        "title": "Trans Male",
+        "data": "trans male"
+      },
+      {
+        "title": "Trans Female",
+        "data": "trans female"
+      },
+      {
+        "title": "Genderqueer",
+        "data": "genderqueer"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      },
+      {
+        "title": "Couldn't tell",
+        "data": "couldnt't tell"
+      }
+    ],
+    "nextMessage": "STEP:USER_BIRTH_DATE_ENTRY"
+  },
+
+  "STEP:USER_BIRTH_DATE_ENTRY": {
+    "type": "message",
+    "text": "And your birth date?",
+    "responseType": "text",
+    "scripts": ["dateScript"],
+    "nextMessage": "STEP:END_THANK_YOU"
+  },
+
+  "STEP:OFFICER_ENCOUNTER_START": {
+    "type": "message",
+    "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
+    "options": [{
+        "title": "End this chat",
+        "data": "1"
+      },
+      {
+        "title": "Start another report",
+        "data": "2"
+      }
+    ],
+    "nextMessage": {
+      "1": "STEP:GOODBYE",
+      "2": "STEP:SUBMIT_REPORT_QUERY"
+      }
+  },
+
+  "STEP:GOODBYE": {
+    "type": "message",
+    "text": "Thanks for talking to me today, Goodbye!",
+    "response_type": "text",
+    "nextMessage": "FINAL:TERMINATE"
+  },
+
+  "FINAL:TERMINATE": {
+    "nextMessage": "nil"
+  },
+
+  "STEP:UNKNOWN_INPUT": {
+    "type": "message",
+    "text": "Sorry, I didnt quite understand that, try again?",
+    "waitForUser": false,
+    "response_type": "text",
+    "nextMessage": "STEP:LAST_STEP"
+  }
+}
