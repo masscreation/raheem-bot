@@ -113,7 +113,7 @@
     "nextMessage": {
       "today": "STEP:TIME_QUERY",
       "yesterday": "STEP:TIME_QUERY",
-      "input date": "STEP:MANUAL_DATE_QUERY"
+      "that day": "STEP:MANUAL_DATE_QUERY"
     }
   },
 
@@ -212,8 +212,15 @@
       "ticketed me": "STEP:OFFICER_INCIDENT_DETAILS",
       "arrested me": "STEP:USER_ARRESTED",
       "something different": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:OFFICER_INCIDENT_DETAILS"
+      "other": "STEP:INITIAL_POLICE_CONTACT_ELABORATE"
     }
+  },
+
+  "STEP:INITIAL_POLICE_CONTACT_ELABORATE": {
+    "type": "message",
+    "text": "Can you offer more detail about what occured?",
+    "responseType": "text",
+    "nextMessage": "STEP:OFFICER_INCIDENT_DETAILS"
   },
 
   "STEP:USER_ARRESTED": {
