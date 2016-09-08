@@ -167,7 +167,7 @@
       "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
       "i was a witness": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:INITIAL_CONTACT_ELABORATE"
+      "other": "STEP:OFFICER_INCIDENT_DETAILS"
     }
   },
 
@@ -214,7 +214,7 @@
       "ticketed me": "STEP:OFFICER_INCIDENT_DETAILS",
       "arrested me": "STEP:USER_ARRESTED",
       "something different": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:INITIAL_POLICE_CONTACT_ELABORATE"
+      "other": "STEP:OFFICER_INCIDENT_DETAILS"
     }
   },
 
@@ -647,6 +647,12 @@
   "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
     "type": "message",
     "text": "Can you tell me more about how this interaction made you feel? If yes, just start typing. If no, type 'next.'",
+    "nextMessage": "STEP:POSITIVE_FEELING_SELECTION_TRANSITION"
+  },
+
+  "STEP:POSITIVE_FEELING_SELECTION_TRANSITION": {
+    "type": "message",
+    "text": "Alright moving on...",
     "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
   },
 
@@ -760,10 +766,6 @@
         "data": "calm"
       },
       {
-        "title": "Accomodating",
-        "data": "accommodationg"
-      },
-      {
         "title": "Friendly",
         "data": "friendly"
       },
@@ -825,7 +827,7 @@
 
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Thank you for sharing so much good information. This is great. We’re almost done. If you’re okay with it, I just want to ask for a little information about you.",
+    "text": "Thanks for sharing. This is all great info for understanding how your community feels about police. We’re almost done.",
     "waitForUser": false,
     "nextMessage": "STEP:USER_RACE_ENTRY"
   },
@@ -835,7 +837,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "USER_RACE",
-    "text": "Don’t worry, your identity is always gonna be confidential. What is your race?",
+    "text": "If its ok, I'd like to ask for a little information about you. Remember, This conversation is anonymous. What's your race?",
     "options": [{
         "title": "Black",
         "data": "black/african-descent"
