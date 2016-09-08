@@ -33,7 +33,7 @@
   "STEP:SAFE_QUERY": {
     "type": "button",
     "anchor": true,
-    "text": "All right. First, are you safe?",
+    "text": "Alright. First, are you safe?",
     "options": [{
         "title": "Yes",
         "data": "yes"
