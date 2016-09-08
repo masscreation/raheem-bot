@@ -33,7 +33,7 @@
   "STEP:SAFE_QUERY": {
     "type": "button",
     "anchor": true,
-    "text": "All right. First, are you safe? ",
+    "text": "All right. First, are you safe?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -354,7 +354,7 @@
 
   "STEP:OFFICER_IDENTIFICATION": {
     "type": "message",
-    "text": "All right, I got a few questions about what you remember about that officer...",
+    "text": "All right, I got a few questions about that officer...",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -362,7 +362,7 @@
   "STEP:OFFICER_BADGE_QUERY": {
     "type": "button",
     "anchor": true,
-    "text": "Do you remember the officers badge number?",
+    "text": "Do you remember that officer's badge number?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -389,7 +389,7 @@
   "STEP:OFFICER_NAME_QUERY": {
     "type": "button",
     "anchor": true,
-    "text": "Do you happen to remember the officers name?",
+    "text": "Do you happen to remember the officer's name?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -410,7 +410,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_NAME",
-    "text": "Go ahead and type the officers name in. (Last Name, First Name)",
+    "text": "Go ahead and type the officer's name in. (Last Name, First Name)",
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
   },
 
@@ -542,7 +542,7 @@
 
   "STEP:FURTHER_OFFICER_DETAILS_ENTRY": {
     "type": "message",
-    "text": "Type as little or as much as you would like.",
+    "text": "Type as little or as much as you want.",
     "scripts": ["varScript"],
     "responseKey": "ADDITIONAL_OFFICER_DETAILS",
     "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
@@ -630,14 +630,14 @@
 
   "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Type in more detail about what you felt about it, or respond 'I dont want to'.",
+    "text": "I want to hear more about how you felt. If you want to tell me more, just start typing. If not, type 'next'.",
     "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
   },
 
   "STEP:POSITIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Choose as many of these that apply to how you felt during the interaction (if any). Click 'Done' when complete.",
+    "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
     "options": [{
         "title": "Protected",
         "data": "protected"
@@ -665,10 +665,6 @@
       {
         "title": "Not listed here",
         "data": "not listed here"
-      },
-      {
-        "title": "Done",
-        "data": "done"
       }
     ],
     "nextMessage": {
@@ -679,14 +675,13 @@
       "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
       "heard": "STEP:POSITIVE_FEELING_SELECTION",
       "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
-      "done": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Choose as many of these that apply to how you felt during the interaction (if any). Click 'Done' when complete.",
+    "text": "Choose which of these most closely reflects your feelings about the interaction. (if any)?",
     "options": [{
         "title": "Threatened",
         "data": "threatened"
@@ -714,10 +709,6 @@
       {
         "title": "Not listed here",
         "data": "not listed here"
-      },
-      {
-        "title": "Done",
-        "data": "done"
       }
     ],
     "nextMessage": {
@@ -728,14 +719,13 @@
       "angry": "STEP:NEGATIVE_FEELING_SELECTION",
       "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
       "not listed here": "STEP:NEGATIVE_FEELING_SELECTION",
-      "done": "STEP:POSITIVE_OFFICER_SELECTION"
     }
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "To help us undersand better, pick as many of these as you'd like to describe the officer's positive behavior (if any). Click 'Done' when complete.",
+    "text": "What word below best describes the officer's behavior (if any)?",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -773,28 +763,17 @@
         "data": "professional"
       },
       {
-        "title": "Done",
-        "data": "done"
+        "title": "Not Listed",
+        "data": "not listed"
       }
     ],
-    "nextMessage": {
-      "approachable": "STEP:POSITIVE_OFFICER_SELECTION",
-      "respectful": "STEP:POSITIVE_OFFICER_SELECTION",
-      "caring": "STEP:POSITIVE_OFFICER_SELECTION",
-      "helpul": "STEP:POSITIVE_OFFICER_SELECTION",
-      "trustworthy": "STEP:POSITIVE_OFFICER_SELECTION",
-      "calm": "STEP:POSITIVE_OFFICER_SELECTION",
-      "accommodating": "STEP:POSITIVE_OFFICER_SELECTION",
-      "friendly": "STEP:POSITIVE_OFFICER_SELECTION",
-      "professional": "STEP:POSITIVE_OFFICER_SELECTION",
-      "done": "STEP:NEGATIVE_OFFICER_SELECTION"
-    }
+    "nextMessage": "STEP:NEGATIVE_OFFICER_SELECTION"
   },
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Thanks. To help us undersand better, pick as many of these as you'd like to describe the officer's negative behavior (if any). Click 'Done' when complete.",
+    "text": "What word below best describes the officer's behavior (if any)?",
     "options": [{
         "title": "Distant",
         "data": "distant"
@@ -816,10 +795,6 @@
         "data": "suspicious"
       },
       {
-        "title": "Distracted",
-        "data": "distracted"
-      },
-      {
         "title": "Too Forceful",
         "data": "too forceful"
       },
@@ -832,22 +807,11 @@
         "data": "abusive language"
       },
       {
-        "title": "Done",
-        "data": "done"
+        "title": "Not Listed",
+        "data": "not listed"
       }
     ],
-    "nextMessage": {
-      "distant": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "discriminatory": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "not in control": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "harassing": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "suspicious": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "distracted": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "too forceful": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "didn't self-identify": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "abusive language": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "done": "STEP:FURTHER_ENCOUNTER_DETAILS"
-    }
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
   },
 
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
