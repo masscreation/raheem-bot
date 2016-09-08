@@ -163,7 +163,7 @@
     ],
     "nextMessage": {
       "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
-      "police contacted me": "STEP:POLICE_INITIATED_ENCOUNTER",
+      "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
       "i was a witness": "STEP:OFFICER_INCIDENT_DETAILS",
       "other": "STEP:OFFICER_INCIDENT_DETAILS"
     }
@@ -354,7 +354,7 @@
 
   "STEP:OFFICER_IDENTIFICATION": {
     "type": "message",
-    "text": "All right, I got a few questions about that officer...",
+    "text": "All right, I got a few questions about that officer, no worries if you can’t recall some of the information!",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -667,15 +667,7 @@
         "data": "not listed here"
       }
     ],
-    "nextMessage": {
-      "protected": "STEP:POSITIVE_FEELING_SELECTION",
-      "relieved": "STEP:POSITIVE_FEELING_SELECTION",
-      "safe": "STEP:POSITIVE_FEELING_SELECTION",
-      "comforted": "STEP:POSITIVE_FEELING_SELECTION",
-      "taken care of": "STEP:POSITIVE_FEELING_SELECTION",
-      "heard": "STEP:POSITIVE_FEELING_SELECTION",
-      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
+    "nextMessage": "STEP:NEGATIVE_FEELING_SELECTION"
   },
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
@@ -711,15 +703,7 @@
         "data": "not listed here"
       }
     ],
-    "nextMessage": {
-      "threatened": "STEP:NEGATIVE_FEELING_SELECTION",
-      "disrespected": "STEP:NEGATIVE_FEELING_SELECTION",
-      "scared": "STEP:NEGATIVE_FEELING_SELECTION",
-      "intimidated": "STEP:NEGATIVE_FEELING_SELECTION",
-      "angry": "STEP:NEGATIVE_FEELING_SELECTION",
-      "ignored": "STEP:NEGATIVE_FEELING_SELECTION",
-      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
+    "nextMessage": "STEP:POSITIVE_OFFICER_SELECTION"
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
