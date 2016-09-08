@@ -180,7 +180,7 @@
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "All right. Just a couple of questions to make sure we can help you best.",
+    "text": "Alright. Just a couple of questions to make sure we can help you best.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
@@ -370,7 +370,7 @@
 
   "STEP:OFFICER_IDENTIFICATION": {
     "type": "message",
-    "text": "All right, I got a few questions about that officer, no worries if you can’t recall some of the information!",
+    "text": "Alright, I got a few questions about that officer, no worries if you can’t recall some of the information!",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -625,7 +625,7 @@
 
   "STEP:OFFICER_ENCOUNTER_NEUTRAL": {
     "type": "message",
-    "text": "All right.",
+    "text": "Alright.",
     "waitForUser": false,
     "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
   },
