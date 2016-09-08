@@ -51,7 +51,7 @@
 
   "STEP:CALL_911": {
     "type": "message",
-    "text": "Please ensure you are okay and in a safe environment immedietly.",
+    "text": "Can you get to a safe space so we can talk? If not call 9-1-1.",
     "waitForUser": false,
     "nextMessage": "STEP:END_THANK_YOU_SUSPENDED"
   },
@@ -63,6 +63,7 @@
     "waitForUser": false,
     "nextMessage": "STEP:LOCATION_QUERY"
   },
+
 
   "STEP:LOCATION_QUERY": {
     "type": "message",
@@ -90,6 +91,8 @@
     "waitForUser": false,
     "nextMessage": "STEP:LOCATION_QUERY"
   },
+
+
 
   "STEP:DATE_QUERY": {
     "type": "button",
@@ -136,7 +139,6 @@
     "responseType": "text",
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
-
 
   "STEP:INITIAL_CONTACT_QUERY": {
     "type": "quickReply",
@@ -948,7 +950,7 @@
   "STEP:END_THANK_YOU_SUSPENDED": {
     "type": "button",
     "anchor": true,
-    "text": "Would you like to report what just happend?",
+    "text": "Would you still like to report what just happend?",
     "options": [{
         "title": "No, end this chat",
         "data": "1"
