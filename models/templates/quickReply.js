@@ -1,7 +1,6 @@
 'use strict'
 
 module.exports = function (recipientID, payload) {
-    console.log("QUICKREPLY PAYLOAD", payload)
     if (payload !== null) {
 
       return {
@@ -25,7 +24,7 @@ function createQuickReplies(quickReplies) {
         "title": quickReply.title,
         "payload": quickReply.data
       }
-    ); 
+    );
   });
   return quickReplyArray;
 }
