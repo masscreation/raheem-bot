@@ -40,6 +40,8 @@ module.exports = {
       currentState = stateStore[lastStateIndex - 2];
     } else if (message.toLowerCase() === "restart"){
       currentState = stateStore[0];
+    } else if (message.toLowerCase() === "new report"){
+      currentState = "STEP:RESTART_CONVO";
     }
     console.log("GET STATE", currentState)
   },
