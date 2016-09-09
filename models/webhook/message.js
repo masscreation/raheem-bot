@@ -3,9 +3,9 @@
 module.exports = class Message {
 
   constructor(event) {
-    
-    console.log("RECIPIENT ID:" event.recipient.id)
-    console.log("SENDER ID:" event.sender.id)
+
+    console.log("RECIPIENT ID:", event.recipient.id)
+    console.log("SENDER ID:", event.sender.id)
 
     this.senderID = event.sender.id;
     this.recipientID = event.recipient.id;
