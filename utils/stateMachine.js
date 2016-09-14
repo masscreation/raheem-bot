@@ -61,7 +61,7 @@ module.exports = {
         currentState = store.state[lastStateIndex - 2];
 
       } else if (message.toLowerCase() === "restart"){
-        currentState = state.store[0];
+        currentState = store.state[0];
 
       } else if (message.toLowerCase() === "new report"){
         currentState = "STEP:RESTART_CONVO";
