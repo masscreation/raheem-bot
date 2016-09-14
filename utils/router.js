@@ -1,9 +1,12 @@
 'use strict';
 
 const fb = require('./services/fbMessengerSendApi');
-const scriptEngine = require('./scriptEngine');
+const messageCourier = require('./messageCourier');
+
 const Message = require('../models/webhook/message');
 const Postback = require('../models/webhook/postback');
+const Attachment = require('../models/webhook/attachment');
+
 const messageTemplate = require('../models/templates/message');
 const buttonTemplate = require('../models/templates/button');
 const genericTemplate = require('../models/templates/generic');
@@ -21,6 +24,8 @@ module.exports = function(messagingEvent) {
       console.log("Timestamp:", messagingEvent.timestamp)
 
       let message = new Message(messagingEvent);
+
+
       if (message.isValid()) {
         // If message is not an echo and has a payload, send it to the format/send process.
 
@@ -57,8 +62,8 @@ function formatAndSend(message, senderID){
   //Iterate through resulting output and send as messages after a short delay
   //to ensure they arrive to user in the correct order
 
-  scriptEngine.digest(message)
-  .then(scriptEngine.format)
+  messageCourier.in(message)
+  .then(messageCourier.out)
   .then(function(outgoingObj){
     for (let i = 0, len = outgoingObj.length; i < len; i++) {
       let obj = outgoingObj[i];

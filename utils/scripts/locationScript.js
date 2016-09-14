@@ -16,89 +16,70 @@ module.exports = {
 		return 'locationScript'
 	},
 
+
 	digest(currentFrame, message){
-		return googlePlacesApi.callPlaceAutocompleteService(message).then(function(predictions){
-				if (predictions) {
-					locationStore["locationQueryResults"] = predictions;
-					console.log(`FOUND ${locationStore['locationQueryResults'].length} LOCATION RESULTS`)
-				}
-			});
+
+		store.data[currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
+
+
+		console.log(store.data[currentFrame["responseKey"]])
+
 	},
 
+	//
+	// digest(currentFrame, message){
+	// 	return googlePlacesApi.callPlaceAutocompleteService(message).then(function(predictions){
+	// 			if (predictions) {
+	// 				locationStore["locationQueryResults"] = predictions;
+	// 				console.log(`FOUND ${locationStore['locationQueryResults'].length} LOCATION RESULTS`)
+	// 			}
+	// 		});
+	// },
+
 	format(currentFrame, message){
-			currentFrame["options"] = formatLocationResults(locationStore['locationQueryResults'])
-			return currentFrame;
-		}
+
+		console.log("FORMATTING LOCATION")
+
+		currentFrame["options"] = [
+			{
+				"content_type": "location"
+			}
+		]
+
+		return currentFrame;
 	}
+}
 
+	// format(currentFrame, message){
+	// 		currentFrame["options"] = formatLocationResults(locationStore['locationQueryResults'])
+	// 		return currentFrame;
+	// 	}
+	// }
 
-
-
-
-// function(currentFrame, message){
+// function getPredictions(query) {
+// 	return googlePlacesApi.callPlaceAutocompleteService(query);
+// }
 //
-// 	return new Promise(function(resolve, reject) {
-//
-// 	let finalResults;
-//
-// 		if (currentFrame.scripts && currentFrame.scripts.indexOf('location') !== -1){
-// 			console.log("SELECTION", message);
-// 			console.log("currentFrame", currentFrame);
-// 			console.log("Current State", currentFrame.state)
-//
-// 			if (currentFrame.state === 'question'){
-//
-// 				getPredictions(message).then(function(results){
-// 					let formattedResults = formatLocationResults(results);
-// 					store['locationQueryResults'] = formattedResults;
-// 					resolve();
-// 				}).catch(function(err) {
-// 					reject(err.message)
-// 					console.log(err.message);
-// 				});
-//
-// 			} else if (currentFrame.state === 'selection'){
-// 				finalResults = store['locationQueryResults'];
-// 				if (finalResults) {
-// 					resolve(finalResults);
-// 				} else {
-// 					reject(new Error('could not get results froms store'));
-// 				}
-// 				return finalResults;
-// 			}
+// function formatLocationResults(results){
+// 	results = results.map(function(result){
+// 		return {
+// 			"title": result.description,
+// 			"buttons": [{
+// 				"type": "postback",
+// 				"contentType": "text",
+// 				"text": "Confirm",
+// 				"payload": result.description
+// 			}]
 // 		}
 // 	});
+// 	results.push({
+// 		"title": "Location Not Listed",
+// 		"buttons": [{
+// 			"type": "postback",
+// 			"text": "Search Again",
+// 			"payload": "Search Again"
+// 		}]
+// 	});
+// 	return results;
 // }
-
-	/*
-	 * Create a generic template from an array of location predictions
-	 * https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template
-	 */
-
-function getPredictions(query) {
-	return googlePlacesApi.callPlaceAutocompleteService(query);
-}
-
-function formatLocationResults(results){
-	results = results.map(function(result){
-		return {
-			"title": result.description,
-			"buttons": [{
-				"type": "postback",
-				"contentType": "text",
-				"text": "Confirm",
-				"payload": result.description
-			}]
-		}
-	});
-	results.push({
-		"title": "Location Not Listed",
-		"buttons": [{
-			"type": "postback",
-			"text": "Search Again",
-			"payload": "Search Again"
-		}]
-	});
-	return results;
-}
 // };

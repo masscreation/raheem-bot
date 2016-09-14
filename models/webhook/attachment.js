@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = class Message {
+module.exports = class Attachment {
 
   constructor(event) {
 
@@ -12,9 +12,8 @@ module.exports = class Message {
     this.timeOfMessage = event.timestamp;
 
     // types of messages
-    this.message = event.message || false;
-    this.message.quick_reply = event.message.quick_reply || false;
-    this.message.attachment = event.message.attachments || false
+    console.log(event)
+    this.attachment = event.message.attachments || false;
 
     // message meta data
     this.isEcho = this.message.is_echo || false;
@@ -23,13 +22,7 @@ module.exports = class Message {
     this.metadata = this.message.metadata || {};
 
     // You may get a text or attachment but not both
-    if (this.message.attachment){
-      this.userContent = this.message.attachment;
-    } else if (this.message.quickReply){
-      this.userContent = this.message.quickReply;
-    } else {
-      this.userContent = this.message.text
-    }
+    this.userContent = this.attachment;
   }
 
   isValid(){

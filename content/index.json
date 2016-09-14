@@ -66,38 +66,18 @@
 
 
   "STEP:LOCATION_QUERY": {
-    "type": "message",
+    "type": "quickReply",
     "anchor": true,
-    "text": "What city did your interaction happen in?",
+    "text": "Please select the area in which the incident occured",
     "responseType": "text",
     "scripts": ["locationScript"],
-    "nextMessage": "STEP:LOCATION_PROMT"
-  },
-
-  "STEP:LOCATION_PROMT": {
-    "type": "generic",
-    "responseKey": "ENCOUNTER_LOCATION",
-    "scripts": ["locationScript", "varScript"],
     "nextMessage": "STEP:DATE_QUERY"
   },
-
-  "STEP:QUE_LOCATION_RETRY": {
-    "nextMessage": "STEP:LOCATION_RETRY"
-  },
-
-  "STEP:LOCATION_RETRY": {
-    "type": "message",
-    "text": "Ok let's try again. Try and be more precise.",
-    "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-
 
   "STEP:DATE_QUERY": {
     "type": "button",
     "anchor": true,
-    "scripts": ["varScript"],
+    "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
     "text": "What day did the incident occur?",
     "options": [{
@@ -110,21 +90,21 @@
       },
       {
         "title": "Input Date",
-        "data": "that day"
+        "data": "input date"
       }
     ],
     "nextMessage": {
       "today": "STEP:TIME_QUERY",
       "yesterday": "STEP:TIME_QUERY",
-      "that day": "STEP:MANUAL_DATE_QUERY"
+      "input date": "STEP:MANUAL_DATE_QUERY"
     }
   },
 
   "STEP:MANUAL_DATE_QUERY": {
     "type": "message",
     "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "HARDCODED_DATE_OF_INCIDENT",
+    "scripts": ["varScript", "dateScript"],
+    "responseKey": "DATE_OF_INCIDENT",
     "text": "Please enter the date the incident occured on. (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
