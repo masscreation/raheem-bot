@@ -825,7 +825,7 @@
   "STEP:NEGATIVE_OFFICER_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "How about any of these?",
+    "text": "What word below best describes the officer's behavior (if any)?",
     "options": [{
         "title": "Distant",
         "data": "distant"
