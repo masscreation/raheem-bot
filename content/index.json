@@ -151,8 +151,8 @@
       "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
       "i was pulled over": "STEP:POLICE_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
-      "i witnessed police": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:OFFICER_INCIDENT_DETAILS"
+      "i witnessed police": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "other": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
