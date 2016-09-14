@@ -14,10 +14,10 @@ module.exports = {
     return new Promise(function(resolve, reject){
       let date = store.data[currentFrame["responseKey"]];
 
-      date = Date.parse(date);
-
-      if (date === null){
-        store.flags.push("ERROR:INVALID_DATE");
+      if (Date.parse(date) !== null){
+        date = Date.parse(date).toString('MMMM dS, yyyy');
+      } else {
+        store.flags = "ERROR:INVALID_DATE";
       }
 
       console.log("Date update: ", date);

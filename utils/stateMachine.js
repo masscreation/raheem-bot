@@ -13,15 +13,24 @@ let currentState = initialState;
 module.exports = {
 
   next(message) {
+
+    if (content[currentState]["referenceStore"]){
+      message = store.data[content[currentState]["referenceStore"]];
+      console.log("message", message)
+    }
+
     currentState = content[currentState].nextMessage
 
     if (typeof currentState === 'object' && currentState[message.toLowerCase()]){
       currentState = currentState[message.toLowerCase()];
 
+    } else if (typeof currentState === 'object' && currentState["*"]){
+      currentState = currentState["*"];
+
     } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
       currentState = "STEP:UNKNOWN_INPUT";
 
-    } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
+    } else if (store.flag){
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (currentState === "STEP:LAST_STEP"){
@@ -32,6 +41,7 @@ module.exports = {
 
       });
     }
+    store.flag = null;
     store.state.push(currentState);
 
   },
@@ -59,7 +69,7 @@ module.exports = {
       }
 
     }
-    
+
     console.log("GET STATE", currentState)
   },
 

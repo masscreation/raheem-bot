@@ -14,7 +14,7 @@
   "STEP:START_CONVERSATION": {
     "type": "button",
     "anchor": true,
-    "text": "Did you want to tell us about having contact with the police?",
+    "text": "Do you want to tell us about having contact with the police?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -51,7 +51,7 @@
 
   "STEP:CALL_911": {
     "type": "message",
-    "text": "Can you get to a safe space so we can talk? If not call 9-1-1.",
+    "text": "Call 9-1-1 right now if you can't get to a safe space.",
     "waitForUser": false,
     "nextMessage": "STEP:END_THANK_YOU_SUSPENDED"
   },
@@ -68,7 +68,7 @@
   "STEP:LOCATION_QUERY": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Please select the area in which the incident occured",
+    "text": "Where did this interaction occur?",
     "responseType": "text",
     "scripts": ["locationScript"],
     "nextMessage": "STEP:DATE_QUERY"
@@ -79,7 +79,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "What day did the incident occur?",
+    "text": "And what day did the interaction occur?",
     "options": [{
         "title": "Today",
         "data": "today"
@@ -105,7 +105,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "Please enter the date the incident occured on. (mm/dd/yyyy)",
+    "text": "Please enter the date the interaction occured on. (mm/dd/yyyy)",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
   },
@@ -115,7 +115,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "TIME_OF_INCIDENT",
-    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'} ? (ex: 12:15 AM)",
+    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'} ?",
     "responseType": "text",
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
@@ -131,12 +131,16 @@
         "data": "i called the police"
       },
       {
+        "title": "I was pulled over",
+        "data": "i was pulled over"
+      },
+      {
         "title": "Police approached me",
         "data": "police approached me"
       },
       {
-        "title": "I was a witness",
-        "data": "i was a witness"
+        "title": "I witnessed police",
+        "data": "i witnessed police"
       },
       {
         "title": "Other",
@@ -145,8 +149,9 @@
     ],
     "nextMessage": {
       "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
+      "i was pulled over": "STEP:POLICE_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
-      "i was a witness": "STEP:OFFICER_INCIDENT_DETAILS",
+      "i witnessed police": "STEP:OFFICER_INCIDENT_DETAILS",
       "other": "STEP:OFFICER_INCIDENT_DETAILS"
     }
   },
@@ -160,7 +165,7 @@
 
   "STEP:POLICE_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "Alright. Just a couple of questions to make sure we can help you best.",
+    "text": "Just a couple of questions so we can help you. Please share as much as you can.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
@@ -171,17 +176,17 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening? They...",
+    "text": "What ended up happening? The police...",
     "options": [{
-        "title": "wanted information",
+        "title": "Wanted information",
         "data": "wanted information"
       },
       {
-        "title": "ticketed me",
+        "title": "Ticketed me",
         "data": "ticketed me"
       },
       {
-        "title": "arrested me",
+        "title": "Arrested me",
         "data": "arrested me"
       },
       {
@@ -190,11 +195,11 @@
       }
     ],
     "nextMessage": {
-      "wanted information": "STEP:OFFICER_INCIDENT_DETAILS",
-      "ticketed me": "STEP:OFFICER_INCIDENT_DETAILS",
+      "wanted information": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "ticketed me": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
       "arrested me": "STEP:USER_ARRESTED",
-      "something different": "STEP:OFFICER_INCIDENT_DETAILS",
-      "other": "STEP:OFFICER_INCIDENT_DETAILS"
+      "something different": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "other": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
@@ -226,18 +231,22 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening in your interaction?",
+    "text": "What ended up happening to you? I was...",
     "options": [{
-        "title": "I was helped",
-        "data": "i was helped"
+        "title": "Helped",
+        "data": "helped"
       },
       {
-        "title": "I was ticketed",
-        "data": "i was ticketed"
+        "title": "Ticketed",
+        "data": "ticketed"
       },
       {
-        "title": "I was arrested",
-        "data": "i was arrested"
+        "title": "Given a warning",
+        "data": "given a warning"
+      },
+      {
+        "title": "Arrested",
+        "data": "arrested"
       },
       {
         "title": "Other",
@@ -296,8 +305,8 @@
       }
     ],
     "nextMessage": {
-      "1": "STEP:OFFICER_INCIDENT_DETAILS",
-      "2": "STEP:OFFICER_INCIDENT_DETAILS",
+      "1": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "2": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
       "3": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
       "4": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
       "5": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
@@ -312,21 +321,17 @@
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
 
-  "STEP:OFFICER_INCIDENT_DETAILS": {
-    "type": "message",
-    "text": "There’s a few details about the interaction as well as the officers involved that we’d like to gather.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-  },
-
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
     "type": "message",
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "NUMBER_OF_OFFICERS",
     "text": "About how many officers were at the scene? (ex: 3)",
-    "nextMessage": "STEP:BEGIN_OFFICER_IDENTIFICATION"
+    "nextMessage": {
+      "*": "STEP:BEGIN_OFFICER_IDENTIFICATION",
+      "1": "STEP:OFFICER_IDENTIFICATION",
+      "one": "STEP:OFFICER_IDENTIFICATION"
+      }
   },
 
   "STEP:BEGIN_OFFICER_IDENTIFICATION": {
@@ -350,7 +355,39 @@
 
   "STEP:OFFICER_IDENTIFICATION": {
     "type": "message",
-    "text": "Alright, I got a few questions about that officer, no worries if you can’t recall some of the information!",
+    "text": "Alright, I've got a few questions about that officer. No worries if you can't remember everything.",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_NAME_QUERY"
+  },
+
+  "STEP:OFFICER_NAME_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "OFFICER_NAME",
+    "text": "If you know the officer's name, type it in. Otherwise tap 'didn't get it'",
+    "options": [{
+        "title": "Didn't get it",
+        "data": "didn't get it"
+      }
+    ],
+    "nextMessage": {
+      "*": "STEP:CONGRATS_NAME_RESPONSE",
+      "didn't get it": "STEP:CONSOLE_NO_NAME_RESPONSE"
+    }
+  },
+
+  "STEP:CONGRATS_NAME_RESPONSE": {
+    "type": "message",
+    "scripts": ["varScript"],
+    "text":  "${OFFICER_NAME}. Great! Not many people remember to get that",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_BADGE_QUERY"
+  },
+
+  "STEP:CONSOLE_NO_NAME_RESPONSE": {
+    "type": "message",
+    "text": "That's okay.",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -358,55 +395,32 @@
   "STEP:OFFICER_BADGE_QUERY": {
     "type": "button",
     "anchor": true,
-    "text": "Do you remember that officer's badge number?",
-    "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
-      }
-    ],
-    "nextMessage": {
-      "yes": "STEP:OFFICER_BADGE_ENTRY",
-      "no": "STEP:OFFICER_NAME_QUERY"
-    }
-  },
-
-  "STEP:OFFICER_BADGE_ENTRY": {
-    "type": "message",
-    "text": "Great! Not many people remember to get that, go ahead and type it in below... (ex: 123456)",
     "scripts": ["varScript"],
     "responseKey": "OFFICER_BADGE_NUMBER",
-    "nextMessage": "STEP:OFFICER_NAME_QUERY"
-  },
-
-  "STEP:OFFICER_NAME_QUERY": {
-    "type": "button",
-    "anchor": true,
-    "text": "Do you happen to remember the officer's name?",
+    "text": "Can you give me the officer’s badge number? Just type it in.",
     "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
+        "title": "Didn't get it",
+        "data": "didn't get it"
       }
     ],
     "nextMessage": {
-      "yes": "STEP:OFFICER_NAME_ENTRY",
-      "no": "STEP:OFFICER_RACE_ENTRY"
+      "*": "STEP:CONGRATS_BADGE_RESPONSE",
+      "didn't get it": "STEP:CONSOLE_NO_BADGE_RESPONSE"
     }
   },
 
-  "STEP:OFFICER_NAME_ENTRY": {
+  "STEP:CONGRATS_BADGE_RESPONSE": {
     "type": "message",
-    "anchor": true,
+    "text": "${OFFICER_BADGE_NUMBER} Very cool! Not many people get that either.",
     "scripts": ["varScript"],
-    "responseKey": "OFFICER_NAME",
-    "text": "Go ahead and type the officer's name in. (Last Name, First Name)",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_RACE_ENTRY"
+  },
+
+  "STEP:CONSOLE_NO_BADGE_RESPONSE": {
+    "type": "message",
+    "text": "No problem.",
+    "waitForUser": false,
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
   },
 
@@ -415,10 +429,10 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_RACE",
-    "text": "Cool. Were you able to tell the officer’s race?",
+    "text": "Were you able to tell the officer’s race?",
     "options": [{
-        "title": "Black",
-        "data": "black/african-descent"
+        "title": "Black/African",
+        "data": "black/african"
       },
       {
         "title": "Hispanic/Latino",
@@ -531,16 +545,24 @@
   "STEP:FURTHER_OFFICER_DETAILS": {
     "type": "message",
     "anchor": true,
-    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_DETAILS_ENTRY"
+    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos? If not type 'No'.",
+    "nextMessage": {
+      "*": "STEP:CONGRATS_FURTHER_OFFICER_DETAILS",
+      "no": "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS"
+    }
   },
 
-  "STEP:FURTHER_OFFICER_DETAILS_ENTRY": {
+  "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS": {
     "type": "message",
-    "text": "Type as little or as much as you want.",
-    "scripts": ["varScript"],
-    "responseKey": "ADDITIONAL_OFFICER_DETAILS",
+    "text": "No problem.",
+    "waitForUser": false,
+    "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
+  },
+
+  "STEP:CONGRATS_FURTHER_OFFICER_DETAILS": {
+    "type": "message",
+    "text": "Ok thanks.",
+    "waitForUser": false,
     "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
   },
 
@@ -567,32 +589,32 @@
     "responseKey": "ENCOUNTER_SENTIMENT",
     "text": "Help me understand how the interaction felt to you.",
     "options": [{
-        "title": "It really was good",
-        "data": "excellent"
+        "title": "It was really good",
+        "data": "it was really good"
       },
       {
         "title": "It was good",
-        "data": "good"
+        "data": "it was good"
       },
       {
-        "title": "It went okay",
-        "data": "neutral"
+        "title": "Okay.",
+        "data": "okay."
       },
       {
         "title": "It wasn't good",
-        "data": "bad"
+        "data": "it wasn't good"
       },
       {
         "title": "Really bad",
-        "data": "terrible"
+        "data": "really bad"
       }
     ],
     "nextMessage": {
-      "excellent": "STEP:OFFICER_ENCOUNTER_GOOD",
-      "good": "STEP:OFFICER_ENCOUNTER_GOOD",
-      "neutral": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
-      "bad": "STEP:OFFICER_ENCOUNTER_BAD",
-      "terrible": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
+      "it was really good": "STEP:OFFICER_ENCOUNTER_GOOD",
+      "it was good": "STEP:OFFICER_ENCOUNTER_GOOD",
+      "okay.": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
+      "it wasn't good": "STEP:OFFICER_ENCOUNTER_BAD",
+      "really bad": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
     }
   },
 
@@ -625,16 +647,45 @@
   },
 
   "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
-    "type": "message",
-    "text": "Can you tell me more about how this interaction made you feel? If yes, just start typing. If no, type 'next.'",
-    "nextMessage": "STEP:POSITIVE_FEELING_SELECTION_TRANSITION"
+    "type": "button",
+    "text": "If you want to, type more about how you felt.",
+    "options": [{
+        "title": "No thanks",
+        "data": "no thanks"
+      }
+    ],
+    "nextMessage": {
+      "*": "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS",
+      "no thanks": "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS"
+    }
   },
 
-  "STEP:POSITIVE_FEELING_SELECTION_TRANSITION": {
+  "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Alright moving on...",
+    "text": "No problem.",
     "waitForUser": false,
-    "nextMessage": "STEP:POSITIVE_FEELING_SELECTION"
+    "referenceStore": "ENCOUNTER_SENTIMENT",
+    "nextMessage": {
+      "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
+      "it was good": "STEP:POSITIVE_FEELING_SELECTION",
+      "okay.": "STEP:POSITIVE_FEELING_SELECTION",
+      "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
+      "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+    }
+  },
+
+  "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
+    "type": "message",
+    "text": "Ok thanks.",
+    "waitForUser": false,
+    "referenceStore": "ENCOUNTER_SENTIMENT",
+    "nextMessage": {
+      "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
+      "it was good": "STEP:POSITIVE_FEELING_SELECTION",
+      "okay.": "STEP:POSITIVE_FEELING_SELECTION",
+      "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
+      "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+    }
   },
 
   "STEP:POSITIVE_FEELING_SELECTION": {
@@ -670,14 +721,11 @@
         "data": "not listed here"
       }
     ],
+    "referenceStore": "ENCOUNTER_SENTIMENT",
     "nextMessage": {
-      "protected": "STEP:NEGATIVE_FEELING_SELECTION",
-      "relieved": "STEP:NEGATIVE_FEELING_SELECTION",
-      "safe": "STEP:NEGATIVE_FEELING_SELECTION",
-      "comforted": "STEP:NEGATIVE_FEELING_SELECTION",
-      "taken care of": "STEP:NEGATIVE_FEELING_SELECTION",
-      "heard": "STEP:NEGATIVE_FEELING_SELECTION",
-      "not listed here": "STEP:NEGATIVE_FEELING_SELECTION"
+      "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
+      "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
+      "okay.": "STEP:NEGATIVE_FEELING_SELECTION"
     }
   },
 
@@ -685,7 +733,7 @@
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Okay. How about any of these?",
+    "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
     "options": [{
         "title": "Threatened",
         "data": "threatened"
@@ -715,7 +763,14 @@
         "data": "not listed here"
       }
     ],
-    "nextMessage": "STEP:POSITIVE_OFFICER_SELECTION"
+    "referenceStore": "ENCOUNTER_SENTIMENT",
+    "nextMessage": {
+      "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
+      "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
+      "okay.": "STEP:POSITIVE_OFFICER_SELECTION",
+      "it wasn't good": "STEP:NEGATIVE_OFFICER_SELECTION",
+      "really bad": "STEP:NEGATIVE_OFFICER_SELECTION"
+    }
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
@@ -759,7 +814,12 @@
         "data": "not listed"
       }
     ],
-    "nextMessage": "STEP:NEGATIVE_OFFICER_SELECTION"
+    "referenceStore": "ENCOUNTER_SENTIMENT",
+    "nextMessage": {
+      "it was really good": "STEP:FURTHER_ENCOUNTER_DETAILS",
+      "it was good": "STEP:FURTHER_ENCOUNTER_DETAILS",
+      "okay.": "STEP:NEGATIVE_OFFICER_SELECTION"
+    }
   },
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
@@ -820,8 +880,8 @@
     "responseKey": "USER_RACE",
     "text": "If its ok, I'd like to ask for a little information about you. Remember, This conversation is anonymous. What's your race?",
     "options": [{
-        "title": "Black",
-        "data": "black/african-descent"
+        "title": "Black/African",
+        "data": "black/african"
       },
       {
         "title": "Hispanic/Latino",
