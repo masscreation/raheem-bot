@@ -285,31 +285,31 @@
     "text": "Okay. How long it take for them to get there to help?",
     "options": [{
         "title": "Less than 2 minutes",
-        "data": "1"
+        "data": "less than 2 minutes"
       },
       {
         "title": "2-5 minutes",
-        "data": "2"
+        "data": "2-5 minutes"
       },
       {
         "title": "5-10 minutes",
-        "data": "3"
+        "data": "5-10 minutes"
       },
       {
         "title": "10-30 minutes",
-        "data": "4"
+        "data": "10-30 minutes"
       },
       {
         "title": "Over 30 minutes",
-        "data": "5"
+        "data": "over 30 minutes"
       }
     ],
     "nextMessage": {
-      "1": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "2": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "3": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
-      "4": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
-      "5": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
+      "less than 2 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "2-5 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "5-10 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
+      "10-30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
+      "over 30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
     }
   },
 
