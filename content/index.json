@@ -717,8 +717,8 @@
         "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
         "it was good": "STEP:POSITIVE_FEELING_SELECTION",
         "okay.": "STEP:POSITIVE_FEELING_SELECTION",
-        "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
-        "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+        "it was bad": "STEP:NEGATIVE_FEELING_SELECTION",
+        "it was really bad": "STEP:NEGATIVE_FEELING_SELECTION"
       }
     },
 
@@ -731,8 +731,8 @@
         "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
         "it was good": "STEP:POSITIVE_FEELING_SELECTION",
         "okay.": "STEP:POSITIVE_FEELING_SELECTION",
-        "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
-        "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+        "it was bad": "STEP:NEGATIVE_FEELING_SELECTION",
+        "it was really bad": "STEP:NEGATIVE_FEELING_SELECTION"
       }
     },
 
@@ -820,8 +820,8 @@
         "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
         "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
         "okay.": "STEP:POSITIVE_OFFICER_SELECTION",
-        "it wasn't good": "STEP:NEGATIVE_OFFICER_SELECTION",
-        "really bad": "STEP:NEGATIVE_OFFICER_SELECTION"
+        "it was bad": "STEP:NEGATIVE_OFFICER_SELECTION",
+        "it was really bad": "STEP:NEGATIVE_OFFICER_SELECTION"
       }
     },
 
