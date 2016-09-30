@@ -1081,6 +1081,10 @@
       "nextMessage": "STEP:SAFE_QUERY"
     },
 
+    "STEP:QUIT_CONVO_PRE": {
+      "nextMessage": "STEP:QUIT_CONVO"
+    },
+
     "STEP:QUIT_CONVO": {
       "text": "Ok. Is it alright if I save what you gave me so far?",
       "options": [{

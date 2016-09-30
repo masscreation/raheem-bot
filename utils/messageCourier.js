@@ -6,27 +6,9 @@ const state = require("./stateMachine");
 const messageThread = require("./messageThread");
 const scriptEngine = require("./scriptEngine");
 
-let scripts = [
-  "varScript",
-  "locationScript",
-  "dateScript"
-];
-
-let scriptArray = [];
-
-
-let loadScripts = function(){
-  scripts.forEach(function(script){
-    scriptArray.push(require(`./scripts/${script}`));
-  });
-}
-
 let currentState, outgoingMessage, output;
 
-loadScripts();
-
 module.exports = {
-
 
   in(message) {
     return new Promise(function(resolve, reject){

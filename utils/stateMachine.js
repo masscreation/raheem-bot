@@ -27,13 +27,6 @@ module.exports = {
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
 
-    } else if (typeof message === 'string' &&
-               message.toLowerCase() === "stop" ||
-               message.toLowerCase() === "exit" ||
-               message.toLowerCase() === "goodbye" ||
-               message.toLowerCase() === "quit"){
-      currentState = "STEP:QUIT_CONVO";
-
     } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
       currentState = "STEP:UNKNOWN_INPUT";
 
@@ -59,6 +52,12 @@ module.exports = {
 
       if (message === "Search Again"){
         currentState = "STEP:QUE_LOCATION_RETRY";
+
+      } else if (message.toLowerCase() === "stop" ||
+                 message.toLowerCase() === "exit" ||
+                 message.toLowerCase() === "goodbye" ||
+                 message.toLowerCase() === "quit"){
+        currentState = "STEP:QUIT_CONVO";
 
       } else if (message === "resume" && currentState !== "NAV_MENU"){
         let lastStateIndex = store.state.length;
