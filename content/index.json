@@ -4,17 +4,9 @@
   },
 
   "STEP:GREETING": {
-    "type": "message",
-    "anchor": true,
-    "text": "Hey. I hope everything’s okay. This conversation is private.",
-    "waitForUser": false,
-    "nextMessage": "STEP:START_CONVERSATION"
-  },
-
-  "STEP:START_CONVERSATION": {
     "type": "button",
     "anchor": true,
-    "text": "Do you want to tell us about having contact with the police?",
+    "text": "Hey. I hope everything’s okay. First, are you safe?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -25,26 +17,7 @@
       }
     ],
     "nextMessage": {
-      "yes": "STEP:SAFE_QUERY",
-      "no": "STEP:GOODBYE"
-    }
-  },
-
-  "STEP:SAFE_QUERY": {
-    "type": "button",
-    "anchor": true,
-    "text": "Alright. First, are you safe?",
-    "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
-      }
-    ],
-    "nextMessage": {
-      "yes": "STEP:START_REPORT",
+      "yes": "STEP:DATE_QUERY",
       "no": "STEP:CALL_911"
     }
   },
@@ -56,22 +29,23 @@
     "nextMessage": "STEP:END_THANK_YOU_SUSPENDED"
   },
 
-  "STEP:START_REPORT": {
-    "type": "message",
-    "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-
-  "STEP:LOCATION_QUERY": {
-    "type": "quickReply",
+  "STEP:END_THANK_YOU_SUSPENDED": {
+    "type": "button",
     "anchor": true,
-    "text": "Where did this interaction occur?",
-    "responseType": "text",
-    "scripts": ["locationScript"],
-    "nextMessage": "STEP:DATE_QUERY"
+    "text": "Would you still like to report what just happend?",
+    "options": [{
+        "title": "No",
+        "data": "1"
+      },
+      {
+        "title": "Yes",
+        "data": "2"
+      }
+    ],
+    "nextMessage": {
+      "1": "STEP:GOODBYE_SAFE",
+      "2": "STEP:GREETING"
+      }
   },
 
   "STEP:DATE_QUERY": {
@@ -79,7 +53,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "And what day did the interaction occur?",
+    "text": "When did the contact happen?",
     "options": [{
         "title": "Today",
         "data": "today"
@@ -89,7 +63,7 @@
         "data": "yesterday"
       },
       {
-        "title": "Input Date",
+        "title": "Type in MM/DD/YY",
         "data": "input date"
       }
     ],
@@ -105,7 +79,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "Please enter the date the interaction occured on. (mm/dd/yyyy)",
+    "text": "Go ahead.",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
   },
@@ -115,8 +89,95 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "TIME_OF_INCIDENT",
-    "text": "Got it. Around what time ${'DATE_OF_INCIDENT'} ?",
+    "text": "Got it. Around what time, such as 12:15AM?",
     "responseType": "text",
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:LOCATION_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "text": "Do you want to tell us about having contact with the police?",
+    "options": [{
+        "title": "Use Location",
+        "data": "1"
+      },
+      {
+        "title": "Type in a city",
+        "data": "2"
+      }
+    ],
+    "nextMessage": {
+      "1": "STEP:USE_LOCATION",
+      "2": "STEP:MANUAL_ENTRY_CITY"
+    }
+  },
+
+  "STEP:USE_LOCATION": {
+    "type": "quickReply",
+    "anchor": true,
+    "text": "Where did this interaction occur?",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:OUTCOME_CONTACT_QUERY"
+  },
+
+  "STEP:MANUAL_ENTRY_CITY": {
+    "type": "quickReply",
+    "anchor": true,
+    "text": "What city did this happen in?",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "nextMessage": "STEP:MANUAL_ENTRY_STREETS"
+  },
+
+  "STEP:MANUAL_ENTRY_STREETS": {
+    "type": "button",
+    "anchor": true,
+    "text": "If you know the address or cross streets, type that in, too.",
+    "responseType": "text",
+    "scripts": ["locationScript"],
+    "options": [
+      {
+        "title": "Don't have it.",
+        "data": "N/A"
+      }
+    ],
+    "nextMessage": "STEP:OUTCOME_CONTACT_QUERY"
+  },
+
+  "STEP:OUTCOME_CONTACT_QUERY": {
+    "type": "quickReply",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "CONTACT_OUTCOME",
+    "text": "What kind of incident occured?",
+    "options": [
+      {
+        "title": "Conversation",
+        "data": "conversation"
+      },
+      {
+        "title": "Citation",
+        "data": "citation"
+      },
+      {
+        "title": "Crime",
+        "data": "crime"
+      },
+      {
+        "title": "Arrest",
+        "data": "arrest"
+      },
+      {
+        "title": "Police Shooting",
+        "data": "police shooting"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      }
+    ],
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
   },
 
@@ -126,7 +187,8 @@
     "scripts": ["varScript"],
     "responseKey": "INITIAL_CONTACT",
     "text": "Which one of these things happened?",
-    "options": [{
+    "options": [
+      {
         "title": "I called the police",
         "data": "i called the police"
       },
@@ -148,132 +210,11 @@
       }
     ],
     "nextMessage": {
-      "i called the police": "STEP:USER_INITIATED_ENCOUNTER",
+      "i called the police": "STEP:EMERGENCY_RESPONSE_TIME",
       "i was pulled over": "STEP:POLICE_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
       "i witnessed police": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
       "other": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-    }
-  },
-
-  "STEP:INITIAL_CONTACT_ELABORATE": {
-    "type": "message",
-    "text": "Can you offer more detail about what occured?",
-    "responseType": "text",
-    "nextMessage": "STEP:POLICE_INITIATED_ENCOUNTER"
-  },
-
-  "STEP:POLICE_INITIATED_ENCOUNTER": {
-    "type": "message",
-    "text": "Just a couple of questions so we can help you. Please share as much as you can.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
-  },
-
-  "STEP:INITIAL_POLICE_CONTACT_QUERY": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening? The police...",
-    "options": [{
-        "title": "Wanted information",
-        "data": "wanted information"
-      },
-      {
-        "title": "Ticketed me",
-        "data": "ticketed me"
-      },
-      {
-        "title": "Arrested me",
-        "data": "arrested me"
-      },
-      {
-        "title": "Other",
-        "data": "other"
-      }
-    ],
-    "nextMessage": {
-      "wanted information": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "ticketed me": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "arrested me": "STEP:USER_ARRESTED",
-      "something different": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "other": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-    }
-  },
-
-  "STEP:INITIAL_POLICE_CONTACT_ELABORATE": {
-    "type": "message",
-    "text": "Can you offer more detail about what occured?",
-    "responseType": "text",
-    "nextMessage": "STEP:OFFICER_INCIDENT_DETAILS"
-  },
-
-  "STEP:USER_ARRESTED": {
-    "type": "message",
-    "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-  },
-
-  "STEP:USER_INITIATED_ENCOUNTER": {
-    "type": "message",
-    "text": "Thanks. I’m gonna get into some details now. I just need to go through what happened so I can help.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:INITIAL_USER_CONTACT_QUERY"
-  },
-
-  "STEP:INITIAL_USER_CONTACT_QUERY": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening to you? I was...",
-    "options": [{
-        "title": "Helped",
-        "data": "helped"
-      },
-      {
-        "title": "Ticketed",
-        "data": "ticketed"
-      },
-      {
-        "title": "Given a warning",
-        "data": "given a warning"
-      },
-      {
-        "title": "Arrested",
-        "data": "arrested"
-      },
-      {
-        "title": "Other",
-        "data": "other"
-      }
-    ],
-    "nextMessage": "STEP:EMERGENCY_QUERY"
-  },
-
-  "STEP:EMERGENCY_QUERY": {
-    "type": "button",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "EMERGENCY?",
-    "text": "Did you call because of an emergency?",
-    "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
-      }
-    ],
-    "nextMessage": {
-      "yes": "STEP:EMERGENCY_RESPONSE_TIME",
-      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
@@ -282,8 +223,9 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "EMERGENCY_RESPONSE_TIME",
-    "text": "Okay. How long it take for them to get there to help?",
-    "options": [{
+    "text": "Okay. How long it take for them to get there?",
+    "options": [
+      {
         "title": "Less than 2 minutes",
         "data": "less than 2 minutes"
       },
@@ -305,8 +247,8 @@
       }
     ],
     "nextMessage": {
-      "less than 2 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "2-5 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "less than 2 minutes": "STEP:USER_INITIATED_ENCOUNTER",
+      "2-5 minutes": "STEP:USER_INITIATED_ENCOUNTER",
       "5-10 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
       "10-30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
       "over 30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
@@ -318,7 +260,82 @@
     "text": "That’s really awful.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
+  },
+
+  "STEP:USER_INITIATED_ENCOUNTER": {
+    "type": "message",
+    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
+    "responseType": "text",
+    "waitForUser": false,
+    "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
+  },
+
+  "STEP:POLICE_INITIATED_ENCOUNTER": {
+    "type": "message",
+    "text": "All right. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
+    "responseType": "text",
+    "waitForUser": false,
+    "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
+  },
+
+  "STEP:INITIAL_POLICE_CONTACT_QUERY": {
+    "type": "quickReply",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "POLICE_ACTION",
+    "text": "What ended up happening? The police...",
+    "options": [{
+        "title": "helped me",
+        "data": "helped me"
+      },
+      {
+        "title": "ticketed me",
+        "data": "ticketed me"
+      },
+      {
+        "title": "gave me a warning",
+        "data": "gave me a warning"
+      },
+      {
+        "title": "arrested me",
+        "data": "arrested me"
+      },
+      {
+        "title": "did nothing",
+        "data": "did nothing"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      }
+    ],
+    "referenceStore": "INITIAL_CONTACT",
+    "nextMessage": {
+      "i called the police": "STEP:EMERGENCY_QUERY",
+      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    }
+  },
+
+  "STEP:EMERGENCY_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "EMERGENCY?",
+    "text": "Did you call because of an emergency?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:EMERGENCY_RESPONSE_TIME",
+      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    }
   },
 
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
@@ -365,7 +382,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "OFFICER_NAME",
-    "text": "If you know the officer's name, type it in. Otherwise tap 'didn't get it'",
+    "text": "If you know the officer's name, type it in.",
     "options": [{
         "title": "Didn't get it",
         "data": "didn't get it"
@@ -411,7 +428,7 @@
 
   "STEP:CONGRATS_BADGE_RESPONSE": {
     "type": "message",
-    "text": "${OFFICER_BADGE_NUMBER} Very cool! Not many people get that either.",
+    "text": "${OFFICER_BADGE_NUMBER} Very cool!",
     "scripts": ["varScript"],
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
@@ -545,10 +562,15 @@
   "STEP:FURTHER_OFFICER_DETAILS": {
     "type": "message",
     "anchor": true,
-    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos? If not type 'No'.",
+    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
+    "options": [{
+        "title": "No Further Details",
+        "data": "no further details"
+      }
+    ],
     "nextMessage": {
       "*": "STEP:CONGRATS_FURTHER_OFFICER_DETAILS",
-      "no": "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS"
+      "no further details": "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS"
     }
   },
 
@@ -566,473 +588,471 @@
     "nextMessage": "STEP:OFFICER_ENCOUNTER_START"
   },
 
-  "STEP:OFFICER_ENCOUNTER_START": {
-    "type": "button",
-    "anchor": true,
-    "text": "When the police officer was interacting with you, did it go like you expected it to?",
-    "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
-      }
-    ],
-    "nextMessage": "STEP:OFFICER_ENCOUNTER_SENTIMENT"
-  },
 
-  "STEP:OFFICER_ENCOUNTER_SENTIMENT": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "ENCOUNTER_SENTIMENT",
-    "text": "Help me understand how the interaction felt to you.",
-    "options": [{
-        "title": "It was really good",
-        "data": "it was really good"
-      },
-      {
-        "title": "It was good",
-        "data": "it was good"
-      },
-      {
-        "title": "Okay.",
-        "data": "okay."
-      },
-      {
-        "title": "It wasn't good",
-        "data": "it wasn't good"
-      },
-      {
-        "title": "Really bad",
-        "data": "really bad"
+    "STEP:OFFICER_ENCOUNTER_START": {
+      "type": "button",
+      "anchor": true,
+      "text": "When the police officer was interacting with you, did it go like you expected it to?",
+      "options": [{
+          "title": "Yes",
+          "data": "yes"
+        },
+        {
+          "title": "No",
+          "data": "no"
+        }
+      ],
+      "nextMessage": "STEP:OFFICER_ENCOUNTER_SENTIMENT"
+    },
+
+    "STEP:OFFICER_ENCOUNTER_SENTIMENT": {
+      "type": "quickReply",
+      "anchor": true,
+      "scripts": ["varScript"],
+      "responseKey": "ENCOUNTER_SENTIMENT",
+      "text": "Help me understand how the interaction felt to you.",
+      "options": [{
+          "title": "It was really good",
+          "data": "it was really good"
+        },
+        {
+          "title": "It was good",
+          "data": "it was good"
+        },
+        {
+          "title": "Okay.",
+          "data": "okay."
+        },
+        {
+          "title": "It was bad",
+          "data": "it was bad"
+        },
+        {
+          "title": "It was really bad",
+          "data": "it was really bad"
+        }
+      ],
+      "nextMessage": {
+        "it was really good": "STEP:OFFICER_ENCOUNTER_GOOD",
+        "it was good": "STEP:OFFICER_ENCOUNTER_GOOD",
+        "okay.": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
+        "it was bad": "STEP:OFFICER_ENCOUNTER_BAD",
+        "it was really bad": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
       }
-    ],
-    "nextMessage": {
-      "it was really good": "STEP:OFFICER_ENCOUNTER_GOOD",
-      "it was good": "STEP:OFFICER_ENCOUNTER_GOOD",
-      "okay.": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
-      "it wasn't good": "STEP:OFFICER_ENCOUNTER_BAD",
-      "really bad": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
+    },
+
+    "STEP:OFFICER_ENCOUNTER_GOOD": {
+      "type": "message",
+      "text": "Glad to hear that.",
+      "waitForUser": false,
+      "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
+    },
+
+    "STEP:OFFICER_ENCOUNTER_NEUTRAL": {
+      "type": "message",
+      "text": "Alright.",
+      "waitForUser": false,
+      "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
+    },
+
+    "STEP:OFFICER_ENCOUNTER_BAD": {
+      "type": "message",
+      "text": "Sorry to hear that.",
+      "waitForUser": false,
+      "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
+    },
+
+    "STEP:OFFICER_ENCOUNTER_TERRIBLE": {
+      "type": "message",
+      "text": "Damn, I'm sorry. We're working on doing something about that.",
+      "waitForUser": false,
+      "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
+    },
+
+    "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
+      "type": "button",
+      "text": "If you want to, type more about how you felt.",
+      "options": [{
+          "title": "No thanks",
+          "data": "no thanks"
+        }
+      ],
+      "nextMessage": {
+        "*": "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS",
+        "no thanks": "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS"
+      }
+    },
+
+    "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
+      "type": "message",
+      "text": "No problem.",
+      "waitForUser": false,
+      "referenceStore": "ENCOUNTER_SENTIMENT",
+      "nextMessage": {
+        "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
+        "it was good": "STEP:POSITIVE_FEELING_SELECTION",
+        "okay.": "STEP:POSITIVE_FEELING_SELECTION",
+        "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
+        "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+      }
+    },
+
+    "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
+      "type": "message",
+      "text": "Ok thanks.",
+      "waitForUser": false,
+      "referenceStore": "ENCOUNTER_SENTIMENT",
+      "nextMessage": {
+        "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
+        "it was good": "STEP:POSITIVE_FEELING_SELECTION",
+        "okay.": "STEP:POSITIVE_FEELING_SELECTION",
+        "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
+        "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
+      }
+    },
+
+    "STEP:POSITIVE_FEELING_SELECTION": {
+      "type": "quickReply",
+      "anchor": true,
+      "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
+      "options": [{
+          "title": "Protected",
+          "data": "protected"
+        },
+        {
+          "title": "Relieved",
+          "data": "relieved"
+        },
+        {
+          "title": "Safe",
+          "data": "safe"
+        },
+        {
+          "title": "Comforted",
+          "data": "comforted"
+        },
+        {
+          "title": "Taken care of",
+          "data": "taken care of"
+        },
+        {
+          "title": "Heard",
+          "data": "heard"
+        },
+        {
+          "title": "Not listed here",
+          "data": "not listed here"
+        }
+      ],
+      "referenceStore": "ENCOUNTER_SENTIMENT",
+      "nextMessage": {
+        "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
+        "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
+        "okay.": "STEP:NEGATIVE_FEELING_SELECTION"
+      }
+    },
+
+
+    "STEP:NEGATIVE_FEELING_SELECTION": {
+      "type": "quickReply",
+      "anchor": true,
+      "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
+      "options": [{
+          "title": "Threatened",
+          "data": "threatened"
+        },
+        {
+          "title": "Disrespected",
+          "data": "disrespected"
+        },
+        {
+          "title": "Scared",
+          "data": "scared"
+        },
+        {
+          "title": "Embarrassed",
+          "data": "embarrassed"
+        },
+        {
+          "title": "Intimidated",
+          "data": "intimidated"
+        },
+        {
+          "title": "Angry",
+          "data": "angry"
+        },
+        {
+          "title": "Ignored",
+          "data": "ignored"
+        },
+        {
+          "title": "Not listed here",
+          "data": "not listed here"
+        }
+      ],
+      "referenceStore": "ENCOUNTER_SENTIMENT",
+      "nextMessage": {
+        "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
+        "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
+        "okay.": "STEP:POSITIVE_OFFICER_SELECTION",
+        "it wasn't good": "STEP:NEGATIVE_OFFICER_SELECTION",
+        "really bad": "STEP:NEGATIVE_OFFICER_SELECTION"
+      }
+    },
+
+    "STEP:POSITIVE_OFFICER_SELECTION": {
+      "type": "quickReply",
+      "anchor": true,
+      "text": "Thanks. Now what describes the officer’s behavior?",
+      "options": [{
+          "title": "Approachable",
+          "data": "approachable"
+        },
+        {
+          "title": "Respectful",
+          "data": "respectful"
+        },
+        {
+          "title": "Caring",
+          "data": "caring"
+        },
+        {
+          "title": "Helpful",
+          "data": "helpful"
+        },
+        {
+          "title": "Trustworthy",
+          "data": "trustworthy"
+        },
+        {
+          "title": "Calm",
+          "data": "calm"
+        },
+        {
+          "title": "Accommodating",
+          "data": "accommodating"
+        },
+        {
+          "title": "Friendly",
+          "data": "friendly"
+        },
+        {
+          "title": "Professional",
+          "data": "professional"
+        }
+      ],
+      "referenceStore": "ENCOUNTER_SENTIMENT",
+      "nextMessage": {
+        "it was really good": "STEP:FURTHER_ENCOUNTER_DETAILS",
+        "it was good": "STEP:FURTHER_ENCOUNTER_DETAILS",
+        "okay.": "STEP:NEGATIVE_OFFICER_SELECTION"
+      }
+    },
+
+    "STEP:NEGATIVE_OFFICER_SELECTION": {
+      "type": "quickReply",
+      "anchor": true,
+      "text": "Thanks. Now what describes the officer’s behavior?",
+      "options": [
+        {
+          "title": "Discriminatory",
+          "data": "discriminatory"
+        },
+        {
+          "title": "Not in control",
+          "data": "not in control"
+        },
+        {
+          "title": "Harassing",
+          "data": "harassing"
+        },
+        {
+          "title": "Suspicious",
+          "data": "suspicious"
+        },
+        {
+          "title": "Too Forceful",
+          "data": "too forceful"
+        },
+        {
+          "title": "Didn't self-identify",
+          "data": "didn't self-identify"
+        },
+        {
+          "title": "Abusive language",
+          "data": "abusive language"
+        },
+        {
+          "title": "Not Listed",
+          "data": "not listed"
+        }
+      ],
+      "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+    },
+
+    "STEP:FURTHER_ENCOUNTER_DETAILS": {
+      "type": "message",
+      "text": "Thank you for sharing so much good information. This is great. We’re almost done.",
+      "waitForUser": false,
+      "nextMessage": "STEP:USER_RACE_ENTRY"
+    },
+
+    "STEP:FURTHER_ENCOUNTER_DETAILS": {
+      "type": "message",
+      "text": "If it’s ok, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+      "waitForUser": false,
+      "nextMessage": "STEP:USER_RACE_ENTRY"
+    },
+
+    "STEP:USER_RACE_ENTRY": {
+      "type": "quickReply",
+      "anchor": true,
+      "scripts": ["varScript"],
+      "responseKey": "USER_RACE",
+      "text": "What is your race?",
+      "options": [
+        {
+          "title": "Black/African",
+          "data": "black/african"
+        },
+        {
+          "title": "Hispanic/Latino",
+          "data": "hispanic/latino"
+        },
+        {
+          "title": "Asian",
+          "data": "asian"
+        },
+        {
+          "title": "Arab",
+          "data": "arab"
+        },
+        {
+          "title": "Native American",
+          "data": "native american"
+        },
+        {
+          "title": "Pacific Islander",
+          "data": "pacific islander"
+        },
+        {
+          "title": "South Asain",
+          "data": "south asain"
+        },
+        {
+          "title": "White/Caucasian",
+          "data": "white/caucasian"
+        },
+        {
+          "title": "Other",
+          "data": "other"
+        },
+        {
+          "title": "Opt out",
+          "data": "opt out"
+        }
+      ],
+      "nextMessage": "STEP:USER_GENDER_ENTRY"
+    },
+
+    "STEP:USER_GENDER_ENTRY": {
+      "type": "quickReply",
+      "anchor": true,
+      "scripts": ["varScript"],
+      "responseKey": "USER_GENDER",
+      "text": "What is your gender?",
+      "options": [{
+          "title": "Woman",
+          "data": "woman"
+        },
+        {
+          "title": "Man",
+          "data": "man"
+        },
+        {
+          "title": "Trans Woman",
+          "data": "trans woman"
+        },
+        {
+          "title": "Trans Man",
+          "data": "trans man"
+        },
+        {
+          "title": "Genderqueer",
+          "data": "genderqueer"
+        },
+        {
+          "title": "Other",
+          "data": "other"
+        },
+        {
+          "title": "Opt out",
+          "data": "opt out"
+        }
+      ],
+      "nextMessage": "STEP:USER_BIRTH_DATE_ENTRY"
+    },
+
+    "STEP:USER_BIRTH_DATE_ENTRY": {
+      "type": "message",
+      "scripts": ["varScript"],
+      "responseKey": "USER_BIRTHDATE",
+      "anchor": true,
+      "text": "And your birth year?",
+      "responseType": "text",
+      "nextMessage": "STEP:END_THANK_YOU"
+    },
+
+    "STEP:END_THANK_YOU": {
+      "type": "button",
+      "anchor": true,
+      "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay.",
+      "options": [{
+          "title": "End this chat",
+          "data": "1"
+        },
+        {
+          "title": "Start another report",
+          "data": "2"
+        }
+      ],
+      "nextMessage": {
+        "1": "STEP:GOODBYE",
+        "2": "STEP:SAFE_QUERY"
+        }
+    },
+
+    "STEP:GOODBYE_SAFE": {
+      "type": "message",
+      "text": "Please get to safety. I hope everything turns out okay. You take care out there.",
+      "response_type": "text",
+      "nextMessage": "FINAL:TERMINATE"
+    },
+
+    "STEP:GOODBYE": {
+      "type": "message",
+      "text": "Thanks for talking to me today, Goodbye!",
+      "response_type": "text",
+      "nextMessage": "FINAL:TERMINATE"
+    },
+
+    "FINAL:TERMINATE": {
+      "nextMessage": "nil"
+    },
+
+    "STEP:UNKNOWN_INPUT": {
+      "type": "message",
+      "text": "Sorry, I didnt quite understand that, try again?",
+      "waitForUser": false,
+      "response_type": "text",
+      "nextMessage": "STEP:LAST_STEP"
+    },
+
+    "STEP:RESTART_CONVO": {
+      "type": "message",
+      "text": "",
+      "waitForUser": false,
+      "response_type": "text",
+      "nextMessage": "STEP:SAFE_QUERY"
     }
-  },
-
-  "STEP:OFFICER_ENCOUNTER_GOOD": {
-    "type": "message",
-    "text": "Glad to hear that.",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:OFFICER_ENCOUNTER_NEUTRAL": {
-    "type": "message",
-    "text": "Alright.",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:OFFICER_ENCOUNTER_BAD": {
-    "type": "message",
-    "text": "Sorry to hear that.",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:OFFICER_ENCOUNTER_TERRIBLE": {
-    "type": "message",
-    "text": "Damn, I'm sorry. We're working on doing something about that.",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS": {
-    "type": "button",
-    "text": "If you want to, type more about how you felt.",
-    "options": [{
-        "title": "No thanks",
-        "data": "no thanks"
-      }
-    ],
-    "nextMessage": {
-      "*": "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS",
-      "no thanks": "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS"
-    }
-  },
-
-  "STEP:CONSOLE_NO_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
-    "type": "message",
-    "text": "No problem.",
-    "waitForUser": false,
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
-      "it was good": "STEP:POSITIVE_FEELING_SELECTION",
-      "okay.": "STEP:POSITIVE_FEELING_SELECTION",
-      "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
-      "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
-  },
-
-  "STEP:CONGRATS_FURTHER_OFFICER_ENCOUNTER_DETAILS": {
-    "type": "message",
-    "text": "Ok thanks.",
-    "waitForUser": false,
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "it was really good": "STEP:POSITIVE_FEELING_SELECTION",
-      "it was good": "STEP:POSITIVE_FEELING_SELECTION",
-      "okay.": "STEP:POSITIVE_FEELING_SELECTION",
-      "it wasn't good": "STEP:NEGATIVE_FEELING_SELECTION",
-      "really bad": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
-  },
-
-  "STEP:POSITIVE_FEELING_SELECTION": {
-    "type": "quickReply",
-    "anchor": true,
-    "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
-    "options": [{
-        "title": "Protected",
-        "data": "protected"
-      },
-      {
-        "title": "Relieved",
-        "data": "relieved"
-      },
-      {
-        "title": "Safe",
-        "data": "safe"
-      },
-      {
-        "title": "Comforted",
-        "data": "comforted"
-      },
-      {
-        "title": "Taken care of",
-        "data": "taken care of"
-      },
-      {
-        "title": "Heard",
-        "data": "heard"
-      },
-      {
-        "title": "Not listed here",
-        "data": "not listed here"
-      }
-    ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
-      "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
-      "okay.": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
-  },
-
-
-  "STEP:NEGATIVE_FEELING_SELECTION": {
-    "type": "quickReply",
-    "anchor": true,
-    "text": "Choose which of these most closely reflects your feelings about the interaction (if any)?",
-    "options": [{
-        "title": "Threatened",
-        "data": "threatened"
-      },
-      {
-        "title": "Disrespected",
-        "data": "disrespected"
-      },
-      {
-        "title": "Scared",
-        "data": "scared"
-      },
-      {
-        "title": "Intimidated",
-        "data": "intimidated"
-      },
-      {
-        "title": "Angry",
-        "data": "angry"
-      },
-      {
-        "title": "Ignored",
-        "data": "ignored"
-      },
-      {
-        "title": "Not listed here",
-        "data": "not listed here"
-      }
-    ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "it was really good": "STEP:POSITIVE_OFFICER_SELECTION",
-      "it was good": "STEP:POSITIVE_OFFICER_SELECTION",
-      "okay.": "STEP:POSITIVE_OFFICER_SELECTION",
-      "it wasn't good": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "really bad": "STEP:NEGATIVE_OFFICER_SELECTION"
-    }
-  },
-
-  "STEP:POSITIVE_OFFICER_SELECTION": {
-    "type": "quickReply",
-    "anchor": true,
-    "text": "What word below best describes the officer's behavior (if any)?",
-    "options": [{
-        "title": "Approachable",
-        "data": "approachable"
-      },
-      {
-        "title": "Respectful",
-        "data": "respectful"
-      },
-      {
-        "title": "Caring",
-        "data": "caring"
-      },
-      {
-        "title": "Helpful",
-        "data": "helpful"
-      },
-      {
-        "title": "Trustworthy",
-        "data": "trustworthy"
-      },
-      {
-        "title": "Calm",
-        "data": "calm"
-      },
-      {
-        "title": "Friendly",
-        "data": "friendly"
-      },
-      {
-        "title": "Professional",
-        "data": "professional"
-      },
-      {
-        "title": "Not Listed",
-        "data": "not listed"
-      }
-    ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "it was really good": "STEP:FURTHER_ENCOUNTER_DETAILS",
-      "it was good": "STEP:FURTHER_ENCOUNTER_DETAILS",
-      "okay.": "STEP:NEGATIVE_OFFICER_SELECTION"
-    }
-  },
-
-  "STEP:NEGATIVE_OFFICER_SELECTION": {
-    "type": "quickReply",
-    "anchor": true,
-    "text": "What word below best describes the officer's behavior (if any)?",
-    "options": [{
-        "title": "Distant",
-        "data": "distant"
-      },
-      {
-        "title": "Discriminatory",
-        "data": "discriminatory"
-      },
-      {
-        "title": "Not in control",
-        "data": "not in control"
-      },
-      {
-        "title": "Harassing",
-        "data": "harassing"
-      },
-      {
-        "title": "Suspicious",
-        "data": "suspicious"
-      },
-      {
-        "title": "Too Forceful",
-        "data": "too forceful"
-      },
-      {
-        "title": "Didn't self-identify",
-        "data": "didn't self-identify"
-      },
-      {
-        "title": "Abusive language",
-        "data": "abusive language"
-      },
-      {
-        "title": "Not Listed",
-        "data": "not listed"
-      }
-    ],
-    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:FURTHER_ENCOUNTER_DETAILS": {
-    "type": "message",
-    "text": "Thanks for sharing. This is all great info for understanding how your community feels about police. We’re almost done.",
-    "waitForUser": false,
-    "nextMessage": "STEP:USER_RACE_ENTRY"
-  },
-
-  "STEP:USER_RACE_ENTRY": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "USER_RACE",
-    "text": "If its ok, I'd like to ask for a little information about you. Remember, This conversation is anonymous. What's your race?",
-    "options": [{
-        "title": "Black/African",
-        "data": "black/african"
-      },
-      {
-        "title": "Hispanic/Latino",
-        "data": "hispanic/latino"
-      },
-      {
-        "title": "Asian",
-        "data": "asian"
-      },
-      {
-        "title": "Arab",
-        "data": "arab"
-      },
-      {
-        "title": "Native American",
-        "data": "native american"
-      },
-      {
-        "title": "Pacific Islander",
-        "data": "pacific islander"
-      },
-      {
-        "title": "South Asain",
-        "data": "south asain"
-      },
-      {
-        "title": "White/Caucasian",
-        "data": "white/caucasian"
-      },
-      {
-        "title": "Other",
-        "data": "other"
-      },
-      {
-        "title": "Opt out",
-        "data": "opt out"
-      }
-    ],
-    "nextMessage": "STEP:USER_GENDER_ENTRY"
-  },
-
-  "STEP:USER_GENDER_ENTRY": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "USER_GENDER",
-    "text": "What is your gender?",
-    "options": [{
-        "title": "Woman",
-        "data": "woman"
-      },
-      {
-        "title": "Man",
-        "data": "man"
-      },
-      {
-        "title": "Trans Woman",
-        "data": "trans woman"
-      },
-      {
-        "title": "Trans Man",
-        "data": "trans man"
-      },
-      {
-        "title": "Genderqueer",
-        "data": "genderqueer"
-      },
-      {
-        "title": "Other",
-        "data": "other"
-      },
-      {
-        "title": "Opt out",
-        "data": "opt out"
-      }
-    ],
-    "nextMessage": "STEP:USER_BIRTH_DATE_ENTRY"
-  },
-
-  "STEP:USER_BIRTH_DATE_ENTRY": {
-    "type": "message",
-    "scripts": ["varScript"],
-    "responseKey": "USER_BIRTHDATE",
-    "anchor": true,
-    "text": "And your birth year?",
-    "responseType": "text",
-    "nextMessage": "STEP:END_THANK_YOU"
-  },
-
-  "STEP:END_THANK_YOU": {
-    "type": "button",
-    "anchor": true,
-    "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
-    "options": [{
-        "title": "End this chat",
-        "data": "1"
-      },
-      {
-        "title": "Start another report",
-        "data": "2"
-      }
-    ],
-    "nextMessage": {
-      "1": "STEP:GOODBYE",
-      "2": "STEP:SAFE_QUERY"
-      }
-  },
-
-  "STEP:END_THANK_YOU_SUSPENDED": {
-    "type": "button",
-    "anchor": true,
-    "text": "Would you still like to report what just happend?",
-    "options": [{
-        "title": "No, end this chat",
-        "data": "1"
-      },
-      {
-        "title": "Yes, start a report.",
-        "data": "2"
-      }
-    ],
-    "nextMessage": {
-      "1": "STEP:GOODBYE",
-      "2": "STEP:SAFE_QUERY"
-      }
-  },
-
-  "STEP:GOODBYE": {
-    "type": "message",
-    "text": "Thanks for talking to me today, Goodbye!",
-    "response_type": "text",
-    "nextMessage": "FINAL:TERMINATE"
-  },
-
-  "FINAL:TERMINATE": {
-    "nextMessage": "nil"
-  },
-
-  "STEP:UNKNOWN_INPUT": {
-    "type": "message",
-    "text": "Sorry, I didnt quite understand that, try again?",
-    "waitForUser": false,
-    "response_type": "text",
-    "nextMessage": "STEP:LAST_STEP"
-  },
-
-  "STEP:RESTART_CONVO": {
-    "type": "message",
-    "text": "",
-    "waitForUser": false,
-    "response_type": "text",
-    "nextMessage": "STEP:SAFE_QUERY"
   }
-}

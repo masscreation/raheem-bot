@@ -12,7 +12,6 @@ module.exports = {
 
   digest(currentFrame, message){
     return new Promise(function(resolve, reject){
-
       let time = store.data[currentFrame["responseKey"]];
 
       if (!validateTime(time)){
@@ -31,10 +30,10 @@ module.exports = {
 
 
 function testTime( time ) {
-  var regex = /^([0-1][0-9])\:[0-5][0-9]\s*[ap]m$/i;
-  var match = time.match( regex );
+  let regex = /^([0-1][0-9])\:[0-5][0-9]\s*[ap]m$/i;
+  let match = time.match( regex );
   if ( match ) {
-    var hour  = parseInt( match[1] );
+    let hour  = parseInt( match[1] );
     if ( !isNaN( hour) && hour <= 11 ) {
       return true;
     }
