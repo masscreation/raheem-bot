@@ -210,11 +210,32 @@
       }
     ],
     "nextMessage": {
-      "i called the police": "STEP:EMERGENCY_RESPONSE_TIME",
+      "i called the police": "STEP:EMERGENCY_QUERY",
       "i was pulled over": "STEP:POLICE_INITIATED_ENCOUNTER",
       "police approached me": "STEP:POLICE_INITIATED_ENCOUNTER",
       "i witnessed police": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
       "other": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
+    }
+  },
+
+  "STEP:EMERGENCY_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "EMERGENCY?",
+    "text": "Did you call because of an emergency?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "yes": "STEP:EMERGENCY_RESPONSE_TIME",
+      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
@@ -311,31 +332,7 @@
       }
     ],
     "referenceStore": "INITIAL_CONTACT",
-    "nextMessage": {
-      "i called the police": "STEP:EMERGENCY_QUERY",
-      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-    }
-  },
-
-  "STEP:EMERGENCY_QUERY": {
-    "type": "button",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "EMERGENCY?",
-    "text": "Did you call because of an emergency?",
-    "options": [{
-        "title": "Yes",
-        "data": "yes"
-      },
-      {
-        "title": "No",
-        "data": "no"
-      }
-    ],
-    "nextMessage": {
-      "yes": "STEP:EMERGENCY_RESPONSE_TIME",
-      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-    }
+    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
 
   "STEP:NUMBER_OF_OFFICERS_ON_SCENE": {
