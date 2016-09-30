@@ -19,7 +19,7 @@ module.exports = {
           message.toLowerCase() === "exit" ||
           message.toLowerCase() === "goodbye" ||
           message.toLowerCase() === "quit"){
-            currentState = "QUIT_CONVO_PRE";
+            currentState = "STEP:QUIT_CONVO_PRE";
       }
     }
 
