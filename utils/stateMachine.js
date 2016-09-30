@@ -67,7 +67,7 @@ module.exports = {
         currentState = store.state[0];
 
       } else if (message.toLowerCase() === "new report"){
-        currentState = "STEP:RESTART_CONVO";
+        currentState = store.state[0];
 
       }
 

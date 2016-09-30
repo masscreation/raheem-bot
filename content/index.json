@@ -1078,7 +1078,7 @@
       "text": "",
       "waitForUser": false,
       "response_type": "text",
-      "nextMessage": "STEP:SAFE_QUERY"
+      "nextMessage": "STEP:1_GET_STARTED_PAYLOAD"
     },
 
     "STEP:QUIT_CONVO_PRE": {
