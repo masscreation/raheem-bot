@@ -1082,6 +1082,7 @@
     },
 
     "STEP:QUIT_CONVO_PRE": {
+      "text": "",
       "nextMessage": "STEP:QUIT_CONVO"
     },
 
