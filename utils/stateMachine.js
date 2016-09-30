@@ -21,14 +21,17 @@ module.exports = {
 
     currentState = content[currentState].nextMessage
 
+    if (typeof message === "string"){
+      if (message.toLowerCase() === "stop" ||
+          message.toLowerCase() === "exit" ||
+          message.toLowerCase() === "goodbye" ||
+          message.toLowerCase() === "quit"){
+            currentState = "QUIT_CONVO_PRE";  
+      }
+    }
+
     if (typeof currentState === 'object' && currentState[message.toLowerCase()]){
       currentState = currentState[message.toLowerCase()];
-
-    } else if (message.toLowerCase() === "stop" ||
-               message.toLowerCase() === "exit" ||
-               message.toLowerCase() === "goodbye" ||
-               message.toLowerCase() === "quit"){
-      currentState = "QUIT_CONVO_PRE";
 
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
