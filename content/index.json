@@ -98,7 +98,8 @@
     "type": "button",
     "anchor": true,
     "text": "Do you want to tell us about having contact with the police?",
-    "options": [{
+    "options": [
+      {
         "title": "Use Location",
         "data": "1"
       },
@@ -108,12 +109,12 @@
       }
     ],
     "nextMessage": {
-      "1": "STEP:USE_LOCATION",
+      "1": "STEP:FB_LOCATION",
       "2": "STEP:MANUAL_ENTRY_CITY"
     }
   },
 
-  "STEP:USE_LOCATION": {
+  "STEP:FB_LOCATION": {
     "type": "quickReply",
     "anchor": true,
     "text": "Where did this interaction occur?",
@@ -123,11 +124,38 @@
   },
 
   "STEP:MANUAL_ENTRY_CITY": {
-    "type": "quickReply",
+    "type": "message",
     "anchor": true,
     "text": "What city did this happen in?",
     "responseType": "text",
     "scripts": ["locationScript"],
+    "nextMessage": "STEP:LOCATION_PROMT"
+  },
+
+  "STEP:LOCATION_PROMT": {
+    "type": "generic",
+    "responseKey": "ENCOUNTER_LOCATION",
+    "scripts": ["locationScript", "varScript"],
+    "nextMessage": "STEP:LOCATION_CONFIRMATION"
+  },
+
+  "STEP:QUE_LOCATION_RETRY": {
+    "nextMessage": "STEP:LOCATION_RETRY"
+  },
+
+  "STEP:LOCATION_RETRY": {
+    "type": "message",
+    "text": "Ok let's try again. Try and be more precise.",
+    "waitForUser": false,
+    "nextMessage": "STEP:LOCATION_QUERY"
+  },
+
+  "STEP:LOCATION_CONFIRMATION": {
+    "type": "message",
+    "text": "You selected ${'ENCOUNTER_LOCATION'}!",
+    "responseType": "text",
+    "scripts": ["varScript"],
+    "waitForUser": false,
     "nextMessage": "STEP:MANUAL_ENTRY_STREETS"
   },
 
@@ -1015,7 +1043,7 @@
       ],
       "nextMessage": {
         "1": "STEP:GOODBYE",
-        "2": "STEP:SAFE_QUERY"
+        "2": "STEP:DATE_QUERY"
         }
     },
 
