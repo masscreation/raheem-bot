@@ -1086,6 +1086,7 @@
     },
 
     "STEP:QUIT_CONVO": {
+      "type": "button",
       "text": "Ok. Is it alright if I save what you gave me so far?",
       "options": [{
           "title": "Yes",
