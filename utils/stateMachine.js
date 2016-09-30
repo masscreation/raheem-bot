@@ -27,7 +27,8 @@ module.exports = {
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
 
-    } else if (message.toLowerCase() === "stop" ||
+    } else if (typeof message === 'string' &&
+               message.toLowerCase() === "stop" ||
                message.toLowerCase() === "exit" ||
                message.toLowerCase() === "goodbye" ||
                message.toLowerCase() === "quit"){
