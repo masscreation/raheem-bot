@@ -91,7 +91,7 @@
     "responseKey": "TIME_OF_INCIDENT",
     "text": "Got it. Around what time, such as 12:15AM?",
     "responseType": "text",
-    "nextMessage": "STEP:LOCATION_QUERY"
+    "nextMessage": "STEP:FB_LOCATION"
   },
 
   "STEP:LOCATION_QUERY": {
@@ -1079,5 +1079,26 @@
       "waitForUser": false,
       "response_type": "text",
       "nextMessage": "STEP:SAFE_QUERY"
-    }
+    },
+
+    "STEP:QUIT_CONVO": {
+      "text": "Ok. Is it alright if I save what you gave me so far?",
+      "options": [{
+          "title": "Yes",
+          "data": "1"
+        },
+        {
+          "title": "No",
+          "data": "2"
+        }
+      ],
+      "nextMessage": "STEP:QUIT_FINAL"
+    },
+
+    "STEP:QUIT_FINAL": {
+      "type": "message",
+      "text": "Got it. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
+      "response_type": "text",
+      "nextMessage": "FINAL:TERMINATE"
+    },
   }

@@ -27,6 +27,13 @@ module.exports = {
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
 
+    } else if (message.toLowerCase() === "stop" ||
+        message.toLowerCase() === "exit" ||
+        message.toLowerCase() === "goodbye" ||
+        message.toLowerCase() === "quit" ||
+    ){
+      currentState = "STEP:QUIT_CONVO";
+
     } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
       currentState = "STEP:UNKNOWN_INPUT";
 
@@ -50,8 +57,12 @@ module.exports = {
 
     if (typeof message === "string"){
 
-      if (message === "menu"){
-        currentState = "STEP:QUE_NAV_MENU";
+      if (message.toLowerCase() === "stop" ||
+          message.toLowerCase() === "exit" ||
+          message.toLowerCase() === "goodbye" ||
+          message.toLowerCase() === "quit" ||
+         ){
+        currentState = "STEP:QUIT_CONVO";
 
       } else if (message === "Search Again"){
         currentState = "STEP:QUE_LOCATION_RETRY";
