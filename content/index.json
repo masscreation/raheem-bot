@@ -1100,5 +1100,5 @@
       "text": "Got it. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
       "response_type": "text",
       "nextMessage": "FINAL:TERMINATE"
-    },
+    }
   }

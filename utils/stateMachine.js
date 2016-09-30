@@ -28,10 +28,9 @@ module.exports = {
       currentState = currentState["*"];
 
     } else if (message.toLowerCase() === "stop" ||
-        message.toLowerCase() === "exit" ||
-        message.toLowerCase() === "goodbye" ||
-        message.toLowerCase() === "quit" ||
-    ){
+               message.toLowerCase() === "exit" ||
+               message.toLowerCase() === "goodbye" ||
+               message.toLowerCase() === "quit"){
       currentState = "STEP:QUIT_CONVO";
 
     } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
@@ -57,14 +56,7 @@ module.exports = {
 
     if (typeof message === "string"){
 
-      if (message.toLowerCase() === "stop" ||
-          message.toLowerCase() === "exit" ||
-          message.toLowerCase() === "goodbye" ||
-          message.toLowerCase() === "quit" ||
-         ){
-        currentState = "STEP:QUIT_CONVO";
-
-      } else if (message === "Search Again"){
+      if (message === "Search Again"){
         currentState = "STEP:QUE_LOCATION_RETRY";
 
       } else if (message === "resume" && currentState !== "NAV_MENU"){
