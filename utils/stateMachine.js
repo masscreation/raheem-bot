@@ -14,21 +14,21 @@ module.exports = {
 
   next(message) {
 
+    if (typeof message === "string"){
+      if (message.toLowerCase() === "stop" ||
+          message.toLowerCase() === "exit" ||
+          message.toLowerCase() === "goodbye" ||
+          message.toLowerCase() === "quit"){
+            currentState = "QUIT_CONVO_PRE";
+      }
+    }
+
     if (content[currentState]["referenceStore"]){
       message = store.data[content[currentState]["referenceStore"]];
       console.log("message", message)
     }
 
     currentState = content[currentState].nextMessage
-
-    if (typeof message === "string"){
-      if (message.toLowerCase() === "stop" ||
-          message.toLowerCase() === "exit" ||
-          message.toLowerCase() === "goodbye" ||
-          message.toLowerCase() === "quit"){
-            currentState = "QUIT_CONVO_PRE";  
-      }
-    }
 
     if (typeof currentState === 'object' && currentState[message.toLowerCase()]){
       currentState = currentState[message.toLowerCase()];
