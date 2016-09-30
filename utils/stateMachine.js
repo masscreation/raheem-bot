@@ -57,7 +57,7 @@ module.exports = {
                  message.toLowerCase() === "exit" ||
                  message.toLowerCase() === "goodbye" ||
                  message.toLowerCase() === "quit"){
-        currentState = "STEP:QUIT_CONVO";
+        currentState = "QUIT_CONVO_PRE";
 
       } else if (message === "resume" && currentState !== "NAV_MENU"){
         let lastStateIndex = store.state.length;
