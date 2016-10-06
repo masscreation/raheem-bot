@@ -50,10 +50,10 @@ module.exports = {
         let response = JSON.parse(body).data;
 
         if (status == 200) {
-          resolve(body)
+          return(body)
 
         } else {
-          reject(new Error('server error: ' + response.error))
+          return(new Error('server error: ' + response.error))
 
         }
       }
@@ -78,10 +78,10 @@ module.exports = {
         let response = JSON.parse(body).data;
 
         if (status == 200) {
-          resolve(body)
+          return(body)
 
         } else {
-          reject(new Error('server error: ' + response.error))
+          return(new Error('server error: ' + response.error))
 
         }
       }
