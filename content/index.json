@@ -1056,11 +1056,11 @@
       "anchor": true,
       "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay.",
       "options": [{
-          "title": "end this chat",
+          "title": "End this chat",
           "data": "1"
         },
         {
-          "title": "start another report",
+          "title": "Start another report",
           "data": "2"
         }
       ],
