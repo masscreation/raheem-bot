@@ -24,6 +24,12 @@ module.exports = {
       }
     }
 
+    if (currentState === 'STEP:END_THANK_YOU'){
+      SeedAppService.logIncident();
+      SeedAppService.updateUser();
+      Store.archiveData();
+    }
+
     if (content[currentState]["referenceStore"]){
       message = Store.data[content[currentState]["referenceStore"]];
       console.log("message", message)
@@ -39,11 +45,6 @@ module.exports = {
         (currentState[message.toLowerCase()] ||
         currentState[message])){
         currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
-
-    } else if (typeof currentState === 'STEP:END_THANK_YOU'){
-      SeedAppService.logIncident();
-      SeedAppService.updateUser();
-      Store.archiveData();
 
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];

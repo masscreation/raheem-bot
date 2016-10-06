@@ -71,7 +71,7 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'POST'
     }, function (error, response, body) {
-      console.log("BODY", body)
+      console.log("BODY", body);
       if (!error && response.statusCode == 200) {
 
         let status = JSON.parse(body).meta;
