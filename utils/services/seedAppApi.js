@@ -69,7 +69,7 @@ module.exports = {
     let userID = Store.getUserID(fbID);
 
     request({
-      uri: `https://theseedapp.com/api/v1/users/${userID}.json`,
+      uri: `https://theseedapp.com/api/v1/users/${userID}`,
       qs: payload,
       rejectUnauthorized: false,
       method: 'PUT'
