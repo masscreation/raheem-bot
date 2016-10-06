@@ -37,6 +37,7 @@ module.exports = {
 
   logIncident(){
     let payload = prepareIncidentPayload();
+
     request({
       uri: 'https://theseedapp.com/api/v1/incidents',
       qs: payload,
@@ -69,7 +70,7 @@ module.exports = {
       uri: `https://theseedapp.com/api/v1/users/${userID}.json`,
       qs: payload,
       rejectUnauthorized: false,
-      method: 'POST'
+      method: 'PUT'
     }, function (error, response, body) {
       console.log("BODY", body);
       if (!error && response.statusCode == 200) {
@@ -78,10 +79,10 @@ module.exports = {
         let response = JSON.parse(body).data;
 
         if (status == 200) {
-          return(body)
+          return(body);
 
         } else {
-          return(new Error('server error: ' + response.error))
+          return(new Error('server error: ' + response.error));
 
         }
       }
