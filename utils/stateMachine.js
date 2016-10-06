@@ -13,7 +13,9 @@ let currentState = initialState;
 
 module.exports = {
 
-  next(message) {
+  next(message, fbID) {
+    console.log('NEXT FBID: ', fbID);
+    currentState = Store.getState(fbID);
 
     if (typeof message === "string"){
       if (message.toLowerCase() === "stop" ||
@@ -25,21 +27,16 @@ module.exports = {
     }
 
     if (currentState === 'STEP:END_THANK_YOU'){
-      SeedAppService.logIncident();
-      SeedAppService.updateUser();
-      Store.archiveData();
+      SeedAppService.logIncident(fbID);
+      SeedAppService.updateUser(fbID);
+      Store.archiveData(fbID);
     }
 
     if (content[currentState]["referenceStore"]){
-      message = Store.data[content[currentState]["referenceStore"]];
-      console.log("message", message)
+      message = Store.users[fbID]['data'][content[currentState]["referenceStore"]];
     }
 
-
     currentState = content[currentState].nextMessage
-    console.log('MESSAGE', message)
-    console.log('CURRENTSTATE', currentState)
-    console.log("NEXT", currentState[message])
 
     if (typeof currentState === 'object' &&
         (currentState[message.toLowerCase()] ||
@@ -58,41 +55,46 @@ module.exports = {
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (currentState === "STEP:LAST_STEP"){
-      Store.state.forEach(function(state){
+      Store.users['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = state;
         }
       });
     }
-    Store.appendState(currentState);
+    Store.appendState(currentState, fbID);
 
   },
 
-  reRoute(message){
+  reRoute(message, fbID){
 
     if (typeof message === "string"){
 
       if (message === "Search Again"){
         currentState = "STEP:QUE_LOCATION_RETRY";
+        Store.appendState(currentState, fbID);
 
       } else if (message === "resume" && currentState !== "NAV_MENU"){
-        let lastStateIndex = Store.state.length;
-        currentState = Store.state[lastStateIndex - 2];
+        let lastStateIndex = Store.users[fbID]['state'].length;
+        currentState = Store.users['state'][lastStateIndex - 2];
+        Store.appendState(currentState, fbID);
 
       } else if (message.toLowerCase() === "restart"){
-        currentState = Store.resetState();
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
 
       } else if (message.toLowerCase() === "new report"){
-        currentState = Store.resetState();
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
 
       }
 
     }
 
-    console.log("GET STATE", currentState)
   },
 
-  get() {
+  get(fbID) {
+    currentState = Store.getState(fbID);
+    console.log('GET STATE: ', currentState)
     return content[currentState];
   }
 

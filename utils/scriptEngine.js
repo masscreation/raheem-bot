@@ -25,10 +25,10 @@ loadScripts();
 module.exports = {
 
 
-  digest(currentState, message) {
+  digest(currentState, message, fbID) {
     return Promise.each(scriptArray, function(script){
       if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
-        return script.digest(currentState, message);
+        return script.digest(currentState, message, fbID);
 
       } else {
         return Promise.resolve();
@@ -37,12 +37,12 @@ module.exports = {
     });
   },
 
-  format(currentState, message) {
+  format(currentState, message, fbID) {
 
     if (currentState.scripts){
       scriptArray.forEach(function(script){
         if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
-          let newOutgoingMessage = script.format(currentState);
+          let newOutgoingMessage = script.format(currentState, fbID);
           newOutgoingMessage ? output = newOutgoingMessage : output = currentState;
         }
       });

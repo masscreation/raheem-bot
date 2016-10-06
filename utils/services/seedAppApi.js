@@ -35,8 +35,8 @@ module.exports = {
     })
   },
 
-  logIncident(){
-    let payload = prepareIncidentPayload();
+  logIncident(fbID){
+    let payload = prepareIncidentPayload(fbID);
 
     request({
       uri: 'https://theseedapp.com/api/v1/incidents',
@@ -61,10 +61,10 @@ module.exports = {
     });
   },
 
-  updateUser(){
-    let payload = prepareUserPayload();
+  updateUser(fbID){
+    let payload = prepareUserPayload(fbID);
 
-    let userID = Store.getUserID();
+    let userID = Store.getUserID(fbID);
 
     request({
       uri: `https://theseedapp.com/api/v1/users/${userID}.json`,
@@ -90,10 +90,10 @@ module.exports = {
   }
 };
 
-let prepareUserPayload = function() {
+let prepareUserPayload = function(fbID) {
 
-  let data = Store.getData();
-  let userID = Store.getUserID();
+  let data = Store.getData(fbID);
+  let userID = Store.getUserID(fbID);
 
   let payload = {
     user_id: userID,
@@ -109,8 +109,8 @@ let prepareUserPayload = function() {
 
 let prepareIncidentPayload = function() {
 
-  let data = Store.getData();
-  let userID = Store.getUserID();
+  let data = Store.getData(fbID);
+  let userID = Store.getUserID(fbID);
 
   let payload = {
     user_id: userID,

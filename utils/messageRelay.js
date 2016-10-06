@@ -12,12 +12,12 @@ module.exports = function(rawEvent) {
   if(rawEvent.message || rawEvent.postback) {
 
     let senderID = rawEvent.sender.id;
-    
+
     async.waterfall([
 
       function getOrCreateUser(callback) {
         SeedAppService.getOrCreateUser(rawEvent).then(function(){
-          callback(null, rawEvent)
+          callback(null, rawEvent);
         });
       },
 
@@ -28,13 +28,13 @@ module.exports = function(rawEvent) {
       },
 
       function courierIn(parsedMessage, callback) {
-        MessageCourier.in(parsedMessage).then(function(digestedMessage){
+        MessageCourier.in(parsedMessage, senderID).then(function(digestedMessage){
           callback(null, digestedMessage);
         });
       },
 
       function courierOut(digestedMessage, callback) {
-        MessageCourier.out(digestedMessage).then(function(newMessage){
+        MessageCourier.out(digestedMessage, senderID).then(function(newMessage){
           callback(null, newMessage);
         });
       }],

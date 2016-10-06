@@ -10,64 +10,73 @@
 
 class StoreInterface {
 
-  constructor(data, users, flags, state) {
-    this.data  = {};
+  constructor(data) {
     this.users = {};
-    this.flags = [];
-    this.state = [];
-  }
-
-  getData() {
-    return this.data;
-  }
-
-  getUserID() {
-    return this.users[this.currentUser]['dbID'];
   }
 
   setUser(dbID, fbID) {
     if (!this.users[fbID]){
-      this.users[fbID] = { 'dbID': dbID }
+      this.users[fbID] = { 'dbID':     dbID,
+                           'data':     {},
+                           'flags':    [],
+                           'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                           'archived': {},
+                           'active':   null
+                          }
     }
-    this.currentUser = fbID;
+    console.log('SET USER', this.users[fbID])
   }
 
-  getDatapoint(key) {
-    return this.data[key];
+  getData(fbID) {
+    return this.users[fbID]['data'];
   }
 
-  saveDatapoint(key, value) {
-    return this.data[key] = value;
+  getUserID(fbID) {
+    return this.users[fbID]['dbID'];
   }
 
-  appendState(frame) {
-    this.state.push(frame);
+  getDatapoint(fbID) {
+    return this.users[fbID]['data'][key];
   }
 
-  resetState() {
-    this.state = ['STEP:1_GET_STARTED_PAYLOAD'];
-    return this.state[0];
+  saveDatapoint(key, value, fbID) {
+    return this.users[fbID]['data'][key] = value;
   }
 
-  saveData() {
-    this.users[this.currentUser]['active'] = this.data;
+  appendState(frame, fbID) {
+    let state = this.users[fbID]['state']
+    state.push(frame);
   }
 
-  archiveData() {
+  getState(fbID) {
+    let state = this.users[fbID]['state'];
+    return state[state.length - 1];
+  }
+
+  resetState(fbID) {
+    this.users[fbID]['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
+    return this.users[fbID]['state'][0];
+  }
+
+  saveData(fbID) {
+    this.users[fbID]['active'] = this.data;
+  }
+
+  archiveData(fbID) {
     let d = new Date();
-    if (!this.users[this.currentUser]['archived']){
-      this.users[this.currentUser]['archived'] = {};
+    if (!this.users[fbID]['archived']){
+      this.users[fbID]['archived'] = {};
     }
-    this.users[this.currentUser]['archived'][d.getTime()] = this.data;
-    this.data = {};
+    this.users[fbID]['archived'][d.getTime()] = this.users[fbID]['data'];
+    this.users[fbID]['data'] = {};
   }
 
-  addFlag() {
-    this.flags.push(flag)
+  addFlag(fbID) {
+    this.users[fbID]['flags'].push(flag)
   }
 
-  flushFlags() {
-    this.flags = [];
+  flushFlags(fbID) {
+    this.users[fbID]['flags'] = [];
   }
 };
 

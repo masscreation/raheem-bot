@@ -19,7 +19,7 @@ module.exports = {
   digest(currentFrame, message){
   },
 
-  format(currentFrame){
+  format(currentFrame, fbID){
     currentFrame = Object.assign({}, currentFrame);
     currentFrame["text"] += review();
     return currentFrame

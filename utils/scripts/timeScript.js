@@ -10,15 +10,15 @@ module.exports = {
     return "dateScript"
   },
 
-  digest(currentFrame, message){
+  digest(currentFrame, message, fbID){
     return new Promise(function(resolve, reject){
-      let time = store.data[currentFrame["responseKey"]];
+      let time = store.users[fbID]['data'][currentFrame["responseKey"]];
 
       if (!validateTime(time)){
-        store.flags.push("ERROR:INVALID_TIME");
+        store.users[fbID]['flags'].push("ERROR:INVALID_TIME");
       }
 
-      store.data[currentFrame["responseKey"]] = date;
+      store.users['data'][currentFrame["responseKey"]] = date;
       resolve();
     })
   },
@@ -29,7 +29,7 @@ module.exports = {
 }
 
 
-function testTime( time ) {
+function testTime(time) {
   let regex = /^([0-1][0-9])\:[0-5][0-9]\s*[ap]m$/i;
   let match = time.match( regex );
   if ( match ) {

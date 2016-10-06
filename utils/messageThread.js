@@ -9,17 +9,17 @@ let messagesArray = [];
 
 module.exports = {
 
-  set(obj, message) {
+  set(obj, message, fbID) {
 
     // if multiple messages at same time
     while (obj.waitForUser === false){
-      obj = scriptEngine.format(obj);
+      obj = scriptEngine.format(obj, fbID);
       messagesArray.push(obj);
-      state.next();
-      obj = state.get();
+      state.next(message, fbID);
+      obj = state.get(fbID);
     };
 
-    obj = scriptEngine.format(obj);
+    obj = scriptEngine.format(obj, fbID);
     messagesArray.push(obj);
     let outgoingMessages = messagesArray;
 
