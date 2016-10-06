@@ -38,10 +38,8 @@ module.exports = {
     if (typeof currentState === 'object' &&
         (currentState[message.toLowerCase()] ||
         currentState[message])){
+        currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
 
-      currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
-
-      console.log("BLOOOOOOOSSSSDFKJESLKFLSKJFLKSDJ", currentState)
     } else if (typeof currentState === 'STEP:END_THANK_YOU'){
       SeedAppService.logIncident();
       SeedAppService.updateUser();

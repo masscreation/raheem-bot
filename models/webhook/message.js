@@ -3,9 +3,7 @@
 module.exports = class Message {
 
   constructor(event) {
-    console.log("EVENT", event.message.quick_reply.payload)
-    console.log("RECIPIENT ID:", event.recipient.id)
-    console.log("SENDER ID:", event.sender.id)
+    console.log("EVENT", event)
 
     this.senderID = event.sender.id;
     this.recipientID = event.recipient.id;
@@ -13,7 +11,7 @@ module.exports = class Message {
 
     // types of messages
     this.message = event.message || false;
-    this.quickReply = event.message.quick_reply.payload || false;
+    this.quickReply = event.message.quick_reply || false;
     this.attachment = event.message.attachments || false;
 
     // message meta data
@@ -26,11 +24,10 @@ module.exports = class Message {
     if (this.attachment){
       this.userContent = this.attachment;
     } else if (this.quickReply){
-      this.userContent = this.quickReply;
+      this.userContent = this.quickReply.payload;
     } else {
       this.userContent = this.message.text;
     }
-
   }
 
   isValid(){
