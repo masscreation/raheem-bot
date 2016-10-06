@@ -940,9 +940,9 @@
 
     "STEP:FURTHER_ENCOUNTER_DETAILS": {
       "type": "message",
-      "text": "Thank you for sharing so much good information. This is great. We’re almost done.",
+      "text": "Thank you for sharing so much good information. This is great. We’re almost done. If it’s ok, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
       "waitForUser": false,
-      "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS_CONT"
+      "nextMessage": "STEP:USER_RACE_ENTRY"
     },
 
     "STEP:FURTHER_ENCOUNTER_DETAILS_CONT": {
