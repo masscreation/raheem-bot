@@ -446,7 +446,7 @@
   "STEP:CONGRATS_NAME_RESPONSE": {
     "type": "message",
     "scripts": ["varScript"],
-    "text":  "${OFFICER_NAME}. Great! Not many people remember to get that",
+    "text":  "${'OFFICER_NAME'}. Great! Not many people remember to get that",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -477,7 +477,7 @@
 
   "STEP:CONGRATS_BADGE_RESPONSE": {
     "type": "message",
-    "text": "${OFFICER_BADGE_NUMBER} Very cool!",
+    "text": "${'OFFICER_BADGE_NUMBER'}. Very cool!",
     "scripts": ["varScript"],
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"

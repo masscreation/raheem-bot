@@ -14,7 +14,6 @@ let currentState = initialState;
 module.exports = {
 
   next(message, fbID) {
-    console.log('NEXT FBID: ', fbID);
     currentState = Store.getState(fbID);
 
     if (currentState === 'STEP:END_THANK_YOU'){

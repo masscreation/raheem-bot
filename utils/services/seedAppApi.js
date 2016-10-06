@@ -125,7 +125,5 @@ let prepareIncidentPayload = function(fbID) {
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
 
-  console.log("PAYLOAD", payload)
-
   return payload
 }

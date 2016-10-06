@@ -37,7 +37,7 @@ module.exports = {
     });
   },
 
-  format(currentState, message, fbID) {
+  format(currentState, fbID) {
 
     if (currentState.scripts){
       scriptArray.forEach(function(script){

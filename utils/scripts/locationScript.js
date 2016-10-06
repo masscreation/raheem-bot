@@ -21,9 +21,6 @@ module.exports = {
 
 		store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
 
-
-		console.log(store.users[fbID]['data'][currentFrame["responseKey"]])
-
 	},
 
 	//
@@ -37,8 +34,6 @@ module.exports = {
 	// },
 
 	format(currentFrame, message, fbID){
-
-		console.log("FORMATTING LOCATION")
 
 		currentFrame["options"] = [
 			{

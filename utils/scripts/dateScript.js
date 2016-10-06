@@ -20,9 +20,7 @@ module.exports = {
       } else {
         store.users[fbID]['flags'] = "ERROR:INVALID_DATE";
       }
-
-      console.log("Date update: ", date);
-
+      
       store.users[fbID]['data'][currentFrame["responseKey"]] = date;
       resolve();
     });

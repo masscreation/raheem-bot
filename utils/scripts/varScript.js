@@ -8,8 +8,10 @@ function swapVar(message, fbID){
     if (word.includes("${")){
       let iOne = word.indexOf('${') + 3;
       let iTwo = word.indexOf('}') - 1;
+      let punctuation = word[word.length - 1];
       let dynamicContent = word.substr(iOne, (iTwo - iOne));
       word = store.getDatapoint(dynamicContent, fbID);
+      if (punctuation){ word = word + punctuation };
     }
     return word
   });
@@ -35,7 +37,7 @@ module.exports = {
   format(currentFrame, fbID){
     if (currentFrame["text"] && currentFrame["text"].includes("${")){
       currentFrame = Object.assign({}, currentFrame);
-      currentFrame["text"] = swapVar(currentFrame["text"]), fbID;
+      currentFrame["text"] = swapVar(currentFrame["text"], fbID);
       console.log("VARIABLE SWAPPED, NEW MESSAGE: ", currentFrame["text"]);
       return currentFrame
     } else {

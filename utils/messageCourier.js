@@ -35,7 +35,7 @@ module.exports = {
       currentState = state.get(fbID);
 
       let outgoingMessages = messageThread.set(currentState, message, fbID);
-
+      
       resolve(outgoingMessages);
     });
   }

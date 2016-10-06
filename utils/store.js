@@ -35,7 +35,7 @@ class StoreInterface {
     return this.users[fbID]['dbID'];
   }
 
-  getDatapoint(fbID) {
+  getDatapoint(key, fbID) {
     return this.users[fbID]['data'][key];
   }
 
