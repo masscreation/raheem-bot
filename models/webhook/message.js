@@ -3,7 +3,7 @@
 module.exports = class Message {
 
   constructor(event) {
-
+    console.log("EVENT", event.message.quick_reply.payload)
     console.log("RECIPIENT ID:", event.recipient.id)
     console.log("SENDER ID:", event.sender.id)
 
@@ -13,23 +13,24 @@ module.exports = class Message {
 
     // types of messages
     this.message = event.message || false;
-    this.message.quick_reply = event.message.quick_reply || false;
-    this.message.attachment = event.message.attachments || false
+    this.quickReply = event.message.quick_reply.payload || false;
+    this.attachment = event.message.attachments || false;
 
     // message meta data
-    this.isEcho = this.message.is_echo || false;
-    this.messageId = this.message.mid || false;
-    this.appId = this.message.app_id || false;
+    this.isEcho = this.message.is_echo || false;;
+    this.messageId = this.message.mid || false;;
+    this.appId = this.message.app_id || false;;
     this.metadata = this.message.metadata || {};
 
     // You may get a text or attachment but not both
-    if (this.message.attachment){
-      this.userContent = this.message.attachment;
-    } else if (this.message.quickReply){
-      this.userContent = this.message.quickReply;
+    if (this.attachment){
+      this.userContent = this.attachment;
+    } else if (this.quickReply){
+      this.userContent = this.quickReply;
     } else {
-      this.userContent = this.message.text
+      this.userContent = this.message.text;
     }
+
   }
 
   isValid(){

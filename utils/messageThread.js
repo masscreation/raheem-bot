@@ -1,7 +1,6 @@
 'use strict'
 
 const content = require('../content');
-const convoEngine = require('./convoEngine');
 const state = require('./stateMachine');
 const scriptEngine = require("./scriptEngine");
 

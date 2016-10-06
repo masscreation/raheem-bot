@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const request = require('request');
 const router = require('./utils/router.js');
+const messageRelay = require('./utils/messageRelay.js');
 const app = express();
 
 app.set('port', (process.env.PORT || 6000));
@@ -86,7 +87,7 @@ app.post('/webhook', function (req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
-				router(messagingEvent);
+				messageRelay(messagingEvent);
 			});
 
     });

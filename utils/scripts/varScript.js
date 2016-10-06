@@ -9,7 +9,7 @@ function swapVar(message){
       let iOne = word.indexOf('${') + 3;
       let iTwo = word.indexOf('}') - 1;
       let dynamicContent = word.substr(iOne, (iTwo - iOne));
-      word = store.data[dynamicContent];
+      word = store.getDatapoint(dynamicContent);
     }
     return word
   });
@@ -25,7 +25,7 @@ module.exports = {
   digest(currentFrame, message){
     return new Promise(function(resolve, reject){
       if (currentFrame["responseKey"]) {
-        store.data[currentFrame["responseKey"]] = message;
+        store.saveDatapoint(currentFrame["responseKey"], message);
         console.log("VARIABLE SAVED: ", store.data[currentFrame["responseKey"]])
       }
       resolve();

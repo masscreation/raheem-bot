@@ -15,7 +15,8 @@ module.exports = {
       let date = store.data[currentFrame["responseKey"]];
 
       if (Date.parse(date) !== null){
-        date = Date.parse(date).toString('MMMM dS, yyyy');
+        date = Date.parse(date).toString('yyyy-M-d');
+        date = new Date(date).valueOf() / 1000;
       } else {
         store.flags = "ERROR:INVALID_DATE";
       }

@@ -1,6 +1,7 @@
 'use strict'
 
-const store = require('./store')
+const Store = require('./store');
+const SeedAppService = require('./services/seedAppApi');
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
 let currentState = initialState;
@@ -24,34 +25,47 @@ module.exports = {
     }
 
     if (content[currentState]["referenceStore"]){
-      message = store.data[content[currentState]["referenceStore"]];
+      message = Store.data[content[currentState]["referenceStore"]];
       console.log("message", message)
     }
 
-    currentState = content[currentState].nextMessage
 
-    if (typeof currentState === 'object' && currentState[message.toLowerCase()]){
-      currentState = currentState[message.toLowerCase()];
+    currentState = content[currentState].nextMessage
+    console.log('MESSAGE', message)
+    console.log('CURRENTSTATE', currentState)
+    console.log("NEXT", currentState[message])
+
+    if (typeof currentState === 'object' &&
+        (currentState[message.toLowerCase()] ||
+        currentState[message])){
+
+      currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
+
+      console.log("BLOOOOOOOSSSSDFKJESLKFLSKJFLKSDJ", currentState)
+    } else if (typeof currentState === 'STEP:END_THANK_YOU'){
+      SeedAppService.logIncident();
+      SeedAppService.updateUser();
+      Store.archiveData();
 
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
 
-    } else if (typeof currentState === 'object' && currentState[message.toLowerCase()] === undefined){
+    } else if (typeof currentState === 'object' &&
+               currentState[message.toLowerCase()] === undefined &&
+               Number(message) === NaN){
       currentState = "STEP:UNKNOWN_INPUT";
 
-    } else if (store.flag){
+    } else if (Store.flag){
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (currentState === "STEP:LAST_STEP"){
-      store.state.forEach(function(state){
+      Store.state.forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = state;
         }
-
       });
     }
-    store.flag = null;
-    store.state.push(currentState);
+    Store.appendState(currentState);
 
   },
 
@@ -63,14 +77,14 @@ module.exports = {
         currentState = "STEP:QUE_LOCATION_RETRY";
 
       } else if (message === "resume" && currentState !== "NAV_MENU"){
-        let lastStateIndex = store.state.length;
-        currentState = store.state[lastStateIndex - 2];
+        let lastStateIndex = Store.state.length;
+        currentState = Store.state[lastStateIndex - 2];
 
       } else if (message.toLowerCase() === "restart"){
-        currentState = store.state[0];
+        currentState = Store.resetState();
 
       } else if (message.toLowerCase() === "new report"){
-        currentState = store.state[0];
+        currentState = Store.resetState();
 
       }
 
