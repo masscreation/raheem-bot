@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (recipientID, payload) {
-    console.log("QUICKREPLY PAYLOAD", payload)
+  console.log(payload.options)
     if (payload !== null) {
 
       return {
@@ -17,15 +17,23 @@ module.exports = function (recipientID, payload) {
     }
 
 function createQuickReplies(quickReplies) {
-  let quickReplyArray = [];
-  quickReplies.forEach(function(quickReply) {
-    quickReplyArray.push(
-      {
-        "content_type": "text",
-        "title": quickReply.title,
-        "payload": quickReply.data
-      }
-    ); 
-  });
+  let quickReplyArray
+
+  if (quickReplies[0].content_type === "location") {
+    quickReplyArray = quickReplies;
+
+  } else {
+    quickReplyArray = [];
+    quickReplies.forEach(function(quickReply) {
+      quickReplyArray.push(
+        {
+          "content_type": "text",
+          "title": quickReply.title,
+          "payload": quickReply.data
+        }
+      );
+    });
+  }
+
   return quickReplyArray;
 }

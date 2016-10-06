@@ -3,6 +3,7 @@
 module.exports = class Postback {
 
   constructor(event) {
+
     this.senderID = event.sender.id;
     this.recipientID = event.recipient.id;
     this.timeOfMessage = event.timestamp;
@@ -11,7 +12,7 @@ module.exports = class Postback {
     this.postback = event.postback || 0;
 
     // You may get a text or attachment but not both
-    this.userContent = this.postback.payload
+    this.userContent = this.postback.payload;
   }
 
 }

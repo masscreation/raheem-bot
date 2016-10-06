@@ -46,6 +46,5 @@ function createButtons(buttons) {
       }
     )
   });
-  console.log("BUTTON FORMATTED", buttonArray)
   return buttonArray;
 }

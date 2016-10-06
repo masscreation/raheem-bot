@@ -2,14 +2,16 @@
 
 const store = require('../store')
 
-function swapVar(message){
+function swapVar(message, fbID){
   let messageArray = message.split(" ");
   messageArray =  messageArray.map(function(word){
     if (word.includes("${")){
       let iOne = word.indexOf('${') + 3;
       let iTwo = word.indexOf('}') - 1;
+      let punctuation = word[word.length - 1];
       let dynamicContent = word.substr(iOne, (iTwo - iOne));
-      word = store[dynamicContent];
+      word = store.getDatapoint(dynamicContent, fbID);
+      if (punctuation){ word = word + punctuation };
     }
     return word
   });
@@ -22,20 +24,20 @@ module.exports = {
     return "varScript"
   },
 
-  digest(currentFrame, message){
+  digest(currentFrame, message, fbID){
     return new Promise(function(resolve, reject){
       if (currentFrame["responseKey"]) {
-        store[currentFrame["responseKey"]] = message;
-        console.log("VARIABLE SAVED: ", store[currentFrame["responseKey"]])
+        store.saveDatapoint(currentFrame["responseKey"], message, fbID);
+        console.log("VARIABLE SAVED: ", message)
       }
       resolve();
     })
   },
 
-  format(currentFrame){
+  format(currentFrame, fbID){
     if (currentFrame["text"] && currentFrame["text"].includes("${")){
       currentFrame = Object.assign({}, currentFrame);
-      currentFrame["text"] = swapVar(currentFrame["text"]);
+      currentFrame["text"] = swapVar(currentFrame["text"], fbID);
       console.log("VARIABLE SWAPPED, NEW MESSAGE: ", currentFrame["text"]);
       return currentFrame
     } else {

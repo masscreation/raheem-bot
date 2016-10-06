@@ -1,14 +1,12 @@
 'use strict';
 
-
 const Promise = require("bluebird");
 const state = require("./stateMachine");
-const messageThread = require("./messageThread");
 
 let scripts = [
   "varScript",
   "locationScript",
-  "dbScript"
+  "dateScript"
 ];
 
 let scriptArray = [];
@@ -27,51 +25,32 @@ loadScripts();
 module.exports = {
 
 
-    digest(message) {
-      return new Promise(function(resolve, reject){
-        console.log("DIGEST MESSAGE", message);
-        //Grab state from previous turn
-        state.reRoute(message)
-        currentState = state.get();
-        //If the currentState includes scripts, iterate through and execute them
-          return Promise.each(scriptArray, function(script){
-            if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
-              return script.digest(currentState, message)
+  digest(currentState, message, fbID) {
+    return Promise.each(scriptArray, function(script){
+      if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+        return script.digest(currentState, message, fbID);
 
-            } else {
-              return Promise.resolve()
+      } else {
+        return Promise.resolve();
 
-            }
-          }).then(function(){
-            resolve(message)
-          });
+      }
     });
   },
 
-  format(message) {
-    return new Promise(function(resolve, reject){
-      console.log("FORMAT MESSAGE START");
+  format(currentState, fbID) {
 
-      state.next(message);
-      currentState = state.get();
+    if (currentState.scripts){
+      scriptArray.forEach(function(script){
+        if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+          let newOutgoingMessage = script.format(currentState, fbID);
+          newOutgoingMessage ? output = newOutgoingMessage : output = currentState;
+        }
+      });
+      return output;
 
-      if (currentState.scripts){
-        scriptArray.forEach(function(script){
-          if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
-            let newOutgoingMessage = script.format(currentState);
-            newOutgoingMessage ? output = newOutgoingMessage : output = currentState
-          }
-        });
+    } else {
+      return currentState;
 
-        let outgoingMessages = messageThread.set(output);
-
-        resolve(outgoingMessages)
-      } else {
-
-        let outgoingMessages = messageThread.set(currentState);
-
-        resolve(outgoingMessages)
-      }
-    })
+    }
   }
 }

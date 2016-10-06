@@ -1,8 +1,9 @@
 
 {
     "appSecret": "287dde7ef803603c539660c791b152fa",
-    "pageAccessToken": "EAAR69CbuHH8BAF8j8eyrEibVv8VI8GGNROQ1NIkwZBt2MPCnabTa8uhWQQwdXY2ufvIq91SlthClPV4zg0hhIMipSpN9XCfZClglcnD382uZBAcLezerFCpucZCAL31SgAvCDg6eHHTsgsaxp9v6bINVfcwNiWgRqtC1ZCkt5qwZDZD",
+    "pageAccessToken": "EAAR69CbuHH8BAC4pTNU0PRoCc7UUvWyV9BIzz9qGGN6JWuddQNoNC462BS70QeaFOXAo46n8U1tp5mwaDwQM9PZC4c0G1TXIerIcHEoW6YZBMfk49eNxZCPIZAUVikmmRbzm9gLPd7PwETibTajUzkr4ZCipQx5DCZBR1PmmtYlAZDZD",
     "validationToken": "this_is_a_verify_token",
     "serverURL": "",
-    "googlePlacesApiKey": "AIzaSyBbixdJQVlTOQ4rHBifvQTOBw5FfJ_Tkhs"
+    "googlePlacesApiKey": "AIzaSyBbixdJQVlTOQ4rHBifvQTOBw5FfJ_Tkhs",
+    "seedBotWriteKey": "1553dfb1fed95eecf4cfe2511bec1117"
 }

@@ -4,8 +4,8 @@ const store = require('../store')
 
 function review(){
   let results = ''
-  for (let keyVal in store) {
-    results += `${keyVal}: ${store[keyVal]}\n`
+  for (let keyVal in store.data) {
+    results += `${keyVal}: ${store.data[keyVal]}\n`
   }
   return results
 }
@@ -19,7 +19,7 @@ module.exports = {
   digest(currentFrame, message){
   },
 
-  format(currentFrame){
+  format(currentFrame, fbID){
     currentFrame = Object.assign({}, currentFrame);
     currentFrame["text"] += review();
     return currentFrame
