@@ -38,6 +38,8 @@ module.exports = {
   logIncident(fbID){
     let payload = prepareIncidentPayload(fbID);
 
+    console.log("PAYLOAD: ", payload)
+
     request({
       uri: 'https://theseedapp.com/api/v1/incidents',
       qs: payload,
@@ -107,7 +109,7 @@ let prepareUserPayload = function(fbID) {
   return payload
 }
 
-let prepareIncidentPayload = function() {
+let prepareIncidentPayload = function(fbID) {
 
   let data = Store.getData(fbID);
   let userID = Store.getUserID(fbID);
@@ -122,6 +124,8 @@ let prepareIncidentPayload = function() {
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
+
+  consloe.log("PAYLOAD", payload)
 
   return payload
 }

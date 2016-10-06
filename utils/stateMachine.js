@@ -17,6 +17,12 @@ module.exports = {
     console.log('NEXT FBID: ', fbID);
     currentState = Store.getState(fbID);
 
+    if (currentState === 'STEP:END_THANK_YOU'){
+      SeedAppService.logIncident(fbID);
+      SeedAppService.updateUser(fbID);
+      Store.archiveData(fbID);
+    }
+
     if (typeof message === "string"){
       if (message.toLowerCase() === "stop" ||
           message.toLowerCase() === "exit" ||
@@ -24,12 +30,6 @@ module.exports = {
           message.toLowerCase() === "quit"){
             currentState = "STEP:QUIT_CONVO_PRE";
       }
-    }
-
-    if (currentState === 'STEP:END_THANK_YOU'){
-      SeedAppService.logIncident(fbID);
-      SeedAppService.updateUser(fbID);
-      Store.archiveData(fbID);
     }
 
     if (content[currentState]["referenceStore"]){
@@ -94,6 +94,7 @@ module.exports = {
 
   get(fbID) {
     currentState = Store.getState(fbID);
+
     console.log('GET STATE: ', currentState)
     return content[currentState];
   }
