@@ -92,6 +92,7 @@ module.exports = {
 let prepareUserPayload = function() {
 
   let data = Store.getData();
+  let userID = Store.getUserID();
 
   let payload = {
     user_id: userID,
