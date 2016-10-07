@@ -18,6 +18,10 @@ app.get('/', function (req, res) {
 	res.send('hello world i am a secret bot');
 });
 
+app.get('/loaderio-59127a886b54b3976354427f20dcdb25', function(req, res) {
+	res.send('loaderio-59127a886b54b3976354427f20dcdb25');
+});
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
