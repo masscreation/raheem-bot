@@ -9,7 +9,7 @@ const router = require('./utils/router.js');
 const messageRelay = require('./utils/messageRelay.js');
 const app = express();
 
-app.set('port', (process.env.PORT || 6000));
+app.set('port', (process.env.PORT || 4001));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 

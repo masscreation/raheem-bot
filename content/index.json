@@ -124,61 +124,10 @@
   "STEP:FB_LOCATION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Where did this interaction occur?",
+    "text": "Where did this contact happen? If the location isn’t shown below, just move the pin to where it took place.",
     "responseType": "text",
     "responseKey": "ENCOUNTER_LOCATION",
     "scripts": ["locationScript"],
-    "nextMessage": "STEP:OUTCOME_CONTACT_QUERY"
-  },
-
-  "STEP:MANUAL_ENTRY_CITY": {
-    "type": "message",
-    "anchor": true,
-    "text": "What city did this happen in?",
-    "responseType": "text",
-    "scripts": ["locationScript"],
-    "nextMessage": "STEP:LOCATION_PROMT"
-  },
-
-  "STEP:LOCATION_PROMT": {
-    "type": "generic",
-    "responseKey": "ENCOUNTER_LOCATION",
-    "scripts": ["locationScript", "varScript"],
-    "nextMessage": "STEP:LOCATION_CONFIRMATION"
-  },
-
-  "STEP:QUE_LOCATION_RETRY": {
-    "nextMessage": "STEP:LOCATION_RETRY"
-  },
-
-  "STEP:LOCATION_RETRY": {
-    "type": "message",
-    "text": "Ok let's try again. Try and be more precise.",
-    "waitForUser": false,
-    "nextMessage": "STEP:LOCATION_QUERY"
-  },
-
-  "STEP:LOCATION_CONFIRMATION": {
-    "type": "message",
-    "text": "You selected ${'ENCOUNTER_LOCATION'}!",
-    "responseType": "text",
-    "scripts": ["varScript"],
-    "waitForUser": false,
-    "nextMessage": "STEP:MANUAL_ENTRY_STREETS"
-  },
-
-  "STEP:MANUAL_ENTRY_STREETS": {
-    "type": "button",
-    "anchor": true,
-    "text": "If you know the address or cross streets, type that in, too.",
-    "responseType": "text",
-    "scripts": ["locationScript"],
-    "options": [
-      {
-        "title": "Don't have it.",
-        "data": "N/A"
-      }
-    ],
     "nextMessage": "STEP:OUTCOME_CONTACT_QUERY"
   },
 
@@ -222,35 +171,135 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INITIAL_CONTACT",
-    "text": "Which one of these things happened?",
+    "text": "Which one of these things happened? You..",
     "options": [
       {
-        "title": "I called the police",
-        "data": "i called the police"
+        "title": "called the police",
+        "data": "called the police"
       },
       {
-        "title": "I was pulled over",
-        "data": "i was pulled over"
+        "title": "got stopped",
+        "data": "got stopped"
       },
       {
-        "title": "Police approached me",
-        "data": "police approached me"
-      },
-      {
-        "title": "I witnessed police",
-        "data": "i witnessed police"
+        "title": "witnessed police",
+        "data": "witnessed police"
       },
       {
         "title": "Other",
         "data": "other"
       }
     ],
+    "nextMessage": "STEP:USER_INITIATED_ENCOUNTER"
+  },
+
+  "STEP:USER_INITIATED_ENCOUNTER": {
+    "type": "message",
+    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
+    "responseType": "text",
+    "waitForUser": false,
+    "referenceStore": "INITIAL_CONTACT",
     "nextMessage": {
-      "i called the police": "STEP:EMERGENCY_QUERY",
-      "i was pulled over": "STEP:INITIAL_CONTACT_QUERY",
-      "police approached me": "STEP:INITIAL_CONTACT_QUERY",
-      "i witnessed police": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "other": "STEP:INITIAL_CONTACT_QUERY"
+      "called the police": "STEP:INITIAL_CONTACT_QUERY_USER",
+      "*": "STEP:INITIAL_CONTACT_QUERY_POLICE"
+    }
+  },
+
+  "STEP:INITIAL_CONTACT_QUERY_USER": {
+    "type": "quickReply",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "POLICE_ACTION",
+    "text": "What ended up happening? The police...",
+    "options": [
+      {
+        "title": "helped you",
+        "data": "helped you"
+      },
+      {
+        "title": "wanted information",
+        "data": "wanted information"
+      },
+      {
+        "title": "searched you",
+        "data": "searched you"
+      },
+      {
+        "title": "searched your car",
+        "data": "searched your car"
+      },
+      {
+        "title": "gave you a warning",
+        "data": "gave you a warning"
+      },
+      {
+        "title": "arrested you",
+        "data": "arrested you"
+      },
+      {
+        "title": "did nothing",
+        "data": "did nothing"
+      },
+      {
+        "title": "other",
+        "data": "other"
+      }
+    ],
+    "referenceStore": "INITIAL_CONTACT",
+    "nextMessage": {
+      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "called the police": "STEP:EMERGENCY_QUERY"
+    }
+  },
+
+
+  "STEP:INITIAL_CONTACT_QUERY_POLICE": {
+    "type": "quickReply",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "POLICE_ACTION",
+    "text": "What ended up happening? The police...",
+    "options": [
+      {
+        "title": "helped you",
+        "data": "helped you"
+      },
+      {
+        "title": "ticketed you",
+        "data": "ticketed you"
+      },
+      {
+        "title": "searched you",
+        "data": "searched you"
+      },
+      {
+        "title": "searched your car",
+        "data": "searched your car"
+      },
+      {
+        "title": "wanted information",
+        "data": "wanted information"
+      },
+      {
+        "title": "gave you a warning",
+        "data": "gave you a warning"
+      },
+      {
+        "title": "arrested you",
+        "data": "arrested you"
+      },
+      {
+        "title": "did nothing",
+        "data": "did nothing"
+      },
+      {
+        "title": "other",
+        "data": "other"
+      }
+    ],
+    "nextMessage": {
+      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "arrested you": "STEP:ARRESTED_CONDOLENSE"
     }
   },
 
@@ -320,65 +369,6 @@
     "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
   },
 
-  "STEP:USER_INITIATED_ENCOUNTER": {
-    "type": "message",
-    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
-  },
-
-  "STEP:POLICE_INITIATED_ENCOUNTER": {
-    "type": "message",
-    "text": "All right. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
-    "responseType": "text",
-    "waitForUser": false,
-    "referenceStore": "INITIAL_CONTACT",
-    "nextMessage": "STEP:INITIAL_CONTACT_QUERY"
-  },
-
-  "STEP:INITIAL_CONTACT_QUERY": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening? The police...",
-    "options": [
-      {
-        "title": "wanted Information",
-        "data": "wanted information"
-      },
-      {
-        "title": "ticketed me",
-        "data": "ticketed me"
-      },
-      {
-        "title": "arrested me",
-        "data": "arrested me"
-      },
-      {
-        "title": "helped me",
-        "data": "helped me"
-      },
-      {
-        "title": "gave me a warning",
-        "data": "gave me a warning"
-      },
-      {
-        "title": "let me go",
-        "data": "let me go"
-      },
-      {
-        "title": "other",
-        "data": "other"
-      }
-    ],
-    "nextMessage": {
-      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "arrested me": "STEP:ARRESTED_CONDOLENSE"
-    }
-  },
-
   "STEP:ARRESTED_CONDOLENSE": {
     "type": "message",
     "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
@@ -446,7 +436,7 @@
   "STEP:CONGRATS_NAME_RESPONSE": {
     "type": "message",
     "scripts": ["varScript"],
-    "text":  "${'OFFICER_NAME'}. Great! Not many people remember to get that",
+    "text":  "${'OFFICER_NAME'}. Great! Not many people remember to get that.",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_BADGE_QUERY"
   },
@@ -477,7 +467,7 @@
 
   "STEP:CONGRATS_BADGE_RESPONSE": {
     "type": "message",
-    "text": "${'OFFICER_BADGE_NUMBER'}. Very cool!",
+    "text": "${'OFFICER_BADGE_NUMBER'}. Got it.",
     "scripts": ["varScript"],
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
@@ -834,8 +824,8 @@
           "data": "ignored"
         },
         {
-          "title": "Not listed here",
-          "data": "not listed here"
+          "title": "Other",
+          "data": "other"
         }
       ],
       "referenceStore": "ENCOUNTER_SENTIMENT",
