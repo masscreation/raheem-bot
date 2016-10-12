@@ -241,6 +241,17 @@
         "data": "other"
       }
     ],
+    "nextMessage": {
+      "arrested you": "STEP:ARRESTED_CONDOLENSE",
+      "*": "STEP:POLICE_SEARCH_QUERY"
+    }
+  },
+
+  "STEP:ARRESTED_CONDOLENSE": {
+    "type": "message",
+    "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
+    "responseType": "text",
+    "waitForUser": false,
     "nextMessage": "STEP:POLICE_SEARCH_QUERY"
   },
 
@@ -354,14 +365,6 @@
   "STEP:SLOW_RESPONSE_TIME_SENTIMENT": {
     "type": "message",
     "text": "That’s really awful.",
-    "responseType": "text",
-    "waitForUser": false,
-    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
-  },
-
-  "STEP:ARRESTED_CONDOLENSE": {
-    "type": "message",
-    "text": "Sorry to hear that. It’s great then that you reached out to share your experience. It’ll help you and your community.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
