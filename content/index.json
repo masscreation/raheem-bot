@@ -202,7 +202,7 @@
     "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:INITIAL_CONTACT_QUERY_USER",
+    "nextMessage": "STEP:INITIAL_CONTACT_QUERY_USER"
   },
 
   "STEP:INITIAL_CONTACT_QUERY_USER": {
