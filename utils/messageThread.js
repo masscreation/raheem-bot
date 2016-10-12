@@ -13,8 +13,10 @@ module.exports = {
 
     // if multiple messages at same time
     while (obj.waitForUser === false){
-      obj = scriptEngine.format(obj, fbID);
-      messagesArray.push(obj);
+      if(obj.type !== 'gate'){
+        obj = scriptEngine.format(obj, fbID);
+        messagesArray.push(obj);
+      }
       state.next(message, fbID);
       obj = state.get(fbID);
     };

@@ -124,7 +124,7 @@
   "STEP:FB_LOCATION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Where did this contact happen? If the location isn’t shown below, just move the pin to where it took place.",
+    "text": "Where did this contact happen? If you don’t see the location, just move the pin to where it took place.",
     "responseType": "text",
     "responseKey": "ENCOUNTER_LOCATION",
     "scripts": ["locationScript"],
@@ -171,15 +171,19 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "INITIAL_CONTACT",
-    "text": "Which one of these things happened? You..",
+    "text": "How did it start? You...",
     "options": [
       {
         "title": "called the police",
         "data": "called the police"
       },
       {
-        "title": "got stopped",
-        "data": "got stopped"
+        "title": "got pulled over",
+        "data": "got pulled over"
+      },
+      {
+        "title": "got stopped on foot",
+        "data": "got stopped on foot"
       },
       {
         "title": "witnessed police",
@@ -221,66 +225,10 @@
         "data": "wanted information"
       },
       {
-        "title": "searched you",
-        "data": "searched you"
-      },
-      {
-        "title": "searched your car",
-        "data": "searched your car"
-      },
-      {
-        "title": "gave you a warning",
-        "data": "gave you a warning"
-      },
-      {
-        "title": "arrested you",
-        "data": "arrested you"
-      },
-      {
-        "title": "did nothing",
-        "data": "did nothing"
-      },
-      {
-        "title": "other",
-        "data": "other"
-      }
-    ],
-    "referenceStore": "INITIAL_CONTACT",
-    "nextMessage": {
-      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "called the police": "STEP:EMERGENCY_QUERY"
-    }
-  },
-
-
-  "STEP:INITIAL_CONTACT_QUERY_POLICE": {
-    "type": "quickReply",
-    "anchor": true,
-    "scripts": ["varScript"],
-    "responseKey": "POLICE_ACTION",
-    "text": "What ended up happening? The police...",
-    "options": [
-      {
-        "title": "helped you",
-        "data": "helped you"
-      },
-      {
         "title": "ticketed you",
         "data": "ticketed you"
       },
       {
-        "title": "searched you",
-        "data": "searched you"
-      },
-      {
-        "title": "searched your car",
-        "data": "searched your car"
-      },
-      {
-        "title": "wanted information",
-        "data": "wanted information"
-      },
-      {
         "title": "gave you a warning",
         "data": "gave you a warning"
       },
@@ -297,9 +245,55 @@
         "data": "other"
       }
     ],
+    "nextMessage": "STEP:POLICE_SEARCH_QUERY"
+  },
+
+  "STEP:POLICE_SEARCH_QUERY": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "EMERGENCY?",
+    "text": "Did the police search you or your property?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
     "nextMessage": {
-      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
-      "arrested you": "STEP:ARRESTED_CONDOLENSE"
+      "yes": "STEP:POLICE_SEARCH_QUERY_PERMISSION",
+      "no": "STEP:EMERGENCY_RESPONSE_GATE"
+    }
+  },
+
+  "STEP:POLICE_SEARCH_QUERY_PERMISSION": {
+    "type": "button",
+    "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "EMERGENCY?",
+    "text": "Did you give them permission to?",
+    "options": [{
+        "title": "Yes",
+        "data": "yes"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": "STEP:EMERGENCY_RESPONSE_GATE"
+  },
+
+  "STEP:EMERGENCY_RESPONSE_GATE": {
+    "type": "gate",
+    "referenceStore": "INITIAL_CONTACT",
+    "waitForUser": false,
+    "nextMessage": {
+      "called the police": "STEP:EMERGENCY_QUERY",
+      "*": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
@@ -353,9 +347,9 @@
       }
     ],
     "nextMessage": {
-      "less than 2 minutes": "STEP:USER_INITIATED_ENCOUNTER",
-      "2-5 minutes": "STEP:USER_INITIATED_ENCOUNTER",
-      "5-10 minutes": "STEP:USER_INITIATED_ENCOUNTER",
+      "less than 2 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "2-5 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
+      "5-10 minutes": "STEP:NUMBER_OF_OFFICERS_ON_SCENE",
       "10-30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT",
       "over 30 minutes": "STEP:SLOW_RESPONSE_TIME_SENTIMENT"
     }
@@ -366,7 +360,7 @@
     "text": "That’s really awful.",
     "responseType": "text",
     "waitForUser": false,
-    "nextMessage": "STEP:INITIAL_POLICE_CONTACT_QUERY"
+    "nextMessage": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
   },
 
   "STEP:ARRESTED_CONDOLENSE": {
