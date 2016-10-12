@@ -202,11 +202,7 @@
     "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
     "responseType": "text",
     "waitForUser": false,
-    "referenceStore": "INITIAL_CONTACT",
-    "nextMessage": {
-      "called the police": "STEP:INITIAL_CONTACT_QUERY_USER",
-      "*": "STEP:INITIAL_CONTACT_QUERY_POLICE"
-    }
+    "nextMessage": "STEP:INITIAL_CONTACT_QUERY_USER",
   },
 
   "STEP:INITIAL_CONTACT_QUERY_USER": {
@@ -461,7 +457,7 @@
 
   "STEP:CONGRATS_BADGE_RESPONSE": {
     "type": "message",
-    "text": "${'OFFICER_BADGE_NUMBER'}. Got it.",
+    "text": "${'OFFICER_BADGE_NUMBER'}. Got it!",
     "scripts": ["varScript"],
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_RACE_ENTRY"
@@ -551,8 +547,8 @@
         "data": "other"
       },
       {
-        "title": "Couldn't tell",
-        "data": "couldnt't tell"
+        "title": "Other",
+        "data": "other"
       }
     ],
     "nextMessage": "STEP:OFFICER_AGE_ENTRY"
@@ -1063,7 +1059,7 @@
 
     "STEP:GOODBYE": {
       "type": "message",
-      "text": "Thanks for talking to me today, Goodbye!",
+      "text": "Okay. Take care.",
       "response_type": "text",
       "nextMessage": "FINAL:TERMINATE"
     },
