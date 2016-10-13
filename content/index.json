@@ -317,7 +317,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "EMERGENCY?",
-    "text": "Did you call because of an emergency?",
+    "text": "Okay. Did you call because of an emergency?",
     "options": [{
         "title": "Yes",
         "data": "yes"
