@@ -1117,9 +1117,14 @@
     },
 
     "STEP:QUIT_FINAL": {
-      "type": "message",
-      "text": "Got it. Thank you so much for doing this. I hope everything turns out okay. You take care out there.",
+      "type": "button",
+      "text": "Got it. Thank you so much for doing this. I hope everything turns out okay. Take care.",
       "response_type": "text",
+      "options": [{
+          "title": "Start a new Report",
+          "data": "restart"
+        }
+      ],
       "nextMessage": "FINAL:TERMINATE"
     }
   }
