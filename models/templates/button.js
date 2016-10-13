@@ -26,13 +26,19 @@ module.exports = function (recipientID, payload) {
 function createButtons(buttons) {
   let buttonArray = [];
   buttons.forEach(function(button) {
-    let type = button.type !== undefined ? "url" : "button";
-    console.log("BUTTON TYPE", button.type);
     buttonArray.push(
-      {
-        "type": type,
-        "title": button.title,
-        "payload": button.data
+      if (button.type === undefined) {
+        return {
+            "type": "postback",
+            "title": button.title,
+            "payload": button.data
+          }
+      } else {
+        return {
+            "type": "url",
+            "title": button.title,
+            "url": button.data
+          }
       }
     )
   });
