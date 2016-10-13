@@ -26,7 +26,7 @@ module.exports = function (recipientID, payload) {
 function createButtons(buttons) {
   let buttonArray = [];
   buttons.forEach(function(button) {
-    let type = button.type ? "url" : "button"
+    let type = button.type === "url" ? "url" : "button";
     buttonArray.push(
       {
         "type": type,
