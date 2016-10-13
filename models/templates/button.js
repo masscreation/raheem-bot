@@ -26,21 +26,23 @@ module.exports = function (recipientID, payload) {
 function createButtons(buttons) {
   let buttonArray = [];
   buttons.forEach(function(button) {
-    buttonArray.push(
-      if (button.type === undefined) {
-        return {
-            "type": "postback",
-            "title": button.title,
-            "payload": button.data
-          }
-      } else {
-        return {
-            "type": "url",
-            "title": button.title,
-            "url": button.data
-          }
-      }
-    )
+    buttonArray.push(createButton(button));
   });
   return buttonArray;
+}
+
+function createButton(button) {
+  if (button.type === undefined) {
+    return {
+        "type": "postback",
+        "title": button.title,
+        "payload": button.data
+      }
+  } else {
+    return {
+        "type": "url",
+        "title": button.title,
+        "url": button.data
+      }
+  }
 }
