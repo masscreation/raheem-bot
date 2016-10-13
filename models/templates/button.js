@@ -26,9 +26,10 @@ module.exports = function (recipientID, payload) {
 function createButtons(buttons) {
   let buttonArray = [];
   buttons.forEach(function(button) {
+    let type = button.type ? "url" : "button"
     buttonArray.push(
       {
-        "type": "postback",
+        "type": type,
         "title": button.title,
         "payload": button.data
       }
