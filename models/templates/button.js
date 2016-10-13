@@ -40,7 +40,7 @@ function createButton(button) {
       }
   } else {
     return {
-        "type": "url",
+        "type": "web_url",
         "title": button.title,
         "url": button.data
       }
