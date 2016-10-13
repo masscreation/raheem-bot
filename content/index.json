@@ -606,7 +606,7 @@
     ],
     "nextMessage": {
       "*": "STEP:CONGRATS_FURTHER_OFFICER_DETAILS",
-      "no further details": "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS"
+      "no other details": "STEP:CONSOLE_NO_FURTHER_OFFICER_DETAILS"
     }
   },
 
@@ -779,8 +779,8 @@
           "data": "heard"
         },
         {
-          "title": "Not listed here",
-          "data": "not listed here"
+          "title": "Other",
+          "data": "other"
         }
       ],
       "referenceStore": "ENCOUNTER_SENTIMENT",
@@ -878,6 +878,10 @@
         {
           "title": "Professional",
           "data": "professional"
+        },
+        {
+          "title": "Not Listed",
+          "data": "not listed"
         }
       ],
       "referenceStore": "ENCOUNTER_SENTIMENT",
