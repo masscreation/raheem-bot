@@ -62,9 +62,11 @@ module.exports = {
     }
 
     if (message === "retry"){
+      let newCurrentState;
       Store.users[fbID]['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
-          currentState = state;
+          currentState = newCurrentState;
+          newCurrentState = state;
         }
       });
     }
