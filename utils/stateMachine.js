@@ -63,7 +63,6 @@ module.exports = {
 
     if (message === "retry"){
       let newCurrentState;
-      let newStateStore = [];
       Store.users[fbID]['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = newCurrentState;
