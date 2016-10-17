@@ -54,7 +54,7 @@ module.exports = {
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (currentState === "STEP:LAST_STEP"){
-      Store.users['state'].forEach(function(state){
+      Store.users[fbID]['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = state;
         }
@@ -78,7 +78,7 @@ module.exports = {
         Store.appendState(currentState, fbID);
 
       } else if (message === "retry"){
-        Store.users['state'].forEach(function(state){
+        Store.users[fbID]['state'].forEach(function(state){
           console.log("STATE", state)
           if (content[state]["anchor"] && content[state]["anchor"] === true){
             console.log("NEW STATE", state)
