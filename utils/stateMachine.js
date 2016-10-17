@@ -79,7 +79,9 @@ module.exports = {
 
       } else if (message === "retry"){
         Store.users['state'].forEach(function(state){
+          console.log("STATE", state)
           if (content[state]["anchor"] && content[state]["anchor"] === true){
+            console.log("NEW STATE", state)
             currentState = state;
           }
         });
