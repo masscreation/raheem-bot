@@ -556,10 +556,6 @@
       {
         "title": "Other",
         "data": "other"
-      },
-      {
-        "title": "Other",
-        "data": "other"
       }
     ],
     "nextMessage": "STEP:OFFICER_AGE_ENTRY"
