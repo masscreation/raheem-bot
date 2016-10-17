@@ -77,6 +77,14 @@ module.exports = {
         currentState = Store.users['state'][lastStateIndex - 2];
         Store.appendState(currentState, fbID);
 
+      } else if (message === "retry"){
+        Store.users['state'].forEach(function(state){
+          if (content[state]["anchor"] && content[state]["anchor"] === true){
+            currentState = state;
+          }
+        });
+        Store.appendState(currentState, fbID);
+
       } else if (message.toLowerCase() === "restart"){
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
