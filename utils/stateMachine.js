@@ -60,6 +60,15 @@ module.exports = {
         }
       });
     }
+
+    if (message === "retry"){
+      Store.users[fbID]['state'].forEach(function(state){
+        if (content[state]["anchor"] && content[state]["anchor"] === true){
+          currentState = state;
+        }
+      });
+    }
+
     Store.appendState(currentState, fbID);
 
   },
@@ -75,16 +84,6 @@ module.exports = {
       } else if (message === "resume" && currentState !== "NAV_MENU"){
         let lastStateIndex = Store.users[fbID]['state'].length;
         currentState = Store.users['state'][lastStateIndex - 2];
-        Store.appendState(currentState, fbID);
-
-      } else if (message === "retry"){
-        Store.users[fbID]['state'].forEach(function(state){
-          console.log("STATE", state)
-          if (content[state]["anchor"] && content[state]["anchor"] === true){
-            console.log("NEW STATE", state)
-            currentState = state;
-          }
-        });
         Store.appendState(currentState, fbID);
 
       } else if (message.toLowerCase() === "restart"){
