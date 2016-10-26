@@ -1,12 +1,19 @@
 {
   "STEP:1_GET_STARTED_PAYLOAD": {
+    "nextMessage": "STEP:BETA_INTRO"
+  },
+
+  "STEP:BETA_INTRO": {
+    "type": "message",
+    "text": "Hi, my name is Raheem. I am here to help collect your stories about what happens with police. I'm in beta right now. Any information collected is for testing purposes only!",
+    "waitForUser": false,
     "nextMessage": "STEP:GREETING"
   },
 
   "STEP:GREETING": {
     "type": "button",
     "anchor": true,
-    "text": "Hey. I hope everything’s okay. First, are you safe?",
+    "text": "I hope everything’s okay. First, are you safe?",
     "options": [{
         "title": "Yes",
         "data": "yes"
