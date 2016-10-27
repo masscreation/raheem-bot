@@ -1052,9 +1052,9 @@
     "STEP:END_THANK_YOU": {
       "type": "button",
       "anchor": true,
-      "text": " Ok, that’s it for the questions. Thank you so much for doing this. I hope everything turns out okay.",
+      "text": "Okay. Thanks so much! One last thing. Mind giving me feedback on how to improve?",
       "options": [{
-          "title": "End this chat",
+          "title": "Give feedback",
           "type": "url",
           "data": "https://philliph.typeform.com/to/sL5zSW"
         },
