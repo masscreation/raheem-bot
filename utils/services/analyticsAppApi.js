@@ -47,7 +47,6 @@ module.exports = {
 
     request({
       uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys?fb_id=${fbID}`,
-      qs: payload,
       rejectUnauthorized: false,
       method: 'PATCH'
     }, function (error, response, body) {
