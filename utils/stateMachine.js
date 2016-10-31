@@ -94,12 +94,18 @@ module.exports = {
       } else if (message.toLowerCase() === "restart"){
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
-        AnalyticsApi.closeSurvey(fbID);
+        AnalyticsApi.closeSurvey(fbID)
+        .then(function(){
+          AnalyticsApi.getOrCreateSurvey(fbID)
+        });
 
       } else if (message.toLowerCase() === "new report"){
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
-        AnalyticsApi.closeSurvey(fbID);
+        AnalyticsApi.closeSurvey(fbID)
+        .then(function(){
+          AnalyticsApi.getOrCreateSurvey(fbID)
+        });
 
       }
 

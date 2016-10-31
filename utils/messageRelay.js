@@ -17,7 +17,6 @@ module.exports = function(rawEvent) {
 
       function getOrCreateUser(callback) {
         SeedAppService.getOrCreateUser(rawEvent).then(function(){
-          AnalyticsApi.getOrCreateSurvey(rawEvent)
           callback(null, rawEvent);
         });
       },

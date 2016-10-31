@@ -7,8 +7,7 @@ const Store = require('../store');
 
 module.exports = {
 
-  getOrCreateSurvey(messagingEvent) {
-    let fbID = messagingEvent.sender.id
+  getOrCreateSurvey(fbID) {
     request({
       uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys?fb_id=${fbID}`,
       rejectUnauthorized: false,
@@ -44,21 +43,23 @@ module.exports = {
   },
 
   closeSurvey(fbID){
+    return new Promise(function(resolve, reject) {
+      request({
+        uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys?fb_id=${fbID}`,
+        rejectUnauthorized: false,
+        method: 'PATCH'
+      }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          console.log("SUCCESS!!!")
+          if (status == 200) {
+            resolve(body);
 
-    request({
-      uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys?fb_id=${fbID}`,
-      rejectUnauthorized: false,
-      method: 'PATCH'
-    }, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        console.log("SUCCESS!!!")
-        if (status == 200) {
-          return(body);
-
-        } else {
-          return(new Error('server error: ' + response.error));
+          } else {
+            reject(new Error('server error: ' + response.error));
+            
+          }
         }
-      }
+      });
     });
   }
 };
