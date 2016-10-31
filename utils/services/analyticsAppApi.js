@@ -24,7 +24,7 @@ module.exports = {
     });
   },
 
-  logStep(state, fbID){
+  logState(state, fbID){
     let payload = prepareIncidentPayload(fbID);
     request({
       uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/steps?title=${state}&fb_id=${fbID}`,
