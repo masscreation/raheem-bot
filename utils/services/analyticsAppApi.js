@@ -45,7 +45,7 @@ module.exports = {
   closeSurvey(fbID){
     return new Promise(function(resolve, reject) {
       request({
-        uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys?fb_id=${fbID}`,
+        uri: `https://raheem-bot-analytics.herokuapp.com/api/v1/surveys/{fbID}`,
         rejectUnauthorized: false,
         method: 'PATCH'
       }, function (error, response, body) {
@@ -56,7 +56,7 @@ module.exports = {
 
           } else {
             reject(new Error('server error: ' + response.error));
-            
+
           }
         }
       });
