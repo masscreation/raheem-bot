@@ -2,7 +2,7 @@
 
 const MessageService = require('./messageService');
 const MessageCourier = require('./messageCourier');
-
+const AnalyticsApi = require('./services/analyticsAppApi');
 const SeedAppService = require('./services/seedAppApi');
 
 const async = require('async');
@@ -17,6 +17,7 @@ module.exports = function(rawEvent) {
 
       function getOrCreateUser(callback) {
         SeedAppService.getOrCreateUser(rawEvent).then(function(){
+          AnalyticsApi.getOrCreateSurvey(rawEvent)
           callback(null, rawEvent);
         });
       },

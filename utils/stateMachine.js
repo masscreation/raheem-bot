@@ -2,6 +2,7 @@
 
 const Store = require('./store');
 const SeedAppService = require('./services/seedAppApi');
+const AnalyticsApi = require('./services/analyticsAppApi')
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
 let currentState = initialState;
@@ -19,6 +20,7 @@ module.exports = {
     if (currentState === 'STEP:END_THANK_YOU'){
       SeedAppService.logIncident(fbID);
       SeedAppService.updateUser(fbID);
+      AnalyticsApi.closeSurvey(fbID);
       Store.archiveData(fbID);
     }
 
@@ -71,6 +73,7 @@ module.exports = {
       });
     }
 
+    AnalyticsApi.logState(currentState, fbID);
     Store.appendState(currentState, fbID);
 
   },
