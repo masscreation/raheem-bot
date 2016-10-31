@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const request = require('request');
-const router = require('./utils/router.js');
 const messageRelay = require('./utils/messageRelay.js');
 const app = express();
 
