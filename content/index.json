@@ -336,7 +336,7 @@
     ],
     "nextMessage": {
       "yes": "STEP:EMERGENCY_RESPONSE_TIME",
-      "no": "STEP:INITIAL_CONTACT_QUERY"
+      "no": "STEP:NUMBER_OF_OFFICERS_ON_SCENE"
     }
   },
 
