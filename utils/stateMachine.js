@@ -17,14 +17,11 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (currentState === 'STEP:END_THANK_YOU'){
+    if (currentState === 'STEP:FINAL_INFO'){
       SeedAppService.logIncident(fbID);
       SeedAppService.updateUser(fbID);
       Store.archiveData(fbID);
-      AnalyticsApi.closeSurvey(fbID)
-      .then(function(){
-        AnalyticsApi.getOrCreateSurvey(fbID);
-      });
+      AnalyticsApi.closeSurvey(fbID);
     }
 
     if (typeof message === "string"){
