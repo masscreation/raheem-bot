@@ -20,8 +20,11 @@ module.exports = {
     if (currentState === 'STEP:END_THANK_YOU'){
       SeedAppService.logIncident(fbID);
       SeedAppService.updateUser(fbID);
-      AnalyticsApi.closeSurvey(fbID);
       Store.archiveData(fbID);
+      AnalyticsApi.closeSurvey(fbID)
+      .then(function(){
+        AnalyticsApi.getOrCreateSurvey(fbID);
+      });
     }
 
     if (typeof message === "string"){
