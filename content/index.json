@@ -1064,12 +1064,12 @@
         },
         {
           "title": "Start another report",
-          "data": "2"
+          "data": "restart"
         }
       ],
       "nextMessage": {
         "1": "STEP:GOODBYE",
-        "2": "STEP:DATE_QUERY"
+        "restart": "STEP:DATE_QUERY"
       }
     },
 
