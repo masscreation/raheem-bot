@@ -5,7 +5,7 @@
 
   "STEP:BETA_INTRO": {
     "type": "message",
-    "text": "Hi, my name is Raheem. I am here to help collect your stories about what happens with police. I'm in beta right now. Any information collected is for testing purposes only!",
+    "text": "Hi, I’m Raheem. I collect your stories about what happens with police. I'm built to run on mobile devices using Facebook Messenger. Right now I’m in beta.",
     "waitForUser": false,
     "nextMessage": "STEP:GREETING"
   },
@@ -58,7 +58,7 @@
   "STEP:GREETING_CONT": {
     "type": "message",
     "waitForUser": false,
-    "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on.",
+    "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on. Any information collected is for testing purposes only!",
     "nextMessage": "STEP:DATE_QUERY"
   },
 
@@ -131,7 +131,7 @@
   "STEP:FB_LOCATION": {
     "type": "quickReply",
     "anchor": true,
-    "text": "Where did this contact happen? If you don’t see the location, just move the pin to where it took place.",
+    "text": "Now, tap “Send location” then move the map around to show me where things took place.",
     "responseType": "text",
     "responseKey": "ENCOUNTER_LOCATION",
     "scripts": ["locationScript"],
@@ -1042,13 +1042,21 @@
       "anchor": true,
       "text": "And your birth year?",
       "responseType": "text",
+      "nextMessage": "STEP:FINAL_INFO"
+    },
+
+    "STEP:FINAL_INFO": {
+      "type": "message",
+      "text": "Ok, that’s it for the questions. We’re using the anonymous data to build a public way to see what’s happening in communities. Coming soon!",
+      "responseType": "text",
+      "waitForUser": false,
       "nextMessage": "STEP:END_THANK_YOU"
     },
 
     "STEP:END_THANK_YOU": {
       "type": "button",
       "anchor": true,
-      "text": "Okay. Thanks so much! One last thing. Mind giving me feedback on how to improve?",
+      "text": "Thank you so much for doing this. Mind giving me quick feedback on how to improve?",
       "options": [{
           "title": "Give feedback",
           "type": "url",
