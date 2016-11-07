@@ -59,15 +59,17 @@ module.exports = {
   closeIncident(fbID) {
     let incidentId = Store.getActiveSurveyId(fbId);
 
-    request({
-      uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
-      ps: { completed: true },
-      rejectUnauthorized: false,
-      method: 'PATCH'
-    }, function(error, response, body) {
-      if(!error && response.statusCode == 200) {
-      }
-    })
+    if (incidentId) {
+      request({
+        uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
+        ps: { completed: true },
+        rejectUnauthorized: false,
+        method: 'PATCH'
+      }, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+        }
+      })
+    }
   },
 
   logIncidentData(fbID){
@@ -77,27 +79,29 @@ module.exports = {
 
     console.log("PAYLOAD: ", payload)
 
-    request({
-      uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
-      qs: payload,
-      rejectUnauthorized: false,
-      method: 'PATCH'
-    }, function (error, response, body) {
-      console.log("BODY", body)
-      if (!error && response.statusCode == 200) {
+    if (incidentId) {
+      request({
+        uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
+        qs: payload,
+        rejectUnauthorized: false,
+        method: 'PATCH'
+      }, function (error, response, body) {
+        console.log("BODY", body)
+        if (!error && response.statusCode == 200) {
 
-        let status = JSON.parse(body).meta;
-        let response = JSON.parse(body).data;
+          let status = JSON.parse(body).meta;
+          let response = JSON.parse(body).data;
 
-        if (status == 200) {
-          return(body)
+          if (status == 200) {
+            return(body)
 
-        } else {
-          return(new Error('server error: ' + response.error))
+          } else {
+            return(new Error('server error: ' + response.error))
 
+          }
         }
-      }
-    });
+      });
+    }
   },
 
   updateUser(fbID){
