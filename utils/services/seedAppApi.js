@@ -46,7 +46,8 @@ module.exports = {
     }, function(error, response, body) {
       if(!error && response.statusCode == 200) {
         let response = JSON.parse(body).data;
-        let id = response.id;
+        let id = body.data.id;
+        console.log("ID", id)
         Store.saveActiveSurveyId(fbID, id);
       }
     })
