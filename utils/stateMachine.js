@@ -18,7 +18,7 @@ module.exports = {
     currentState = Store.getState(fbID);
 
     if (currentState === 'STEP:FINAL_INFO'){
-      SeedAppService.logIncident(fbID);
+      SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
       Store.archiveData(fbID);
       SeedAppService.closeIncident(fbID);
