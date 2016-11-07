@@ -21,7 +21,7 @@ module.exports = {
       SeedAppService.logIncident(fbID);
       SeedAppService.updateUser(fbID);
       Store.archiveData(fbID);
-      AnalyticsApi.closeSurvey(fbID);
+      SeedAppService.closeIncident(fbID);
     }
 
     if (typeof message === "string"){
@@ -73,7 +73,6 @@ module.exports = {
       });
     }
 
-    AnalyticsApi.logState(currentState, fbID);
     Store.appendState(currentState, fbID);
 
   },
@@ -94,12 +93,12 @@ module.exports = {
       } else if (message.toLowerCase() === "restart"){
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
-        AnalyticsApi.getOrCreateSurvey(fbID)
+        SeedAppService.createIncident(fbID)
 
       } else if (message.toLowerCase() === "new report"){
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
-        AnalyticsApi.getOrCreateSurvey(fbID)
+        SeedAppService.createIncident(fbID)
 
       }
 

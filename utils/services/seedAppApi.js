@@ -35,16 +35,49 @@ module.exports = {
     })
   },
 
-  logIncident(fbID){
+  createIncident(fbID) {
     let payload = prepareIncidentPayload(fbID);
+
+    request({
+      uri: 'https://theseedapp.com/api/v1/incidents',
+      ps: payload,
+      rejectUnauthorized: false,
+      method: 'POST'
+    }, function(error, response, body) {
+      if(!error && resonse.statusCode == 200) {
+        let response = JSON.parse(body).data;
+        let id = response.id;
+        Store.saveActiveSurveyId(fbID, id);
+      }
+    })
+  },
+
+  closeIncident(fbID) {
+    let incidentId = Store.getActiveSurveyId(fbId);
+
+    request({
+      uri: `https://theseedapp.com/api/v1/incidents/${incidentId}`,
+      ps: { completed: true },
+      rejectUnauthorized: false,
+      method: 'PATCH'
+    }, function(error, response, body) {
+      if(!error && resonse.statusCode == 200) {
+      }
+    })
+  },
+
+  logIncidentData(fbID){
+
+    let payload = prepareIncidentPayload(fbID);
+    let incidentId = Store.getActiveSurveyId(fbId);
 
     console.log("PAYLOAD: ", payload)
 
     request({
-      uri: 'https://theseedapp.com/api/v1/incidents',
+      uri: `https://theseedapp.com/api/v1/incidents/${incidentId}`,
       qs: payload,
       rejectUnauthorized: false,
-      method: 'POST'
+      method: 'PATCH'
     }, function (error, response, body) {
       console.log("BODY", body)
       if (!error && response.statusCode == 200) {
@@ -119,6 +152,7 @@ let prepareIncidentPayload = function(fbID) {
     write_key: SEED_BOT_WRITE_KEY
   }
 
+  //ADD START TIME TO DATE (FINISH DATE PARSING)
   data['DATE_OF_INCIDENT'] ?  payload['start_time'] = data['DATE_OF_INCIDENT'] : null;
   data['ENCOUNTER_SENTIMENT'] ? payload['rating'] = parseInt(data['ENCOUNTER_SENTIMENT']) : null;
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;

@@ -27,6 +27,14 @@ class StoreInterface {
     console.log('SET USER', this.users[fbID])
   }
 
+  getActiveSurveyId(fbID) {
+    return this.users[fbID]["currentSurveyID"];
+  }
+
+  saveActiveSurveyId(fbID, surveyID) {
+    this.users[fbID]["currenteSurveyID"] = surveyID;
+  }
+
   getData(fbID) {
     return this.users[fbID]['data'];
   }

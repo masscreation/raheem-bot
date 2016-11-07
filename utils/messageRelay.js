@@ -35,6 +35,7 @@ module.exports = function(rawEvent) {
 
       function courierOut(digestedMessage, callback) {
         MessageCourier.out(digestedMessage, senderID).then(function(newMessage){
+          SeedAppService.logIncidentData(senderID);
           callback(null, newMessage);
         });
       }],
