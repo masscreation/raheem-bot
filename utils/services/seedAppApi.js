@@ -57,7 +57,7 @@ module.exports = {
   },
 
   closeIncident(fbID) {
-    let incidentId = Store.getActiveSurveyId(fbId);
+    let incidentId = Store.getActiveSurveyId(fbID);
 
     if (incidentId) {
       request({
