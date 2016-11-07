@@ -69,7 +69,7 @@ module.exports = {
   logIncidentData(fbID){
 
     let payload = prepareIncidentPayload(fbID);
-    let incidentId = Store.getActiveSurveyId(fbId);
+    let incidentId = Store.getActiveSurveyId(fbID);
 
     console.log("PAYLOAD: ", payload)
 
