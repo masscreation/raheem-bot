@@ -17,7 +17,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       let fbID = messagingEvent.sender.id
       request({
-        uri: 'https://theseedapp.com/api/v1/users/generate',
+        uri: 'https://raheem.ai/api/v1/users/generate',
         qs: { facebook_id: fbID },
         rejectUnauthorized: false,
         method: 'POST'
@@ -39,7 +39,7 @@ module.exports = {
     let payload = prepareIncidentPayload(fbID);
 
     request({
-      uri: 'https://theseedapp.com/api/v1/incidents',
+      uri: 'https://raheem.ai/api/v1/incidents',
       ps: payload,
       rejectUnauthorized: false,
       method: 'POST'
@@ -58,7 +58,7 @@ module.exports = {
     let incidentId = Store.getActiveSurveyId(fbId);
 
     request({
-      uri: `https://theseedapp.com/api/v1/incidents/${incidentId}`,
+      uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
       ps: { completed: true },
       rejectUnauthorized: false,
       method: 'PATCH'
@@ -76,7 +76,7 @@ module.exports = {
     console.log("PAYLOAD: ", payload)
 
     request({
-      uri: `https://theseedapp.com/api/v1/incidents/${incidentId}`,
+      uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
       qs: payload,
       rejectUnauthorized: false,
       method: 'PATCH'
@@ -104,7 +104,7 @@ module.exports = {
     let userID = Store.getUserID(fbID);
 
     request({
-      uri: `https://theseedapp.com/api/v1/users/${userID}`,
+      uri: `https://raheem.ai/api/v1/users/${userID}`,
       qs: payload,
       rejectUnauthorized: false,
       method: 'PUT'
