@@ -44,6 +44,9 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'POST'
     }, function(error, response, body) {
+      console.log("CREATE INCIDENT FEEDBACK")
+      console.log("ERROR", error)
+      console.log("RESPONSE", JSON.parse(body))
       if(!error && response.statusCode == 200) {
         let response = JSON.parse(body);
         console.log("DATA", response)
