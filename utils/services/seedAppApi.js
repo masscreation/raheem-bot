@@ -40,7 +40,7 @@ module.exports = {
 
     request({
       uri: 'https://raheem.ai/api/v1/incidents',
-      ps: payload,
+      qs: payload,
       rejectUnauthorized: false,
       method: 'POST'
     }, function(error, response, body) {
@@ -62,7 +62,10 @@ module.exports = {
     if (incidentId) {
       request({
         uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
-        ps: { completed: true },
+        qs: {
+              completed: true,
+              write_key: SEED_BOT_WRITE_KEY
+            },
         rejectUnauthorized: false,
         method: 'PATCH'
       }, function(error, response, body) {
