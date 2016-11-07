@@ -44,7 +44,7 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'POST'
     }, function(error, response, body) {
-      if(!error && resonse.statusCode == 200) {
+      if(!error && response.statusCode == 200) {
         let response = JSON.parse(body).data;
         let id = response.id;
         Store.saveActiveSurveyId(fbID, id);
@@ -61,7 +61,7 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'PATCH'
     }, function(error, response, body) {
-      if(!error && resonse.statusCode == 200) {
+      if(!error && response.statusCode == 200) {
       }
     })
   },
