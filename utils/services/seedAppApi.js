@@ -37,10 +37,12 @@ module.exports = {
 
   createIncident(fbID) {
     let payload = prepareIncidentPayload(fbID);
+    let userID = Store.getUserID(fbID);
 
     request({
       uri: 'https://raheem.ai/api/v1/incidents',
-      qs: payload,
+      qs: { user_id: userID,
+            write_key: SEED_BOT_WRITE_KEY },
       rejectUnauthorized: false,
       method: 'POST'
     }, function(error, response, body) {
@@ -56,7 +58,7 @@ module.exports = {
           Store.saveActiveSurveyId(fbID, id);
         }
       }
-    })
+    });
   },
 
   closeIncident(fbID) {
@@ -74,7 +76,7 @@ module.exports = {
       }, function(error, response, body) {
         if(!error && response.statusCode == 200) {
         }
-      })
+      });
     }
   },
 
