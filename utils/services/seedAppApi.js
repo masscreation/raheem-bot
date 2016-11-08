@@ -46,15 +46,10 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'POST'
     }, function(error, response, body) {
-      console.log("CREATE INCIDENT FEEDBACK")
-      console.log("ERROR", error)
-      console.log("RESPONSE", JSON.parse(body))
       if(!error && response.statusCode == 200) {
         let response = JSON.parse(body);
-        console.log("DATA", response)
         if (response.data.id) {
           let id = response.data.id;
-          console.log("ID", id)
           Store.saveActiveSurveyId(fbID, id);
         }
       }
@@ -86,6 +81,7 @@ module.exports = {
     let incidentId = Store.getActiveSurveyId(fbID);
 
     console.log("PAYLOAD: ", payload)
+    console.log("INCIDENTID: ", incidnetId)
 
     if (incidentId) {
       request({
