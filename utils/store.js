@@ -32,7 +32,7 @@ class StoreInterface {
   }
 
   saveActiveSurveyId(fbID, surveyID) {
-    this.users[fbID]["currenteSurveyID"] = surveyID;
+    this.users[fbID]["currentSurveyID"] = surveyID;
   }
 
   getData(fbID) {
