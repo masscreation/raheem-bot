@@ -81,7 +81,7 @@ module.exports = {
     let incidentId = Store.getActiveSurveyId(fbID);
 
     console.log("PAYLOAD: ", payload)
-    console.log("INCIDENTID: ", incidnetId)
+    console.log("INCIDENTID: ", incidentId)
 
     if (incidentId) {
       request({
