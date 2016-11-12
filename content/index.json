@@ -1059,7 +1059,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "USER_GENDER_IDENTIFICATION",
-    "text": "Do you self-identify as a transgender or intersexual person?",
+    "text": "Which do you identify with?",
     "options": [
       {
         "title": "Intersexual",
