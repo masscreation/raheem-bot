@@ -58,7 +58,7 @@
   "STEP:GREETING_CONT": {
     "type": "message",
     "waitForUser": false,
-    "text": "Good. Let’s try to keep it that way. Let me ask a few questions to get an idea of what went on. Any information collected is for testing purposes only!",
+    "text": "Good. Let’s try to keep it that way. I’m going to ask you questions to get an idea of what went on. Right now any information is for testing purposes only. In the future, the data will be put together to show what’s happening in our communities.",
     "nextMessage": "STEP:DATE_QUERY"
   },
 
@@ -67,7 +67,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "When did the contact happen?",
+    "text": "To get started, when did the contact happen?",
     "options": [{
         "title": "Today",
         "data": "today"
@@ -206,7 +206,7 @@
 
   "STEP:USER_INITIATED_ENCOUNTER": {
     "type": "message",
-    "text": "Thanks. I’m gonna get into some details now. If you need to stop, just type “STOP”. I just need to go through what happened so I can help.",
+    "text": "Thanks. Now a few questions about the police who were involved. If you need to stop, just type “STOP”.",
     "responseType": "text",
     "waitForUser": false,
     "nextMessage": "STEP:INITIAL_CONTACT_QUERY_USER"
@@ -419,7 +419,7 @@
 
   "STEP:OFFICER_IDENTIFICATION": {
     "type": "message",
-    "text": "Alright, I've got a few questions about that officer. No worries if you can't remember everything.",
+    "text": "All right, we’re about halfway done. I’ve got a few questions about that officer. No worries if you can’t remember everything.",
     "waitForUser": false,
     "nextMessage": "STEP:OFFICER_NAME_QUERY"
   },
@@ -524,12 +524,12 @@
         "data": "pacific islander"
       },
       {
-        "title": "White/Caucasian",
-        "data": "white/caucasian"
+        "title": "South Asian",
+        "data": "south asian"
       },
       {
-        "title": "Other",
-        "data": "other"
+        "title": "White/Caucasian",
+        "data": "white/caucasian"
       },
       {
         "title": "Couldn't tell",
@@ -546,10 +546,6 @@
     "responseKey": "OFFICER_GENDER",
     "text": "What about the officer's gender?",
     "options": [
-      {
-        "title": "Genderqueer",
-        "data": "genderqueer"
-      },
       {
         "title": "Man",
         "data": "man"
@@ -603,7 +599,7 @@
   "STEP:FURTHER_OFFICER_DETAILS": {
     "type": "button",
     "anchor": true,
-    "text": "Any other details you wanna tell me about the officer that might help, like height, hair color and style, or tattoos?",
+    "text": "If there are any other details you wanna tell me about the officer that might help, like their vehicle #, height, hair color, or tattoos, please type them all here.",
     "options": [{
         "title": "No other details",
         "data": "no other details"
@@ -678,7 +674,7 @@
       "4": "STEP:OFFICER_ENCOUNTER_GOOD",
       "3": "STEP:OFFICER_ENCOUNTER_NEUTRAL",
       "2": "STEP:OFFICER_ENCOUNTER_BAD",
-      "1": "STEP:OFFICER_ENCOUNTER_TERRIBLE"
+      "1": "STEP:OFFICER_ENCOUNTER_BAD"
     }
   },
 
@@ -699,13 +695,6 @@
   "STEP:OFFICER_ENCOUNTER_BAD": {
     "type": "message",
     "text": "Sorry to hear that.",
-    "waitForUser": false,
-    "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
-  },
-
-  "STEP:OFFICER_ENCOUNTER_TERRIBLE": {
-    "type": "message",
-    "text": "Damn, I'm sorry. We're working on doing something about that.",
     "waitForUser": false,
     "nextMessage": "STEP:FURTHER_OFFICER_ENCOUNTER_DETAILS"
   },
@@ -735,7 +724,7 @@
     "nextMessage": {
       "5": "STEP:POSITIVE_FEELING_SELECTION",
       "4": "STEP:POSITIVE_FEELING_SELECTION",
-      "3": "STEP:POSITIVE_FEELING_SELECTION",
+      "3": "STEP:NEUTRAL_FEELING_SELECTION",
       "2": "STEP:NEGATIVE_FEELING_SELECTION",
       "1": "STEP:NEGATIVE_FEELING_SELECTION"
     }
@@ -749,7 +738,7 @@
     "nextMessage": {
       "5": "STEP:POSITIVE_FEELING_SELECTION",
       "4": "STEP:POSITIVE_FEELING_SELECTION",
-      "3": "STEP:POSITIVE_FEELING_SELECTION",
+      "3": "STEP:NEUTRAL_FEELING_SELECTION",
       "2": "STEP:NEGATIVE_FEELING_SELECTION",
       "1": "STEP:NEGATIVE_FEELING_SELECTION"
     }
@@ -788,12 +777,43 @@
         "data": "other"
       }
     ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "5": "STEP:POSITIVE_OFFICER_SELECTION",
-      "4": "STEP:POSITIVE_OFFICER_SELECTION",
-      "3": "STEP:NEGATIVE_FEELING_SELECTION"
-    }
+    "nextMessage": "STEP:POSITIVE_OFFICER_SELECTION"
+  },
+
+  "STEP:NEUTRAL_FEELING_SELECTION": {
+    "type": "quickReply",
+    "anchor": true,
+    "text": "Choose the one that describes how you felt.",
+    "options": [{
+        "title": "Taken care of",
+        "data": "taken care of"
+      },
+      {
+        "title": "Disappointed",
+        "data": "disappointed"
+      },
+      {
+        "title": "Relieved",
+        "data": "relieved"
+      },
+      {
+        "title": "Ignored",
+        "data": "ignored"
+      },
+      {
+        "title": "Satisfied",
+        "data": "satisfied"
+      },
+      {
+        "title": "Frustrated",
+        "data": "frustrated"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      }
+    ],
+    "nextMessage": "STEP:NEUTRAL_OFFICER_SELECTION"
   },
 
   "STEP:NEGATIVE_FEELING_SELECTION": {
@@ -833,14 +853,7 @@
         "data": "other"
       }
     ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "5": "STEP:POSITIVE_OFFICER_SELECTION",
-      "4": "STEP:POSITIVE_OFFICER_SELECTION",
-      "3": "STEP:POSITIVE_OFFICER_SELECTION",
-      "2": "STEP:NEGATIVE_OFFICER_SELECTION",
-      "1": "STEP:NEGATIVE_OFFICER_SELECTION"
-    }
+    "nextMessage": "STEP:NEGATIVE_OFFICER_SELECTION"
   },
 
   "STEP:POSITIVE_OFFICER_SELECTION": {
@@ -884,16 +897,51 @@
         "data": "professional"
       },
       {
-        "title": "Not Listed",
-        "data": "not listed"
+        "title": "Other",
+        "data": "other"
       }
     ],
-    "referenceStore": "ENCOUNTER_SENTIMENT",
-    "nextMessage": {
-      "5": "STEP:FURTHER_ENCOUNTER_DETAILS",
-      "4": "STEP:FURTHER_ENCOUNTER_DETAILS",
-      "3": "STEP:NEGATIVE_OFFICER_SELECTION"
-    }
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:NEUTRAL_OFFICER_SELECTION": {
+    "type": "quickReply",
+    "anchor": true,
+    "text": "Thanks. Now what describes the officer’s behavior?",
+    "options": [{
+        "title": "Approachable",
+        "data": "approachable"
+      },
+      {
+        "title": "Didn't self-identify",
+        "data": "didn't self-identify"
+      },
+      {
+        "title": "Trustworthy",
+        "data": "trustworthy"
+      },
+      {
+        "title": "Suspicious",
+        "data": "suspicious"
+      },
+      {
+        "title": "Helpful",
+        "data": "helpful"
+      },
+      {
+        "title": "Too forceful",
+        "data": "too forceful"
+      },
+      {
+        "title": "Professional",
+        "data": "professional"
+      },
+      {
+        "title": "Other",
+        "data": "other"
+      }
+    ],
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
   },
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
@@ -930,8 +978,38 @@
         "data": "abusive language"
       },
       {
-        "title": "Not Listed",
-        "data": "not listed"
+        "title": "Other",
+        "data": "other"
+      }
+    ],
+    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+  },
+
+  "STEP:MEDIA_UPLOAD_QUERY": {
+    "type": "button",
+    "text": "Thanks. Did you take any video or pictures you want to share? You can also upload audio files.",
+    "options": [{
+        "title": "Upload",
+        "data": "upload"
+      },
+      {
+        "title": "No",
+        "data": "no"
+      }
+    ],
+    "nextMessage": {
+      "upload": "STEP:MEDIA_UPLOAD",
+      "no": "STEP:FURTHER_ENCOUNTER_DETAILS"
+    }
+  },
+
+  "STEP:MEDIA_UPLOAD": {
+    "type": "message",
+    "text": "Go ahead. Send me as many files as you would like, then hit done.",
+    "scripts": ["attachmentScript"],
+    "options": [{
+        "title": "Done",
+        "data": "done"
       }
     ],
     "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
@@ -939,14 +1017,7 @@
 
   "STEP:FURTHER_ENCOUNTER_DETAILS": {
     "type": "message",
-    "text": "Thank you for sharing so much good information. This is great. We’re almost done. If it’s ok, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
-    "waitForUser": false,
-    "nextMessage": "STEP:USER_RACE_ENTRY"
-  },
-
-  "STEP:FURTHER_ENCOUNTER_DETAILS_CONT": {
-    "type": "message",
-    "text": "If it’s ok, I just want to ask for a little information about you. Don’t worry, your identity is always gonna be confidential.",
+    "text": "Thank you for sharing so much good information. This is great. Just a few more questions about you and then we're done.",
     "waitForUser": false,
     "nextMessage": "STEP:USER_RACE_ENTRY"
   },
@@ -956,7 +1027,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "USER_RACE",
-    "text": "What is your race?",
+    "text": "First, what is your race? (Your identity is always gonna be anonymous.)",
     "options": [
       {
         "title": "Asian",
@@ -987,12 +1058,12 @@
         "data": "pacific islander"
       },
       {
-        "title": "White/Caucasian",
-        "data": "white/caucasian"
+        "title": "South Asian",
+        "data": "south asian"
       },
       {
-        "title": "Other",
-        "data": "other"
+        "title": "White/Caucasian",
+        "data": "white/caucasian"
       },
       {
         "title": "Opt out",
@@ -1034,7 +1105,7 @@
     "anchor": true,
     "scripts": ["varScript"],
     "responseKey": "USER_GENDER_IDENTIFICATION",
-    "text": "Do you self-identify as a transgender or intersexual person?",
+    "text": "Do you identify as a transgender or intersexual person?",
     "options": [{
         "title": "Yes",
         "data": "yes"
@@ -1078,7 +1149,7 @@
     "scripts": ["varScript"],
     "responseKey": "USER_BIRTHDATE",
     "anchor": true,
-    "text": "And your birth year?",
+    "text": "And what’s your birth year?",
     "responseType": "text",
     "nextMessage": "STEP:FINAL_INFO"
   },
@@ -1103,11 +1174,15 @@
       {
         "title": "Start another report",
         "data": "restart"
+      },
+      {
+        "title": "End this chat",
+        "data": "end this chat"
       }
     ],
     "nextMessage": {
-      "1": "STEP:GOODBYE",
-      "restart": "STEP:DATE_QUERY"
+      "restart": "STEP:DATE_QUERY",
+      "end this chat": "STEP:QUIT_FINAL"
     }
   },
 
