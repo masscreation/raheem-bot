@@ -17,6 +17,10 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
+    if (currentState['loop'] && currentState["breakKey"] !== message) {
+      return
+    }
+
     if (currentState === 'STEP:FINAL_INFO'){
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
