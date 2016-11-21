@@ -1008,7 +1008,6 @@
     "loop": true,
     "breakKey": "done",
     "text": "Go ahead. Send me as many files as you would like, then hit done.",
-    "scripts": ["attachmentScript"],
     "options": [{
         "title": "Done",
         "data": "done"
