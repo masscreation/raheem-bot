@@ -901,7 +901,7 @@
         "data": "other"
       }
     ],
-    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+    "nextMessage": "STEP:MEDIA_UPLOAD_QUERY"
   },
 
   "STEP:NEUTRAL_OFFICER_SELECTION": {
@@ -941,7 +941,7 @@
         "data": "other"
       }
     ],
-    "nextMessage": "STEP:FURTHER_ENCOUNTER_DETAILS"
+    "nextMessage": "STEP:MEDIA_UPLOAD_QUERY"
   },
 
   "STEP:NEGATIVE_OFFICER_SELECTION": {
