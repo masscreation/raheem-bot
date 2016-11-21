@@ -33,16 +33,17 @@ module.exports = {
 
       if (currentState['loop'] && currentState["breakKey"] !== message) {
         reject();
+        
+      } else {
+        Store.saveData(fbID);
+
+        state.next(message, fbID);
+        currentState = state.get(fbID);
+
+        let outgoingMessages = messageThread.set(currentState, message, fbID);
+
+        resolve(outgoingMessages);
       }
-
-      Store.saveData(fbID);
-
-      state.next(message, fbID);
-      currentState = state.get(fbID);
-
-      let outgoingMessages = messageThread.set(currentState, message, fbID);
-
-      resolve(outgoingMessages);
     });
   }
 }
