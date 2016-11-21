@@ -17,66 +17,65 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (currentState['loop'] && currentState["breakKey"] !== message) {
-      return
-    }
+    if (!currentState['loop'] || currentState['loop'] && currentState["breakKey"] === message) {
 
-    if (currentState === 'STEP:FINAL_INFO'){
-      SeedAppService.logIncidentData(fbID);
-      SeedAppService.updateUser(fbID);
-      Store.archiveData(fbID);
-      SeedAppService.closeIncident(fbID);
-    }
-
-    if (typeof message === "string"){
-      if (message.toLowerCase() === "stop" ||
-          message.toLowerCase() === "exit" ||
-          message.toLowerCase() === "goodbye" ||
-          message.toLowerCase() === "quit"){
-            currentState = "STEP:QUIT_CONVO_PRE";
+      if (currentState === 'STEP:FINAL_INFO'){
+        SeedAppService.logIncidentData(fbID);
+        SeedAppService.updateUser(fbID);
+        Store.archiveData(fbID);
+        SeedAppService.closeIncident(fbID);
       }
-    }
 
-    if (content[currentState]["referenceStore"]){
-      message = Store.users[fbID]['data'][content[currentState]["referenceStore"]];
-    }
-
-    currentState = content[currentState].nextMessage
-
-    if (typeof currentState === 'object' &&
-        (currentState[message.toLowerCase()] ||
-        currentState[message])){
-        currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
-
-    } else if (typeof currentState === 'object' && currentState["*"]){
-      currentState = currentState["*"];
-
-    } else if (typeof currentState === 'object' &&
-               currentState[message.toLowerCase()] === undefined) {
-      currentState = "STEP:UNKNOWN_INPUT";
-
-    } else if (Store.flag){
-      currentState = "STEP:UNKNOWN_INPUT";
-
-    } else if (currentState === "STEP:LAST_STEP"){
-      Store.users[fbID]['state'].forEach(function(state){
-        if (content[state]["anchor"] && content[state]["anchor"] === true){
-          currentState = state;
+      if (typeof message === "string"){
+        if (message.toLowerCase() === "stop" ||
+            message.toLowerCase() === "exit" ||
+            message.toLowerCase() === "goodbye" ||
+            message.toLowerCase() === "quit"){
+              currentState = "STEP:QUIT_CONVO_PRE";
         }
-      });
-    }
+      }
 
-    if (message === "retry"){
-      let newCurrentState;
-      Store.users[fbID]['state'].forEach(function(state){
-        if (content[state]["anchor"] && content[state]["anchor"] === true){
-          currentState = newCurrentState;
-          newCurrentState = state;
-        }
-      });
-    }
+      if (content[currentState]["referenceStore"]){
+        message = Store.users[fbID]['data'][content[currentState]["referenceStore"]];
+      }
 
-    Store.appendState(currentState, fbID);
+      currentState = content[currentState].nextMessage
+
+      if (typeof currentState === 'object' &&
+          (currentState[message.toLowerCase()] ||
+          currentState[message])){
+          currentState = (Number(message) === NaN) ? currentState[message.toLowerCase()] : currentState[message];
+
+      } else if (typeof currentState === 'object' && currentState["*"]){
+        currentState = currentState["*"];
+
+      } else if (typeof currentState === 'object' &&
+                 currentState[message.toLowerCase()] === undefined) {
+        currentState = "STEP:UNKNOWN_INPUT";
+
+      } else if (Store.flag){
+        currentState = "STEP:UNKNOWN_INPUT";
+
+      } else if (currentState === "STEP:LAST_STEP"){
+        Store.users[fbID]['state'].forEach(function(state){
+          if (content[state]["anchor"] && content[state]["anchor"] === true){
+            currentState = state;
+          }
+        });
+      }
+
+      if (message === "retry"){
+        let newCurrentState;
+        Store.users[fbID]['state'].forEach(function(state){
+          if (content[state]["anchor"] && content[state]["anchor"] === true){
+            currentState = newCurrentState;
+            newCurrentState = state;
+          }
+        });
+      }
+
+      Store.appendState(currentState, fbID);
+    }
 
   },
 
