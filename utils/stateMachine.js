@@ -17,7 +17,7 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (!currentState['loop'] || currentState['loop'] && currentState["breakKey"] === message) {
+    if (!currentState['loop'] || (currentState['loop'] && currentState["breakKey"] === message)) {
 
       if (currentState === 'STEP:FINAL_INFO'){
         SeedAppService.logIncidentData(fbID);
@@ -73,9 +73,8 @@ module.exports = {
           }
         });
       }
-
-      Store.appendState(currentState, fbID);
     }
+    Store.appendState(currentState, fbID);
 
   },
 
