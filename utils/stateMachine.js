@@ -16,8 +16,9 @@ module.exports = {
 
   next(message, fbID) {
     currentState = Store.getState(fbID);
-    console.log("VALID THIdamfna;kgnasdklngaslkfa'kjfe;lkasdjf;laskdjf;lasdkjfNG :", currentState['loop'] && currentState["breakKey"] === message)
-    if (!currentState['loop'] || (currentState['loop'] && currentState["breakKey"] === message)) {
+
+    if (!content[currentState]['loop'] ||
+        content[currentState]['loop'] && content[currentState]["breakKey"] === message) {
 
       if (currentState === 'STEP:FINAL_INFO'){
         SeedAppService.logIncidentData(fbID);
