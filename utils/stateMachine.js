@@ -71,36 +71,35 @@ module.exports = {
         }
       });
     }
-  }
-  Store.appendState(currentState, fbID);
+    Store.appendState(currentState, fbID);
+  },
 
-},
+  reRoute(message, fbID){
 
-reRoute(message, fbID){
+    if (typeof message === "string"){
 
-  if (typeof message === "string"){
+      if (message === "Search Again"){
+        currentState = "STEP:QUE_LOCATION_RETRY";
+        Store.appendState(currentState, fbID);
 
-    if (message === "Search Again"){
-      currentState = "STEP:QUE_LOCATION_RETRY";
-      Store.appendState(currentState, fbID);
+      } else if (message === "resume" && currentState !== "NAV_MENU"){
+        let lastStateIndex = Store.users[fbID]['state'].length;
+        currentState = Store.users['state'][lastStateIndex - 2];
+        Store.appendState(currentState, fbID);
 
-    } else if (message === "resume" && currentState !== "NAV_MENU"){
-      let lastStateIndex = Store.users[fbID]['state'].length;
-      currentState = Store.users['state'][lastStateIndex - 2];
-      Store.appendState(currentState, fbID);
+      } else if (message.toLowerCase() === "restart"){
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
+        SeedAppService.createIncident(fbID)
 
-    } else if (message.toLowerCase() === "restart"){
-      currentState = Store.resetState(fbID);
-      Store.appendState(currentState, fbID);
-      SeedAppService.createIncident(fbID)
+      } else if (message.toLowerCase() === "new report"){
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
+        SeedAppService.createIncident(fbID)
 
-    } else if (message.toLowerCase() === "new report"){
-      currentState = Store.resetState(fbID);
-      Store.appendState(currentState, fbID);
-      SeedAppService.createIncident(fbID)
+      }
 
     }
-
   },
 
   get(fbID) {
