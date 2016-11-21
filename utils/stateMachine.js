@@ -48,8 +48,7 @@ module.exports = {
       currentState = currentState["*"];
 
     } else if (typeof currentState === 'object' &&
-               currentState[message.toLowerCase()] === undefined &&
-               Number(message) === NaN){
+               currentState[message.toLowerCase()] === undefined) {
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (Store.flag){
