@@ -993,13 +993,13 @@
         "data": "upload"
       },
       {
-        "title": "No",
-        "data": "no"
+        "title": "Skip",
+        "data": "skip"
       }
     ],
     "nextMessage": {
       "upload": "STEP:MEDIA_UPLOAD",
-      "no": "STEP:FURTHER_ENCOUNTER_DETAILS"
+      "skip": "STEP:FURTHER_ENCOUNTER_DETAILS"
     }
   },
 
