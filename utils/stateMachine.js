@@ -24,6 +24,10 @@ module.exports = {
       SeedAppService.closeIncident(fbID);
     }
 
+    if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS") {
+      SeedAppService.createOfficer(fbID);
+    }
+
     if (typeof message === "string"){
       if (message.toLowerCase() === "stop" ||
           message.toLowerCase() === "exit" ||
@@ -46,7 +50,7 @@ module.exports = {
 
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
-
+z
     } else if (typeof currentState === 'object' &&
                currentState[message.toLowerCase()] === undefined) {
       currentState = "STEP:UNKNOWN_INPUT";

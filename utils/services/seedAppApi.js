@@ -56,6 +56,22 @@ module.exports = {
     });
   },
 
+  createOfficer(fbID) {
+    let payload = prepareOfficerPayload(fbID);
+
+    request({
+      uri: 'https://raheem.ai/api/v1/officers',
+      qs: payload,
+      rejectUnauthorized: false,
+      method: 'POST'
+    }, function(error, response, body) {
+      if(!error && response.statusCode == 200) {
+        let response = JSON.parse(body);
+        console.log("OFFICER RESPONSE: ", response);
+      }
+    });
+  },
+
   closeIncident(fbID) {
     let incidentId = Store.getActiveSurveyId(fbID);
 
@@ -150,6 +166,25 @@ let prepareUserPayload = function(fbID) {
   data['USER_RACE'] ?  payload['race_id'] = data['USER_RACE'] : null;
   data['USER_GENDER'] ? payload['gender_id'] = data['USER_GENDER'] : null;
   data['USER_BIRTHDATE'] ? payload['birthday'] = data['USER_BIRTHDATE'] : null;
+
+  return payload
+}
+
+let prepareOfficerPayload = function(fbID){
+  let incidentID = Store.getActiveSurveyId(fbID);
+  let data = Store.getData(fbID);
+  let userID = Store.getUserID(fbID);
+
+  let payload = {
+    incident_id: incidentID,
+    write_key: SEED_BOT_WRITE_KEY
+  }
+
+  data['OFFICER_NAME'] ?  payload['name'] = data['OFFICER_NAME'] : null;
+  data['OFFICER_BADGE_NUMBER'] ? payload['badge_number'] = data['OFFICER_BADGE_NUMBER'] : null;
+  data['OFFICER_GENDER'] ? payload['gender_id'] : null;
+  data['OFFICER_RACE'] ? payload['race_id'] : null;
+  data['OFFICER_DETAILS_DESCRIPTION'] ? payload['description'] = data['OFFICER_DETAILS_DESCRIPTION'] : null;
 
   return payload
 }

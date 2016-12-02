@@ -42,16 +42,16 @@
     "text": "Would you still like to report what just happend?",
     "options": [{
         "title": "No",
-        "data": "1"
+        "data": "no"
       },
       {
         "title": "Yes",
-        "data": "2"
+        "data": "yes"
       }
     ],
     "nextMessage": {
-      "1": "STEP:GOODBYE_SAFE",
-      "2": "STEP:DATE_QUERY"
+      "no": "STEP:GOODBYE_SAFE",
+      "yes": "STEP:DATE_QUERY"
       }
   },
 
@@ -599,6 +599,8 @@
   "STEP:FURTHER_OFFICER_DETAILS": {
     "type": "button",
     "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "OFFICER_DETAILS_DESCRIPTION",
     "text": "If there are any other details you wanna tell me about the officer that might help, like their vehicle #, height, hair color, or tattoos, please type them all here.",
     "options": [{
         "title": "No other details",
