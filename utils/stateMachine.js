@@ -50,7 +50,7 @@ module.exports = {
 
     } else if (typeof currentState === 'object' && currentState["*"]){
       currentState = currentState["*"];
-z
+
     } else if (typeof currentState === 'object' &&
                currentState[message.toLowerCase()] === undefined) {
       currentState = "STEP:UNKNOWN_INPUT";
