@@ -749,6 +749,8 @@
   "STEP:POSITIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "FEELING_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Protected",
@@ -785,6 +787,8 @@
   "STEP:NEUTRAL_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "FEELING_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Taken care of",
@@ -821,6 +825,8 @@
   "STEP:NEGATIVE_FEELING_SELECTION": {
     "type": "quickReply",
     "anchor": true,
+    "scripts": ["varScript"],
+    "responseKey": "FEELING_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Threatened",
@@ -1115,7 +1121,7 @@
       },
       {
         "title": "No",
-        "data": "no"
+        "data": "n/a"
       },
       {
         "title": "Opt Out",
