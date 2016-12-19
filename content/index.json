@@ -105,7 +105,7 @@
     "responseKey": "TIME_OF_INCIDENT",
     "text": "Got it. Around what time, such as 12:15AM?",
     "responseType": "text",
-    "nextMessage": "STEP:FB_LOCATION"
+    "nextMessage": "STEP:OUTCOME_CONTACT_QUERY"
   },
 
   "STEP:LOCATION_QUERY": {

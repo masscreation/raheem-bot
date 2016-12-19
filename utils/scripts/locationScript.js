@@ -19,7 +19,7 @@ module.exports = {
 
 	digest(currentFrame, message, fbID){
 
-		// store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
+		store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
 
 	},
 
@@ -35,11 +35,11 @@ module.exports = {
 
 	format(currentFrame, message, fbID){
 
-		// currentFrame["options"] = [
-		// 	{
-		// 		"content_type": "location"
-		// 	}
-		// ]
+		currentFrame["options"] = [
+			{
+				"content_type": "location"
+			}
+		]
 
 		return currentFrame;
 	}
