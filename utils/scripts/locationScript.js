@@ -18,7 +18,8 @@ module.exports = {
 
 
 	digest(currentFrame, message, fbID){
-
+		console.log('MESSAGE :', message)
+		console.log('MESSAGE LOCATION :', message[0]);
 		store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
 
 	},

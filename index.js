@@ -8,7 +8,7 @@ const request = require('request');
 const messageRelay = require('./utils/messageRelay.js');
 const app = express();
 
-app.set('port', (process.env.PORT || 4001));
+app.set('port', (process.env.PORT || 8000));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
