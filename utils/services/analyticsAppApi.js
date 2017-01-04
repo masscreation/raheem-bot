@@ -19,6 +19,7 @@ module.exports = {
 
       } else {
         return(new Error('server error: ' + response.error));
+        
       }
     });
   },

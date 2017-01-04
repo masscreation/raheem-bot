@@ -5,6 +5,7 @@
 
   "STEP:BETA_INTRO": {
     "type": "message",
+    "anchor": true,
     "text": "Hi, I’m Raheem. I collect your stories about what happens with police. I'm built to run on mobile devices using Facebook Messenger. Right now I’m in beta.",
     "waitForUser": false,
     "nextMessage": "STEP:GREETING"
