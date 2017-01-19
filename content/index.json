@@ -94,7 +94,7 @@
     "anchor": true,
     "scripts": ["varScript", "dateScript"],
     "responseKey": "DATE_OF_INCIDENT",
-    "text": "Go ahead. (please enter as: mm/dd/yy)",
+    "text": "Go ahead, please enter as:\n'MM/DD/YY'",
     "responseType": "text",
     "nextMessage": "STEP:TIME_QUERY"
   },
