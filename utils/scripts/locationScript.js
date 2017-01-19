@@ -6,6 +6,8 @@
 const googlePlacesApi = require('../services/googlePlacesApi');
 const store = require('../store');
 const locationStore = {}
+const Raven = require('raven');
+
 /*
  * Collection of methods related to getting the users location
  *
@@ -20,10 +22,21 @@ module.exports = {
 	digest(currentFrame, message, fbID){
 		console.log('MESSAGE :', message)
 		console.log('MESSAGE LOCATION :', message[0]);
-		if(message[0].title !== 'Attachment Unavailable') {
-			store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
-		}
-
+		Raven.context(function() {
+			Raven.captureBreadcrumb({
+				message: 'Saving coordinates for locationScript',
+				category: 'locationScript',
+				data: {
+					message: message,
+					currentFrame: currentFrame
+				}
+			});
+			if(message[0].payload !== undefined && message[0].title !== 'Attachment Unavailable') {
+				store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
+			} else {
+				store.users[fbID]['flags'].push("ERROR:INVALID_LOCATION");
+			}
+		});
 	},
 
 	//
