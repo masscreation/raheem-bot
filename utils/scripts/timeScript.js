@@ -1,22 +1,21 @@
 "use strict";
 
-const store = require('../store')
+const store = require('../store');
 const date = require('datejs');
 
 module.exports = {
 
   type(){
-    return "timeScript"
+    return "timeScript";
   },
 
   digest(currentFrame, message, fbID){
     return new Promise(function(resolve, reject){
-      let time = store.users[fbID]['data'][currentFrame["responseKey"]];
+      const time = store.users[fbID]['data'][currentFrame["responseKey"]];
 
       if (!testTime(time)){
         store.users[fbID]['flags'].push("ERROR:INVALID_TIME");
       }
-
       store.users[fbID]['data'][currentFrame["responseKey"]] = time;
 
       resolve();

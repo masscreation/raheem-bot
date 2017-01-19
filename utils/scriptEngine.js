@@ -13,8 +13,8 @@ let scripts = [
 let scriptArray = [];
 
 
-let loadScripts = function(){
-  scripts.forEach(function(script){
+let loadScripts = function() {
+  scripts.forEach(function(script) {
     scriptArray.push(require(`./scripts/${script}`));
   });
 }
@@ -27,8 +27,8 @@ module.exports = {
 
 
   digest(currentState, message, fbID) {
-    return Promise.each(scriptArray, function(script){
-      if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+    return Promise.each(scriptArray, function(script) {
+      if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1) {
         return script.digest(currentState, message, fbID);
 
       } else {
@@ -40,9 +40,9 @@ module.exports = {
 
   format(currentState, fbID) {
 
-    if (currentState.scripts){
-      scriptArray.forEach(function(script){
-        if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1){
+    if (currentState.scripts) {
+      scriptArray.forEach(function(script) {
+        if (currentState.scripts && currentState.scripts.indexOf(script.type()) !== -1) {
           let newOutgoingMessage = script.format(currentState, fbID);
           newOutgoingMessage ? output = newOutgoingMessage : output = currentState;
         }

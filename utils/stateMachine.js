@@ -2,7 +2,6 @@
 
 const Store = require('./store');
 const SeedAppService = require('./services/seedAppApi');
-const AnalyticsApi = require('./services/analyticsAppApi')
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
 let currentState = initialState;

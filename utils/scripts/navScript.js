@@ -1,28 +1,28 @@
 "use strict";
 
-const store = require('../store')
+const store = require('../store');
 
-function review(){
-  let results = ''
+function review() {
+  let results = '';
   for (let keyVal in store.data) {
-    results += `${keyVal}: ${store.data[keyVal]}\n`
+    results += `${keyVal}: ${store.data[keyVal]}\n`;
   }
-  return results
+  return results;
 }
 
 module.exports = {
 
   type(){
-    return "dbScript"
+    return "dbScript";
   },
 
-  digest(currentFrame, message){
+  digest(currentFrame, message) {
   },
 
-  format(currentFrame, fbID){
+  format(currentFrame, fbID) {
     currentFrame = Object.assign({}, currentFrame);
     currentFrame["text"] += review();
-    return currentFrame
+    return currentFrame;
   }
 
 }

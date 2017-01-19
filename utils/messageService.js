@@ -14,7 +14,7 @@ const quickReplyTemplate = require('../models/templates/quickReply');
 module.exports = {
 
   parse(messagingEvent) {
-    return new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject) {
 
       if (messagingEvent.optin) {
         console.log("Received Authentication");
@@ -49,7 +49,7 @@ module.exports = {
     for (let i = 0, len = outgoingObj.length; i < len; i++) {
       let obj = outgoingObj[i];
       if (i > 0){
-        sleep(1000).then(function(){
+        sleep(1000).then(function() {
           fbService.send(createTemplate(senderID, obj));
         });
       } else {

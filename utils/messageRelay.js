@@ -2,7 +2,6 @@
 
 const MessageService = require('./messageService');
 const MessageCourier = require('./messageCourier');
-const AnalyticsApi = require('./services/analyticsAppApi');
 const SeedAppService = require('./services/seedAppApi');
 const async = require('async');
 const Raven = require('raven');
@@ -29,7 +28,8 @@ module.exports = function(rawEvent) {
               rawEvent: rawEvent
             }
           });
-          SeedAppService.getOrCreateUser(rawEvent).then(function(){
+          SeedAppService.getOrCreateUser(rawEvent)
+          .then(function() {
             callback(null, rawEvent);
           });
         });
@@ -45,7 +45,8 @@ module.exports = function(rawEvent) {
               rawEvent: messagingEvent
             }
           });
-          MessageService.parse(messagingEvent).then(function(parsedMessage){
+          MessageService.parse(messagingEvent)
+          .then(function(parsedMessage) {
             callback(null, parsedMessage);
           });
         });
@@ -61,7 +62,8 @@ module.exports = function(rawEvent) {
               rawEvent: parsedMessage
             }
           });
-          MessageCourier.in(parsedMessage, senderID).then(function(digestedMessage){
+          MessageCourier.in(parsedMessage, senderID)
+          .then(function(digestedMessage) {
             callback(null, digestedMessage);
           });
         });
@@ -77,7 +79,8 @@ module.exports = function(rawEvent) {
               rawEvent: digestedMessage
             }
           });
-          MessageCourier.out(digestedMessage, senderID).then(function(newMessage){
+          MessageCourier.out(digestedMessage, senderID)
+          .then(function(newMessage){
             SeedAppService.logIncidentData(senderID);
             callback(null, newMessage);
           });

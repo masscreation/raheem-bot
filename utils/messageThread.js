@@ -12,8 +12,8 @@ module.exports = {
   set(obj, message, fbID) {
 
     // if multiple messages at same time
-    while (obj.waitForUser === false){
-      if(obj.type !== 'gate'){
+    while (obj.waitForUser === false) {
+      if(obj.type !== 'gate') {
         obj = scriptEngine.format(obj, fbID);
         messagesArray.push(obj);
       }

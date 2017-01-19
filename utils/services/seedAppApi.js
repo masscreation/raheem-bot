@@ -96,9 +96,6 @@ module.exports = {
     let payload = prepareIncidentPayload(fbID);
     let incidentId = Store.getActiveSurveyId(fbID);
 
-    console.log("PAYLOAD: ", payload)
-    console.log("INCIDENTID: ", incidentId)
-
     if (incidentId) {
       request({
         uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
@@ -106,7 +103,6 @@ module.exports = {
         rejectUnauthorized: false,
         method: 'PATCH'
       }, function (error, response, body) {
-        console.log("BODY", body)
         if (!error && response.statusCode == 200) {
 
           let status = JSON.parse(body).meta;
@@ -135,7 +131,6 @@ module.exports = {
       rejectUnauthorized: false,
       method: 'PUT'
     }, function (error, response, body) {
-      console.log("BODY", body);
       if (!error && response.statusCode == 200) {
 
         let status = JSON.parse(body).meta;

@@ -20,13 +20,13 @@ module.exports = {
       } else {
         store.users[fbID]['flags'] = "ERROR:INVALID_DATE";
       }
-      
+
       store.users[fbID]['data'][currentFrame["responseKey"]] = date;
       resolve();
     });
   },
 
   format(currentFrame){
-    return currentFrame
+    return currentFrame;
   }
 }
