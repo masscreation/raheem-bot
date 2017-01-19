@@ -395,7 +395,8 @@
     "nextMessage": {
       "*": "STEP:BEGIN_OFFICER_IDENTIFICATION",
       "1": "STEP:OFFICER_IDENTIFICATION",
-      "one": "STEP:OFFICER_IDENTIFICATION"
+      "one": "STEP:OFFICER_IDENTIFICATION",
+      "One": "STEP:OFFICER_IDENTIFICATION"
       }
   },
 
