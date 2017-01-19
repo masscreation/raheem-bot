@@ -6,7 +6,8 @@ const state = require("./stateMachine");
 let scripts = [
   "varScript",
   "locationScript",
-  "dateScript"
+  "dateScript",
+  "timeScript"
 ];
 
 let scriptArray = [];

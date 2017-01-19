@@ -55,8 +55,9 @@ module.exports = {
                currentState[message.toLowerCase()] === undefined) {
       currentState = "STEP:UNKNOWN_INPUT";
 
-    } else if (Store.flag){
+    } else if (Store.getFlags(fbID).length > 0){
       currentState = "STEP:UNKNOWN_INPUT";
+      Store.flushFlags(fbID);
 
     } else if (currentState === "STEP:LAST_STEP"){
       Store.users[fbID]['state'].forEach(function(state){

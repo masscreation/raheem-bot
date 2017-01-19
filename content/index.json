@@ -102,7 +102,7 @@
   "STEP:TIME_QUERY": {
     "type": "message",
     "anchor": true,
-    "scripts": ["varScript"],
+    "scripts": ["varScript", "timeScript"],
     "responseKey": "TIME_OF_INCIDENT",
     "text": "Got it. Around what time, such as 12:15AM?",
     "responseType": "text",

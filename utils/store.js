@@ -83,6 +83,10 @@ class StoreInterface {
     this.users[fbID]['flags'].push(flag)
   }
 
+  getFlags(fbID) {
+    return this.users[fbID]['flags'];
+  }
+
   flushFlags(fbID) {
     this.users[fbID]['flags'] = [];
   }
