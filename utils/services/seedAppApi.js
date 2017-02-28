@@ -17,7 +17,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       let fbID = messagingEvent.sender.id
       request({
-        uri: 'https://raheem.ai/api/v1/users/generate',
+        uri: 'https://www.raheem.ai/api/v1/users/generate',
         qs: { facebook_id: fbID },
         rejectUnauthorized: false,
         method: 'POST'
@@ -40,7 +40,7 @@ module.exports = {
     let userID = Store.getUserID(fbID);
 
     request({
-      uri: 'https://raheem.ai/api/v1/incidents',
+      uri: 'https://www.raheem.ai/api/v1/incidents',
       qs: { user_id: userID,
             write_key: SEED_BOT_WRITE_KEY },
       rejectUnauthorized: false,
@@ -60,7 +60,7 @@ module.exports = {
     let payload = prepareOfficerPayload(fbID);
 
     request({
-      uri: 'https://raheem.ai/api/v1/officers',
+      uri: 'https://www.raheem.ai/api/v1/officers',
       qs: payload,
       rejectUnauthorized: false,
       method: 'POST'
@@ -77,7 +77,7 @@ module.exports = {
 
     if (incidentId) {
       request({
-        uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
+        uri: `https://www.raheem.ai/api/v1/incidents/${incidentId}`,
         qs: {
               completed: true,
               write_key: SEED_BOT_WRITE_KEY
@@ -98,7 +98,7 @@ module.exports = {
 
     if (incidentId) {
       request({
-        uri: `https://raheem.ai/api/v1/incidents/${incidentId}`,
+        uri: `https://www.raheem.ai/api/v1/incidents/${incidentId}`,
         qs: payload,
         rejectUnauthorized: false,
         method: 'PATCH'
@@ -126,7 +126,7 @@ module.exports = {
     let userID = Store.getUserID(fbID);
 
     request({
-      uri: `https://raheem.ai/api/v1/users/${userID}`,
+      uri: `https://www.raheem.ai/api/v1/users/${userID}`,
       qs: payload,
       rejectUnauthorized: false,
       method: 'PUT'
