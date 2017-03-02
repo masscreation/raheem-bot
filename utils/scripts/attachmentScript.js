@@ -10,8 +10,8 @@ module.exports = {
 
   digest(currentFrame, message, fbID){
     return new Promise(function(resolve, reject){
-      if (message.url) {
-        seedAppService.sendAttachment(message.url, fbID);
+      if (message[0] && message[0].payload) {
+        seedAppService.sendAttachment(message[0].payload.url, fbID);
       }
       resolve();
     });
