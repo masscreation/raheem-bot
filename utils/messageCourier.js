@@ -31,7 +31,9 @@ module.exports = {
 
       currentState = state.get(fbID);
 
-      if (currentState['loop'] && currentState["breakKey"] !== message.toLowerCase()) {
+      if (currentState['loop'] &&
+          !message.url &&
+          currentState["breakKey"] !== message.toLowerCase()) {
         reject();
 
       } else {

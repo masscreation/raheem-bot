@@ -105,6 +105,8 @@ module.exports = {
         rejectUnauthorized: false,
         method: 'POST'
       }, function(error, response, body) {
+        console.log("ERROR", error)
+        console.log("BODY", body)
         if(!error && response.statusCode == 200) {
           console.log("success!");
         }
