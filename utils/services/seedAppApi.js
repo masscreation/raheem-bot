@@ -91,6 +91,27 @@ module.exports = {
     }
   },
 
+  sendAttachment(url, fbID) {
+    let incidentId = Store.getActiveSurveyId(fbID);
+
+    if (incidentId) {
+      request({
+        uri: `https://www.raheem.ai/api/v1/attachments`,
+        qs: {
+              attachment_id: incidentId,
+              asset: url,
+              write_key: SEED_BOT_WRITE_KEY
+            },
+        rejectUnauthorized: false,
+        method: 'POST'
+      }, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+          console.log("success!");
+        }
+      });
+    }
+  },
+
   logIncidentData(fbID){
 
     let payload = prepareIncidentPayload(fbID);
@@ -200,6 +221,7 @@ let prepareIncidentPayload = function(fbID) {
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
+  data !== {} ? payload['metadata'] = data : null;
 
   return payload
 }

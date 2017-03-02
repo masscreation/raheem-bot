@@ -267,7 +267,7 @@
     "type": "button",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "EMERGENCY?",
+    "responseKey": "POLICE_SEARCH?",
     "text": "Did the police search you or your property?",
     "options": [{
         "title": "Yes",
@@ -288,7 +288,7 @@
     "type": "button",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "EMERGENCY?",
+    "responseKey": "PERMISSION_TO_SEARCH?",
     "text": "Did you give them permission to?",
     "options": [{
         "title": "Yes",
@@ -752,7 +752,7 @@
     "type": "quickReply",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "FEELING_REACTION",
+    "responseKey": "USER_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Protected",
@@ -790,7 +790,7 @@
     "type": "quickReply",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "FEELING_REACTION",
+    "responseKey": "USER_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Taken care of",
@@ -828,7 +828,7 @@
     "type": "quickReply",
     "anchor": true,
     "scripts": ["varScript"],
-    "responseKey": "FEELING_REACTION",
+    "responseKey": "USER_REACTION",
     "text": "Choose the one that describes how you felt.",
     "options": [{
         "title": "Threatened",
@@ -870,6 +870,8 @@
     "type": "quickReply",
     "anchor": true,
     "text": "Thanks. Now what describes the officer’s behavior?",
+    "scripts": ["varScript"],
+    "responseKey": "OFFICER_DISPOSITION",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -918,6 +920,8 @@
     "type": "quickReply",
     "anchor": true,
     "text": "Thanks. Now what describes the officer’s behavior?",
+    "scripts": ["varScript"],
+    "responseKey": "OFFICER_DISPOSITION",
     "options": [{
         "title": "Approachable",
         "data": "approachable"
@@ -958,6 +962,8 @@
     "type": "quickReply",
     "anchor": true,
     "text": "Thanks. Now what describes the officer’s behavior?",
+    "scripts": ["varScript"],
+    "responseKey": "OFFICER_DISPOSITION",
     "options": [
       {
         "title": "Discriminatory",
@@ -1015,6 +1021,7 @@
 
   "STEP:MEDIA_UPLOAD": {
     "type": "button",
+    "scripts": ["attachmentScript"],
     "loop": true,
     "breakKey": "done",
     "text": "Go ahead. Send me as many files as you would like, then hit done.",

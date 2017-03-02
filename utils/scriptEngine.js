@@ -7,7 +7,8 @@ let scripts = [
   "varScript",
   "locationScript",
   "dateScript",
-  "timeScript"
+  "timeScript",
+  "attachmentScript"
 ];
 
 let scriptArray = [];
