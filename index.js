@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const request = require('request');
+const fs = require('file-system');
 const messageRelay = require('./utils/messageRelay.js');
 const app = express();
 
@@ -13,8 +14,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // index
-app.get('/', function (req, res) {
-	res.send('hello world i am a secret bot');
+
+app.get('/terms-of-use', function(req, res){
+  let tempFile="./docs/terms-of-use-raheem.pdf";
+  fs.readFile(tempFile, function (err, data){
+     res.contentType("application/pdf");
+     res.send(data);
+  });
+});
+
+app.get('/privacy-policy', function(req, res){
+  let tempFile="./docs/privacy-policy-raheem.pdf";
+  fs.readFile(tempFile, function (err, data){
+     res.contentType("application/pdf");
+     res.send(data);
+  });
 });
 
 app.get('/loaderio-59127a886b54b3976354427f20dcdb25', function(req, res) {

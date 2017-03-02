@@ -15,6 +15,7 @@
     "config": "^1.20.4",
     "datejs": "^1.0.0-rc3",
     "express": "^4.13.4",
+    "file-system": "^2.2.2",
     "request": "^2.71.0",
     "xdate": "^0.8.0"
   },
