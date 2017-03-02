@@ -22,7 +22,7 @@ module.exports = class Message {
 
     // You may get a text or attachment but not both
     if (this.attachment){
-      this.userContent = this.attachment[0];
+      this.userContent = this.attachment;
     } else if (this.quickReply){
       this.userContent = this.quickReply.payload;
     } else {
