@@ -55,6 +55,8 @@ module.exports = {
       currentState = "STEP:UNKNOWN_INPUT";
 
     } else if (Store.getFlags(fbID).length > 0){
+      console.log('FLAGGED');
+      console.log("flags: ", Store.getFlags(fbID))
       currentState = "STEP:UNKNOWN_INPUT";
       Store.flushFlags(fbID);
 
