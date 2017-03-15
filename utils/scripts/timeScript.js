@@ -34,7 +34,7 @@ function testTime(time) {
 
 function testShortTime(time) {
   const regex = /^([0]?[1-9]|1[0-2])\s?(AM|PM)?$/i;
-  return regex.text(time)
+  return regex.test(time)
 }
 
 function testLongTime(time) {
