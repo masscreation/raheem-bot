@@ -29,6 +29,15 @@ module.exports = {
 
 
 function testTime(time) {
+  return testLongTime(time) || testShortTime(time);
+}
+
+function testShortTime(time) {
+  const regex = /^([0]?[1-9]|1[0-2])\s?(AM|PM)?$/i;
+  return regex.text(time)
+}
+
+function testLongTime(time) {
   const regex = /^([0]?[1-9]|1[0-2]):([0-5]\d)\s?(AM|PM)?$/i;
   return regex.test(time);
 }
