@@ -1,6 +1,6 @@
 {
   "STEP:1_GET_STARTED_PAYLOAD": {
-    "nextMessage": "STEP:STEP:BETA_INTRO"
+    "nextMessage": "STEP:BETA_INTRO"
   },
 
   "STEP:BETA_INTRO": {
