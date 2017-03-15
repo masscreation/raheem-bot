@@ -1,6 +1,6 @@
 {
   "STEP:1_GET_STARTED_PAYLOAD": {
-    "nextMessage": "STEP:BETA_INTRO"
+    "nextMessage": "STEP:USER_GENDER_ENTRY"
   },
 
   "STEP:BETA_INTRO": {
@@ -1101,6 +1101,10 @@
       {
         "title": "Genderqueer",
         "data": "genderqueer"
+      },
+      {
+        "title": "Gender-Nonconforming",
+        "data": "gender-nonconforming"
       },
       {
         "title": "Man",

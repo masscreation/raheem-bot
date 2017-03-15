@@ -1,0 +1,59 @@
+{
+  "incident": {
+    "date_of_incident": 12345566,
+    "time_of_incident": "10:23pm",
+    "location": {
+      "lat": 0.123232,
+      "long": 1.23233
+    },
+    "contact_outcome": [
+      "crime",
+      "arrest"
+    ],
+    "initial_contact": [
+      "got pulled over"
+    ],
+    "police_action": [
+      "wanted information",
+      "arrested you"
+    ],
+    "search": {
+      "searched": true,
+      "consent": false,
+    },
+    "emergency": true,
+    "response_time": "less than 2 minutes",
+    "number_of_officers": 2,
+    "officers": [
+      {
+        "name": "John Smith",
+        "badge_number": 123456,
+        "race": "asian",
+        "gender": "man",
+        "age": "20-30",
+        "details": "he had a face tattoo"
+      }
+    ],
+    "user_expectation": true,
+    "encounter_rating": 3,
+    "user_reactions": [
+      "protected",
+      "safe"
+    ],
+    "police_behaviour": [
+      "helpful",
+      "calm",
+      "friendly"
+    ],
+    "attachments": [
+      "www.host.com/image_1.jpg"
+      "www.host.com/image_2.jpg"
+    ],
+    "user": {
+      "race": "white/caucasian",
+      "gender": "man",
+      "identification": "transgender",
+      "birth_year": "1990"
+    }
+  }
+}
