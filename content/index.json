@@ -188,7 +188,10 @@
         "data": "didn't get one"
       }
     ],
-    "nextMessage": "STEP:INITIAL_CONTACT_CATALYST"
+    "nextMessage": {
+      "didn't get one": "STEP:CITATION_NUMBER",
+      "*": "STEP:CASE_NUMBER"
+    }
   },
 
   "STEP:CASE_NUMBER": {
@@ -197,6 +200,21 @@
     "scripts": ["varScript"],
     "responseKey": "CASE_NUMBER",
     "text": "If you have the case number, type it in, or select Didn’t get one.",
+    "options": [{
+        "title": "Didn't get one",
+        "data": "didn't get one"
+      }
+    ],
+    "nextMessage": {
+      "didn't get one": "STEP:INITIAL_CONTACT_CATALYST",
+      "*": "STEP:CASE_NUMBER_CONFIRMATION"
+    }
+  },
+
+  "STEP:CASE_NUMBER_CONFIRMATION": {
+    "type": "text",
+    "scripts": ["varScript"],
+    "text": "${'CASE_NUMBER'}, got it!",
     "options": [{
         "title": "Didn't get one",
         "data": "didn't get one"
