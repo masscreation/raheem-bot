@@ -215,7 +215,7 @@
     "type": "message",
     "scripts": ["varScript"],
     "waitForUser": false,
-    "text": "${'CASE_NUMBER'}, got it!",
+    "text": "${'CASE_NUMBER'}. Got it!",
     "nextMessage": "STEP:INITIAL_CONTACT_CATALYST"
   },
 
