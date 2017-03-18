@@ -212,14 +212,10 @@
   },
 
   "STEP:CASE_NUMBER_CONFIRMATION": {
-    "type": "text",
+    "type": "message",
     "scripts": ["varScript"],
+    "waitForUser": false,
     "text": "${'CASE_NUMBER'}, got it!",
-    "options": [{
-        "title": "Didn't get one",
-        "data": "didn't get one"
-      }
-    ],
     "nextMessage": "STEP:INITIAL_CONTACT_CATALYST"
   },
 
