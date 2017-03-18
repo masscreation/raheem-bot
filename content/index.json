@@ -190,7 +190,7 @@
     ],
     "nextMessage": {
       "didn't get one": "STEP:CITATION_NUMBER",
-      "*": "STEP:CASE_NUMBER"
+      "*": "STEP:CASE_NUMBER_CONFIRMATION"
     }
   },
 
