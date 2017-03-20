@@ -218,12 +218,18 @@ let prepareIncidentPayload = function(fbID) {
   }
 
   //ADD START TIME TO DATE (FINISH DATE PARSING)
+  data['CONTACT_OUTCOME'] ? payload['incident_type_id'] = data['CONTACT_OUTCOME'] : null
   data['DATE_OF_INCIDENT'] ?  payload['start_time'] = data['DATE_OF_INCIDENT'] : null;
   data['ENCOUNTER_SENTIMENT'] ? payload['rating'] = parseInt(data['ENCOUNTER_SENTIMENT']) : null;
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
   data !== {} ? payload['metadata'] = data : null;
+  payload['reactions_list'] = [];
+  data['USER_REACTION'] ? payload['reactions_list'].push(data['USER_REACTION']) : null;
+  data['OFFICER_DISPOSITION'] ? payload['reactions_list'].push(data['OFFICER_DISPOSITION']) : null;
+  payload['tags_list'] = [];
+  data['CONTACT_OUTCOME'] ? payload['tags_list'].push(data['CONTACT_OUTCOME']) : null;
 
   return payload
 }
