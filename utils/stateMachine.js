@@ -94,6 +94,7 @@ module.exports = {
         Store.appendState(currentState, fbID);
 
       } else if (message.toLowerCase() === "restart"){
+        console.log('RESETTING CONVERSATION')
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
         SeedAppService.createIncident(fbID)
