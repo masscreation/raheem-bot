@@ -224,7 +224,7 @@ let prepareIncidentPayload = function(fbID) {
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
-  data !== {} ? payload['metadata'] = data : null;
+  data !== {} ? payload['metadata'] = JSON.stringify(data) : null;
   payload['reactions_list'] = [];
   data['USER_REACTION'] ? payload['reactions_list'].push(data['USER_REACTION']) : null;
   data['OFFICER_DISPOSITION'] ? payload['reactions_list'].push(data['OFFICER_DISPOSITION']) : null;
