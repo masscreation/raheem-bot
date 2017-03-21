@@ -37,7 +37,6 @@ module.exports = {
   },
 
   createIncident(fbID) {
-    let payload = prepareIncidentPayload(fbID);
     let userID = Store.getUserID(fbID);
 
     request({
