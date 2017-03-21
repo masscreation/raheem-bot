@@ -20,8 +20,8 @@ module.exports = {
     if (currentState === 'STEP:FINAL_INFO'){
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
-      Store.archiveData(fbID);
       SeedAppService.closeIncident(fbID);
+      Store.archiveData(fbID);
     }
 
     if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS") {
