@@ -132,9 +132,11 @@ module.exports = {
           let response = JSON.parse(body).data;
 
           if (status == 200) {
+            console.log("SUCCESSFUL UPDATE INCIDENT")
             return(body)
 
           } else {
+            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + response.error)
             return(new Error('server error: ' + response.error))
 
           }
