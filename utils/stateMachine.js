@@ -4,7 +4,7 @@ const Store = require('./store');
 const SeedAppService = require('./services/seedAppApi');
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
-const greetingVar = "Raheem is a Facebook Messenger chatbot that captures your interactions with police to build a national database of police performance open to the public"
+const greetingVar = "Raheem is a Facebook Messenger chatbot that captures your interactions with police to build a national database of police performance open to the public."
 let currentState = initialState;
 
 /*
