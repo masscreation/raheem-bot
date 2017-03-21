@@ -94,7 +94,7 @@ module.exports = {
         currentState = Store.users['state'][lastStateIndex - 2];
         Store.appendState(currentState, fbID);
 
-      } else if (message.toLowerCase() === "restart" || message.toLowerCase() === greetingVar){
+      } else if (message.toLowerCase() === "restart" || message === greetingVar){
         console.log('RESETTING CONVERSATION')
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
