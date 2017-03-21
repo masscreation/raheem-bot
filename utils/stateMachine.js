@@ -4,6 +4,7 @@ const Store = require('./store');
 const SeedAppService = require('./services/seedAppApi');
 const content = require('../content');
 const initialState = "STEP:1_GET_STARTED_PAYLOAD";
+const greetingVar = "Raheem is a Facebook Messenger chatbot that captures your interactions with police to build a national database of police performance open to the public"
 let currentState = initialState;
 
 /*
@@ -93,7 +94,7 @@ module.exports = {
         currentState = Store.users['state'][lastStateIndex - 2];
         Store.appendState(currentState, fbID);
 
-      } else if (message.toLowerCase() === "restart"){
+      } else if (message.toLowerCase() === "restart" || greetingVar){
         console.log('RESETTING CONVERSATION')
         currentState = Store.resetState(fbID);
         Store.appendState(currentState, fbID);
@@ -112,7 +113,7 @@ module.exports = {
   get(fbID) {
     currentState = Store.getState(fbID);
 
-    console.log('GET STATE: ', currentState)
+    // console.log('GET STATE: ', currentState)
     return content[currentState];
   }
 
