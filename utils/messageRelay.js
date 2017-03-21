@@ -81,7 +81,6 @@ module.exports = function(rawEvent) {
           });
           MessageCourier.out(digestedMessage, senderID)
           .then(function(newMessage){
-            SeedAppService.logIncidentData(senderID);
             callback(null, newMessage);
           });
         });

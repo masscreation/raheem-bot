@@ -16,6 +16,8 @@ module.exports = {
 
   next(message, fbID) {
     currentState = Store.getState(fbID);
+    
+    SeedAppService.logIncidentData(senderID);
 
     if (currentState === 'STEP:FINAL_INFO'){
       SeedAppService.logIncidentData(fbID);
