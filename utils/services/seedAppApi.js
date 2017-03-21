@@ -136,7 +136,7 @@ module.exports = {
             return(body)
 
           } else {
-            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + response)
+            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + response[0] + response[1])
             return(new Error('server error: ' + response.error))
 
           }
