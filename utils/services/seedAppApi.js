@@ -137,8 +137,9 @@ module.exports = {
             return(body)
 
           } else {
-            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + util.inspect(response, {showHidden: false, depth: null}))
-            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + util.inspect(body, {showHidden: false, depth: null}))
+            console.log('UNSUCCESSFUL UPDATE INCIDENT RESPONSE: ' + util.inspect(response, {showHidden: false, depth: null}))
+            console.log('UNSUCCESSFUL UPDATE INCIDENT BODY: ' + util.inspect(body, {showHidden: false, depth: null}))
+            console.log('UNSUCCESSFUL UPDATE INCIDENT ERROR: ' + util.inspect(error, {showHidden: false, depth: null}))
             return(new Error('server error: ' + response.error))
 
           }
@@ -185,8 +186,8 @@ let prepareUserPayload = function(fbID) {
     write_key: SEED_BOT_WRITE_KEY
   }
 
-  data['USER_RACE'] ?  payload['race_id'] = data['USER_RACE'] : null;
-  data['USER_GENDER'] ? payload['gender_id'] = data['USER_GENDER'] : null;
+  data['USER_RACE'] ?  payload['race_name'] = data['USER_RACE'] : null;
+  data['USER_GENDER'] ? payload['gender_name'] = data['USER_GENDER'] : null;
   data['USER_BIRTHDATE'] ? payload['birthday'] = data['USER_BIRTHDATE'] : null;
 
   return payload
@@ -204,8 +205,8 @@ let prepareOfficerPayload = function(fbID){
 
   data['OFFICER_NAME'] ?  payload['name'] = data['OFFICER_NAME'] : null;
   data['OFFICER_BADGE_NUMBER'] ? payload['badge_number'] = data['OFFICER_BADGE_NUMBER'] : null;
-  data['OFFICER_GENDER'] ? payload['gender_id'] : null;
-  data['OFFICER_RACE'] ? payload['race_id'] : null;
+  data['OFFICER_GENDER'] ? payload['gender_name'] : null;
+  data['OFFICER_RACE'] ? payload['race_name'] : null;
   data['OFFICER_DETAILS_DESCRIPTION'] ? payload['description'] = data['OFFICER_DETAILS_DESCRIPTION'] : null;
 
   return payload
