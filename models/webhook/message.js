@@ -3,8 +3,7 @@
 module.exports = class Message {
 
   constructor(event) {
-    console.log("EVENT", event)
-
+    
     this.senderID = event.sender.id;
     this.recipientID = event.recipient.id;
     this.timeOfMessage = event.timestamp;

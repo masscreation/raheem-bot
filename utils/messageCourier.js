@@ -13,6 +13,7 @@ module.exports = {
   in(rawEvent, fbID) {
     return new Promise(function(resolve, reject) {
       let message = rawEvent.userContent;
+      console.log("INCOMING MESSAGE: ", message);
       //Grab state from previous turn
       state.reRoute(message, fbID);
       currentState = state.get(fbID);

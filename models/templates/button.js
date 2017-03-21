@@ -1,7 +1,6 @@
 'use strict'
 
 module.exports = function (recipientID, payload) {
-  console.log(payload);
 
     if (payload !== null) {
 
