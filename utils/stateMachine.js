@@ -17,11 +17,6 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-
-    if (message.toLowerCase() !== "new report" && message.toLowerCase() !== "restart") {
-      SeedAppService.logIncidentData(fbID);
-    }
-
     if (currentState === 'STEP:FINAL_INFO'){
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
@@ -86,31 +81,28 @@ module.exports = {
   },
 
   reRoute(message, fbID){
+    if (isString(message) && message === "Search Again"){
+      currentState = "STEP:QUE_LOCATION_RETRY";
+      Store.appendState(currentState, fbID);
 
-    if (typeof message === "string"){
+    } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
+      let lastStateIndex = Store.users[fbID]['state'].length;
+      currentState = Store.users['state'][lastStateIndex - 2];
+      Store.appendState(currentState, fbID);
 
-      if (message === "Search Again"){
-        currentState = "STEP:QUE_LOCATION_RETRY";
-        Store.appendState(currentState, fbID);
+    } else if (isString(message) && message.toLowerCase() === "restart" || message === greetingVar){
+      console.log('RESETTING CONVERSATION')
+      currentState = Store.resetState(fbID);
+      Store.appendState(currentState, fbID);
+      SeedAppService.createIncident(fbID)
 
-      } else if (message === "resume" && currentState !== "NAV_MENU"){
-        let lastStateIndex = Store.users[fbID]['state'].length;
-        currentState = Store.users['state'][lastStateIndex - 2];
-        Store.appendState(currentState, fbID);
+    } else if (isString(message) && message.toLowerCase() === "new report"){
+      currentState = Store.resetState(fbID);
+      Store.appendState(currentState, fbID);
+      SeedAppService.createIncident(fbID)
 
-      } else if (message.toLowerCase() === "restart" || message === greetingVar){
-        console.log('RESETTING CONVERSATION')
-        currentState = Store.resetState(fbID);
-        Store.appendState(currentState, fbID);
-        SeedAppService.createIncident(fbID)
-
-      } else if (message.toLowerCase() === "new report"){
-        currentState = Store.resetState(fbID);
-        Store.appendState(currentState, fbID);
-        SeedAppService.createIncident(fbID)
-
-      }
-
+    } else {
+      SeedAppService.logIncidentData(fbID);
     }
   },
 
@@ -122,3 +114,7 @@ module.exports = {
   }
 
 };
+
+function isString(message) {
+  return typeof message === "string";
+}
