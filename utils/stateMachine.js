@@ -21,7 +21,6 @@ module.exports = {
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
       SeedAppService.closeIncident(fbID);
-      Store.archiveData(fbID);
     }
 
     if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS") {
