@@ -86,7 +86,9 @@ module.exports = {
         rejectUnauthorized: false,
         method: 'PATCH'
       }, function(error, response, body) {
-        Store.archiveData(fbID);
+        Store.archiveData(fbID, JSON.parse(body)["data"]["id"]);
+        if(!error && response.statusCode == 200) {
+        }
       });
     }
   },
