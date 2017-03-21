@@ -4,6 +4,7 @@ const config = require('config');
 const request = require('request');
 const content = require('../../content');
 const Store = require('../store');
+const util = require('util');
 
 // Google places api key
 // https://developers.google.com/places/web-service/get-api-key
@@ -136,7 +137,8 @@ module.exports = {
             return(body)
 
           } else {
-            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + response[0] + response[1])
+            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + util.inspect(response, {showHidden: false, depth: null}))
+            console.log('UNSUCCESSFUL UPDATE INCIDENT: ' + util.inspect(body, {showHidden: false, depth: null}))
             return(new Error('server error: ' + response.error))
 
           }
