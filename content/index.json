@@ -189,7 +189,7 @@
       }
     ],
     "nextMessage": {
-      "didn't get one": "STEP:CITATION_NUMBER",
+      "didn't get one": "STEP:INITIAL_CONTACT_CATALYST",
       "*": "STEP:CASE_NUMBER_CONFIRMATION"
     }
   },
