@@ -99,7 +99,7 @@ module.exports = {
       request({
         uri: `https://www.raheem.ai/api/v1/attachments`,
         qs: {
-              attachment_id: incidentId,
+              incident_id: incidentId,
               asset_url: url,
               write_key: SEED_BOT_WRITE_KEY
             },
