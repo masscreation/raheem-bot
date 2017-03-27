@@ -21,10 +21,19 @@ class StoreInterface {
                            'flags':    [],
                            'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
                            'archived': {},
-                           'active':   null
+                           'active':   null,
+                           'test': false
                           }
     }
     console.log('SET USER', this.users[fbID])
+  }
+
+  isNotTest(fbID) {
+    return this.users[fbID]['test'];
+  }
+
+  setTest(fbID) {
+    this.users[fbID]['test'] = true;
   }
 
   getActiveSurveyId(fbID) {
@@ -64,6 +73,7 @@ class StoreInterface {
   resetState(fbID) {
     this.users[fbID]['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
     this.users[fbID]['data'] = {};
+    this.users[fbID]['test'] = false;
     return this.users[fbID]['state'][0];
   }
 

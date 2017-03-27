@@ -8,6 +8,33 @@
     "anchor": true,
     "text": "Hi, I’m Raheem. I collect your stories about what happens with police. I'm built to run on mobile devices using Facebook Messenger. Right now I’m in beta.",
     "waitForUser": false,
+    "nextMessage": "STEP:MAIN_MENU"
+  },
+
+  "STEP:MAIN_MENU": {
+    "type": "button",
+    "anchor": true,
+    "text": "What would you like to do?",
+    "options": [{
+        "title": "Fill out a report",
+        "data": "report"
+      },
+      {
+        "title": "Just try me out",
+        "data": "test"
+      }
+    ],
+    "nextMessage": "STEP:GREETING"
+  },
+
+  "STEP:GREETING": {
+    "type": "button",
+    "text": "Alright. Go ahead and try me out. None of your responses will be recorded. To file a report click on “File a report” in the persistent menu.",
+    "options": [{
+        "title": "Ok",
+        "data": "ok"
+      }
+    ],
     "nextMessage": "STEP:GREETING"
   },
 
