@@ -223,7 +223,7 @@ let prepareIncidentPayload = function(fbID) {
   }
 
   //ADD START TIME TO DATE (FINISH DATE PARSING)
-  data['INCIDENT_TYPE'] ? payload['INCIDENT_TYPE'] = data['CONTACT_OUTCOME'] : null
+  data['INCIDENT_TYPE'] ? payload['INCIDENT_TYPE'] = data['INCIDENT_TYPE'] : null
   data['DATE_OF_INCIDENT'] ?  payload['start_time'] = data['DATE_OF_INCIDENT'] : null;
   data['ENCOUNTER_SENTIMENT'] ? payload['rating'] = parseInt(data['ENCOUNTER_SENTIMENT']) : null;
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
