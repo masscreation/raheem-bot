@@ -17,13 +17,6 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
-      Store.setTest(fbID, true);
-    } else if (currentState === 'STEP:MAIN_MENU' && message === 'report') {
-      Store.setTest(fbID, false);
-      SeedAppService.createIncident(fbID);
-    }
-
     if (currentState === 'STEP:FINAL_INFO' && Store.isNotTest(fbID)){
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
@@ -88,31 +81,44 @@ module.exports = {
   },
 
   reRoute(message, fbID){
-    if (isString(message) && message === "Search Again"){
-      currentState = "STEP:QUE_LOCATION_RETRY";
-      Store.appendState(currentState, fbID);
+    return new Promise(function(resolve, reject) {
 
-    } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
-      let lastStateIndex = store.users[fbID]['state'].length;
-      currentState = store.users[fbID]['state'][lastStateIndex - 2];
-      Store.appendState(currentState, fbID);
+      if (isString(message) && message === "Search Again"){
+        currentState = "STEP:QUE_LOCATION_RETRY";
+        Store.appendState(currentState, fbID);
 
-    } else if (isString(message) && message.toLowerCase() === "restart" || message === greetingVar){
-      console.log('RESETTING CONVERSATION')
-      currentState = Store.resetState(fbID);
-      Store.appendState(currentState, fbID);
-      // if (Store.isNotTest(fbID)) {
-      //   SeedAppService.createIncident(fbID);
-      // }
+      } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
+        let lastStateIndex = store.users[fbID]['state'].length;
+        currentState = store.users[fbID]['state'][lastStateIndex - 2];
+        Store.appendState(currentState, fbID);
 
-    } else if (isString(message) && message.toLowerCase() === "new report"){
-      currentState = Store.resetState(fbID);
-      Store.appendState(currentState, fbID);
-      // if (Store.isNotTest(fbID)) {
-      //   SeedAppService.createIncident(fbID);
-      // }
+      } else if (isString(message) && message.toLowerCase() === "restart" || message === greetingVar){
+        console.log('RESETTING CONVERSATION')
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
+        // if (Store.isNotTest(fbID)) {
+        //   SeedAppService.createIncident(fbID);
+        // }
 
-    }
+      } else if (isString(message) && message.toLowerCase() === "new report"){
+        currentState = Store.resetState(fbID);
+        Store.appendState(currentState, fbID);
+        // if (Store.isNotTest(fbID)) {
+        //   SeedAppService.createIncident(fbID);
+        // }
+
+      }
+
+      if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
+        Store.setTest(fbID, true);
+        resolve();
+      } else if (currentState === 'STEP:MAIN_MENU' && message === 'report') {
+        Store.setTest(fbID, false);
+        SeedAppService.createIncident(fbID).then(function() {
+          resolve();
+        });
+      }
+    });
   },
 
   get(fbID) {

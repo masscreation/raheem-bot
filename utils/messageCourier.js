@@ -17,13 +17,14 @@ module.exports = {
       let message = rawEvent.userContent;
       console.log("INCOMING MESSAGE: ", message);
       //Grab state from previous turn
-      state.reRoute(message, fbID);
-      currentState = state.get(fbID);
+      state.reRoute(message, fbID).then(function() {
+        currentState = state.get(fbID);
         //If the currentState includes scripts, iterate through and execute them
-      scriptEngine.digest(currentState, message, fbID)
-      .then(function() {
-        resolve(message);
+        scriptEngine.digest(currentState, message, fbID)
+        .then(function() {
+          resolve(message);
 
+        });
       });
     });
   },
