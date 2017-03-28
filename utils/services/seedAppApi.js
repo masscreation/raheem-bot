@@ -24,6 +24,8 @@ module.exports = {
         method: 'POST'
       }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
+          console.log("response: ", util.inspect(response, {showHidden: false, depth: null}))
+          console.log("body: ", util.inspect(body, {showHidden: false, depth: null}))
           let status = JSON.parse(body).meta;
           let response = JSON.parse(body).data;
           Store.setUser(response.id, fbID);
