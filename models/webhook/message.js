@@ -21,15 +21,15 @@ module.exports = class Message {
 
     // You may get a text or attachment but not both
     if (this.attachment){
-      this.userContent = this.attachment;
+      this.users[fbID]Content = this.attachment;
     } else if (this.quickReply){
-      this.userContent = this.quickReply.payload;
+      this.users[fbID]Content = this.quickReply.payload;
     } else {
-      this.userContent = this.message.text;
+      this.users[fbID]Content = this.message.text;
     }
   }
 
   isValid(){
-    return !this.isEcho && this.userContent;
+    return !this.isEcho && this.users[fbID]Content;
   }
 }

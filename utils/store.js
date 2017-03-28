@@ -3,87 +3,88 @@
 class StoreInterface {
 
   constructor(data) {
+    this.users = {};
   }
 
   setUser(fbID, blob) {
-    this.user = blob;
+    this.users[fbID] = blob;
   }
 
   getUser(fbID) {
-    return this.user;
+    return this.users[fbID];
   }
 
   isNotTest(fbID) {
-    return !this.user['test'];
+    return !this.users[fbID]['test'];
   }
 
   setTest(fbID, bool) {
-    this.user['test'] = bool;
+    this.users[fbID]['test'] = bool;
   }
 
   getActiveSurveyId(fbID) {
-    return this.user["currentSurveyID"];
+    return this.users[fbID]["currentSurveyID"];
   }
 
   saveActiveSurveyId(fbID, surveyID) {
-    this.user["currentSurveyID"] = surveyID;
+    this.users[fbID]["currentSurveyID"] = surveyID;
   }
 
   getData(fbID) {
-    return this.user['data'];
+    return this.users[fbID]['data'];
   }
 
   getUserID(fbID) {
-    console.log('GOT USER: ', this.user['dbID']);
-    return this.user['dbID'];
+    console.log('GOT USER: ', this.users[fbID]['dbID']);
+    return this.users[fbID]['dbID'];
   }
 
   getDatapoint(key, fbID) {
-    return this.user['data'][key];
+    return this.users[fbID]['data'][key];
   }
 
   saveDatapoint(key, value, fbID) {
-    return this.user['data'][key] = value;
+    return this.users[fbID]['data'][key] = value;
   }
 
   appendState(frame, fbID) {
-    let state = this.user['state']
+    let state = this.users[fbID]['state']
     state.push(frame);
   }
 
   getState(fbID) {
-    let state = this.user['state'];
+    let state = this.users[fbID]['state'];
     return state[state.length - 1];
   }
 
   resetState(fbID) {
-    this.user['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
-    this.user['data'] = {};
-    this.user['test'] = false;
-    return this.user['state'][0];
+    this.users[fbID]['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
+    this.users[fbID]['data'] = {};
+    this.users[fbID]['test'] = false;
+    return this.users[fbID]['state'][0];
   }
 
   saveData(fbID) {
-    this.user['active'] = this.data;
+    this.users[fbID]['active'] = this.data;
   }
 
   archiveData(fbID, surveyID) {
-    if (!this.user['archived']){
-      this.user['archived'] = {};
+    if (!this.users[fbID]['archived']){
+      this.users[fbID]['archived'] = {};
     }
-    this.user['archived'][surveyID] = this.user['data'];
+    this.users[fbID]['archived'][surveyID] = this.users[fbID]['data'];
   }
 
   addFlag(fbID) {
-    this.user['flags'].push(flag)
+    this.users[fbID]['flags'].push(flag)
   }
 
   getFlags(fbID) {
-    return this.user['flags'];
+    return this.users[fbID]['flags'];
   }
 
   flushFlags(fbID) {
-    this.user['flags'] = [];
+    this.users[fbID]['flags'] = [];
   }
 };
 

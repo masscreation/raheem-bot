@@ -12,7 +12,7 @@ module.exports = class Postback {
     this.postback = event.postback || 0;
 
     // You may get a text or attachment but not both
-    this.userContent = this.postback.payload;
+    this.users[fbID]Content = this.postback.payload;
   }
 
 }

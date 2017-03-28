@@ -22,9 +22,9 @@ module.exports = {
 			});
 
 			if(message[0].payload !== undefined && message[0].title !== 'Attachment Unavailable') {
-				store.user['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
+				store.users[fbID]['data'][currentFrame["responseKey"]] = JSON.stringify(message[0].payload.coordinates);
 			} else {
-				store.user['flags'].push("ERROR:INVALID_LOCATION");
+				store.users[fbID]['flags'].push("ERROR:INVALID_LOCATION");
 			}
 		});
 	},
