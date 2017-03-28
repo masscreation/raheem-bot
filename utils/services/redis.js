@@ -16,16 +16,20 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
-        console.log('SAVED USER: ', reply);
-        console.log('ERROR, ERROR! ', err);
-        resolve({ 'dbID':     dbID,
-                  'data':     {},
-                  'flags':    [],
-                  'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
-                  'archived': {},
-                  'active':   null
-                });
-      })
+        if (reply === 1) {
+          client.get(strID, function(blob) {
+            resolve(blob)
+          });
+        } else {
+          resolve({ 'dbID':     dbID,
+                    'data':     {},
+                    'flags':    [],
+                    'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                    'archived': {},
+                    'active':   null
+                  });
+        }
+      });
       // client.get(strID, function(err, reply) {
       //   if (reply) {
       //     console.log('SAVED USER: ', reply)
@@ -48,7 +52,7 @@ module.exports = {
   saveUserBlob(fbID, blob) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.hmset(strID, JSON.stringify(blob), function(err, reply){
+      client.set(strID, JSON.stringify(blob), function(err, reply){
         resolve();
       });
     });
