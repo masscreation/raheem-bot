@@ -15,7 +15,7 @@ module.exports = {
   getUserBlob(dbID, fbID) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.exists(strID, function(err, reply)) {
+      client.exists(strID, function(err, reply) {
         console.log('SAVED USER: ', reply);
         console.log('ERROR, ERROR! ', err);
         resolve({ 'dbID':     dbID,
