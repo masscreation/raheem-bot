@@ -17,17 +17,17 @@ class StoreInterface {
   }
 
   setUser(dbID, fbID) {
-    // let user = this.user;
+    let user = this.user;
 
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
         if (reply === 1) {
-          this.user = JSON.parse(client.hmget(strID));
+          user = JSON.parse(client.hmget(strID));
           console.log('OLD USER: ', user)
           resolve();
         } else {
-          this.user = { 'dbID':     dbID,
+          user = { 'dbID':     dbID,
                         'data':     {},
                         'flags':    [],
                         'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
@@ -37,8 +37,8 @@ class StoreInterface {
           console.log('NEW USER: ', user)
           resolve();
         }
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   endTurn(fbID) {
