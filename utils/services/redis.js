@@ -18,6 +18,7 @@ module.exports = {
       client.exists(strID, function(err, reply) {
         if (reply === 1) {
           client.get(strID, function(err, blob) {
+            console.log("GOT BLOB OK: ", blob)
             resolve(JSON.parse(blob));
           });
         } else {
