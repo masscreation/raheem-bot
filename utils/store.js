@@ -39,7 +39,7 @@ class StoreInterface {
           resolve();
         }
       });
-    )}
+    });
   }
 
   endTurn(fbID) {
