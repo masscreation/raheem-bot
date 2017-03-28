@@ -5,7 +5,7 @@ const request = require('request');
 const content = require('../../content');
 const Store = require('../store');
 const util = require('util');
-const RedisStore = require('./redis');
+const RedisService= require('./redis');
 
 // Google places api key
 // https://developers.google.com/places/web-service/get-api-key
