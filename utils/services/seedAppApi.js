@@ -217,8 +217,9 @@ let prepareOfficerPayload = function(fbID){
 }
 
 let prepareIncidentPayload = function(fbID) {
-
+  console.log("PREPARING INCIDENT DATA")
   let data = Store.getData(fbID);
+  console.log("DATA: ", JSON.stringify(data))
   let userID = Store.getUserID(fbID);
 
   let payload = {
