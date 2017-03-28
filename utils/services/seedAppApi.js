@@ -5,6 +5,7 @@ const request = require('request');
 const content = require('../../content');
 const Store = require('../store');
 const util = require('util');
+const RedisStore = require('./redis');
 
 // Google places api key
 // https://developers.google.com/places/web-service/get-api-key
@@ -27,10 +28,9 @@ module.exports = {
           // console.log("response: ", util.inspect(response, {showHidden: false, depth: null}))
           let status = JSON.parse(body).meta;
           let response = JSON.parse(body).data;
-          Store.setUser(response.id, fbID).then(function() {
-            resolve(messagingEvent);
+          RedisService.getUserBlob(response.id, fbID).then(function(blob){
+            Store.setUser(fbID, blob);
           });
-
         } else {
           reject(new Error('server error: ' + response.error));
         }

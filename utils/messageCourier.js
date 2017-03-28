@@ -5,6 +5,7 @@ const state = require("./stateMachine");
 const messageThread = require("./messageThread");
 const scriptEngine = require("./scriptEngine");
 const Store = require("./store");
+const RedisService = require("./services/redis");
 
 let currentState, outgoingMessage, output;
 
@@ -44,9 +45,12 @@ module.exports = {
         currentState = state.get(fbID);
 
         let outgoingMessages = messageThread.set(currentState, message, fbID);
-        
-        Store.endTurn(fbID);
-        resolve(outgoingMessages);
+
+        RedisService.saveUserBlob(fbID, this.user)
+        .then(function() {
+          resolve(outgoingMessages);
+        });
+
       }
     });
   }
