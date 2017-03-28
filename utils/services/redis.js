@@ -15,26 +15,17 @@ module.exports = {
   getUserBlob(dbID, fbID) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.exists(strID, function(err, reply) {
-        if (reply === 1) {
-          console.log('USER EXISTS')
-          client.hmget(strID, function(err, user) {
-            console.log('OLD USER: ', user)
-            resolve(user);
-          });
+      client.get(strID, function(err, reply) {
+        if (reply) {
+          resolve(JSON.parse(reply));
         } else {
-          user = { 'dbID':     dbID,
+          resolve({ 'dbID':     dbID,
                     'data':     {},
                     'flags':    [],
                     'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
                     'archived': {},
                     'active':   null
-                  }
-          console.log('NEW USER: ', user)
-          resolve(user);
-        }
-        if (err) {
-          console.log('BLEK: ', err);
+                  });
         }
       });
     });
