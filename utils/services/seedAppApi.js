@@ -123,6 +123,7 @@ module.exports = {
 
     let payload = prepareIncidentPayload(fbID);
     let incidentId = Store.getActiveSurveyId(fbID);
+    console.log('')
 
     if (incidentId) {
       request({
@@ -219,8 +220,9 @@ let prepareOfficerPayload = function(fbID){
 let prepareIncidentPayload = function(fbID) {
   console.log("PREPARING INCIDENT DATA")
   let data = Store.getData(fbID);
-  console.log("DATA: ", JSON.stringify(data))
   let userID = Store.getUserID(fbID);
+  console.log("DATA: ", JSON.stringify(data))
+  console.log("USER_ID: ", userID)
 
   let payload = {
     user_id: userID,
