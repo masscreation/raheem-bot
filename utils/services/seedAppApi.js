@@ -123,8 +123,7 @@ module.exports = {
 
     let payload = prepareIncidentPayload(fbID);
     let incidentId = Store.getActiveSurveyId(fbID);
-    console.log('')
-
+    console.log('incident_id: ', incidentId);
     if (incidentId) {
       request({
         uri: `https://www.raheem.ai/api/v1/incidents/${incidentId}`,
