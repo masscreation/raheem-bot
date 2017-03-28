@@ -17,25 +17,29 @@ class StoreInterface {
   }
 
   setUser(dbID, fbID) {
-    let strID = JSON.stringify(fbID);
-    let user;
-    client.exists(strID, function(err, reply) {
-      if (reply === 1) {
-        user = JSON.parse(client.hmget(strID));
-        console.log('OLD USER: ', user)
-      } else {
-        user = { 'dbID':     dbID,
-                      'data':     {},
-                      'flags':    [],
-                      'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
-                      'archived': {},
-                      'active':   null
-                    }
-        console.log('NEW USER: ', user)
-      }
-    });
-    this.user = user;
-    console.log('SET USER', this.user)
+    let user = this.user;
+
+    return new Promise(function(resolve, reject) {
+      let strID = JSON.stringify(fbID);
+      let user;
+      client.exists(strID, function(err, reply) {
+        if (reply === 1) {
+          user = JSON.parse(client.hmget(strID));
+          console.log('OLD USER: ', user)
+          resolve();
+        } else {
+          user = { 'dbID':     dbID,
+                        'data':     {},
+                        'flags':    [],
+                        'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                        'archived': {},
+                        'active':   null
+                      }
+          console.log('NEW USER: ', user)
+          resolve();
+        }
+      });
+    )}
   }
 
   endTurn(fbID) {

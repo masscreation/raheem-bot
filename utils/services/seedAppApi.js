@@ -27,8 +27,9 @@ module.exports = {
           // console.log("response: ", util.inspect(response, {showHidden: false, depth: null}))
           let status = JSON.parse(body).meta;
           let response = JSON.parse(body).data;
-          Store.setUser(response.id, fbID);
-          resolve(messagingEvent);
+          Store.setUser(response.id, fbID).then(function() {
+            resolve(messagingEvent);
+          });
 
         } else {
           reject(new Error('server error: ' + response.error));
