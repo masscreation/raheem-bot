@@ -15,7 +15,6 @@ module.exports = {
   getUserBlob(dbID, fbID) {
     console.log("GETTING USER BLOB")
     return new Promise(function(resolve, reject) {
-      console.log("INSIDE PROMISE")
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
         if (reply === 1) {
@@ -32,6 +31,9 @@ module.exports = {
                   }
           console.log('NEW USER: ', user)
           resolve(user);
+        }
+        if (err) {
+          console.log('BLEK: ', err);
         }
       });
     });
