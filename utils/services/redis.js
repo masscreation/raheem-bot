@@ -13,6 +13,7 @@ if (process.env.REDISTOGO_URL) {
 module.exports = {
 
   getUserBlob(fbID) {
+    console.log("GETTING USER BLOB")
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
@@ -22,12 +23,12 @@ module.exports = {
           resolve(user);
         } else {
           user = { 'dbID':     dbID,
-                        'data':     {},
-                        'flags':    [],
-                        'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
-                        'archived': {},
-                        'active':   null
-                      }
+                    'data':     {},
+                    'flags':    [],
+                    'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                    'archived': {},
+                    'active':   null
+                  }
           console.log('NEW USER: ', user)
           resolve(user);
         }

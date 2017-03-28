@@ -9,10 +9,6 @@ class StoreInterface {
     this.user = blob;
   }
 
-  endTurn(fbID) {
-    RedisService.saveUserBlob(fbID, this.user);
-  }
-
   getActiveSurveyId(fbID) {
     return this.user["currentSurveyID"];
   }

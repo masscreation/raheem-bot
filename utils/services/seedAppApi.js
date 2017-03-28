@@ -28,7 +28,8 @@ module.exports = {
           // console.log("response: ", util.inspect(response, {showHidden: false, depth: null}))
           let status = JSON.parse(body).meta;
           let response = JSON.parse(body).data;
-          RedisService.getUserBlob(response.id, fbID).then(function(blob){
+          RedisService.getUserBlob(response.id, fbID)
+          .then(function(blob){
             Store.setUser(fbID, blob);
           });
         } else {
