@@ -3,7 +3,7 @@
 module.exports = class Message {
 
   constructor(event) {
-    
+
     this.senderID = event.sender.id;
     this.recipientID = event.recipient.id;
     this.timeOfMessage = event.timestamp;
@@ -21,15 +21,15 @@ module.exports = class Message {
 
     // You may get a text or attachment but not both
     if (this.attachment){
-      this.users[fbID]Content = this.attachment;
+      this.userContent = this.attachment;
     } else if (this.quickReply){
-      this.users[fbID]Content = this.quickReply.payload;
+      this.userContent = this.quickReply.payload;
     } else {
-      this.users[fbID]Content = this.message.text;
+      this.userContent = this.message.text;
     }
   }
 
   isValid(){
-    return !this.isEcho && this.users[fbID]Content;
+    return !this.isEcho && this.userContent;
   }
 }

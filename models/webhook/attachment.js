@@ -22,10 +22,10 @@ module.exports = class Attachment {
     this.metadata = this.message.metadata || {};
 
     // You may get a text or attachment but not both
-    this.users[fbID]Content = this.attachment[0].payload.url;
+    this.userContent = this.attachment[0].payload.url;
   }
 
   isValid(){
-    return !this.isEcho && this.users[fbID]Content;
+    return !this.isEcho && this.userContent;
   }
 }
