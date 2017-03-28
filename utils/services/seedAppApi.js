@@ -41,22 +41,26 @@ module.exports = {
   },
 
   createIncident(fbID) {
-    let userID = Store.getUserID(fbID);
+    return new Promise(function(resolve, reject) {
 
-    request({
-      uri: 'https://www.raheem.ai/api/v1/incidents',
-      qs: { user_id: userID,
-            write_key: SEED_BOT_WRITE_KEY },
-      rejectUnauthorized: false,
-      method: 'POST'
-    }, function(error, response, body) {
-      if(!error && response.statusCode == 200) {
-        if (JSON.parse(body)["data"]["id"]) {
-          let id = JSON.parse(body)["data"]["id"];
-          Store.saveActiveSurveyId(fbID, id);
+      let userID = Store.getUserID(fbID);
+
+      request({
+        uri: 'https://www.raheem.ai/api/v1/incidents',
+        qs: { user_id: userID,
+              write_key: SEED_BOT_WRITE_KEY },
+        rejectUnauthorized: false,
+        method: 'POST'
+      }, function(error, response, body) {
+        if(!error && response.statusCode == 200) {
+          if (JSON.parse(body)["data"]["id"]) {
+            let id = JSON.parse(body)["data"]["id"];
+            Store.saveActiveSurveyId(fbID, id);
+            resolve();
+          }
         }
-      }
-    });
+      });
+    })
   },
 
   createOfficer(fbID) {
