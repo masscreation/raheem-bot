@@ -25,7 +25,7 @@ module.exports = {
                   'archived': {},
                   'active':   null
                 });
-      }
+      })
       // client.get(strID, function(err, reply) {
       //   if (reply) {
       //     console.log('SAVED USER: ', reply)
