@@ -19,7 +19,7 @@ module.exports = {
 
     if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
       Store.setTest(fbID, true);
-    } else {
+    } else if (currentState === 'STEP:MAIN_MENU' && message === 'report') {
       Store.setTest(fbID, false);
       SeedAppService.createIncident(fbID);
     }
