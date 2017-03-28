@@ -14,11 +14,11 @@ class StoreInterface {
   }
 
   isNotTest(fbID) {
-    return this.users[fbID]['test'];
+    return this.user['test'];
   }
 
   setTest(fbID) {
-    this.users[fbID]['test'] = true;
+    this.user['test'] = true;
   }
 
   getActiveSurveyId(fbID) {
