@@ -117,6 +117,8 @@ module.exports = {
         SeedAppService.createIncident(fbID).then(function() {
           resolve();
         });
+      } else {
+        resolve();
       }
     });
   },
