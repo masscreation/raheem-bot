@@ -17,11 +17,12 @@ class StoreInterface {
   }
 
   setUser(dbID, fbID) {
-    client.exists(fbID, function(err, reply) {
+    let strID = JSON.stringify(fbID);
+    client.exists(strID, function(err, reply) {
       if (reply === 1) {
-        this.user = JSON.parse(client.hmget(fbID));
+        this.user = JSON.parse(client.hmget(strID));
       } else {
-        this.user = { 'dbID': dbID,
+        this.user = { 'dbID':     dbID,
                       'data':     {},
                       'flags':    [],
                       'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
@@ -34,7 +35,8 @@ class StoreInterface {
   }
 
   endTurn(fbID) {
-    client.hmset(fbID, JSON.stringify(this.user));
+    let strID = JSON.stringify(fbID);
+    client.hmset(strID, JSON.stringify(this.user));
   }
 
   getActiveSurveyId(fbID) {
