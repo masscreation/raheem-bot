@@ -17,8 +17,8 @@ module.exports = {
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
         if (reply === 1) {
-          client.get(strID, function(blob) {
-            resolve(blob)
+          client.get(strID, function(err, blob) {
+            resolve(JSON.parse(blob));
           });
         } else {
           resolve({ 'dbID':     dbID,
