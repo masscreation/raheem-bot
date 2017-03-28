@@ -29,8 +29,9 @@ module.exports = {
           let status = JSON.parse(body).meta;
           let response = JSON.parse(body).data;
           RedisService.getUserBlob(response.id, fbID)
-          .then(function(blob){
+          .then(function(blob) {
             Store.setUser(fbID, blob);
+            resolve();
           });
         } else {
           reject(new Error('server error: ' + response.error));
