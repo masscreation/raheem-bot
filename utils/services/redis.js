@@ -56,7 +56,9 @@ module.exports = {
   saveUserBlob(fbID, blob) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.set(strID, JSON.stringify(blob), function(err, reply){
+      let strBlob = JSON.stringify(blob);
+      console.log("BLOB TO BE SAVED: ", strBlob)
+      client.set(strID, strBlob, function(err, reply){
         if (err) {
           console.log("ERROR: ", err)
         } else {
