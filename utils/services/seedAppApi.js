@@ -54,7 +54,6 @@ module.exports = {
         if (JSON.parse(body)["data"]["id"]) {
           let id = JSON.parse(body)["data"]["id"];
           console.log("BAAAAHDY", body["data"]["id"]);
-          console.log("BAAAAHDY", JSON.parse(body).data.id);
           Store.saveActiveSurveyId(fbID, id);
         }
       }
