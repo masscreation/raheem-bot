@@ -37,7 +37,7 @@ module.exports = {
     }
 
     if (content[currentState]["referenceStore"]){
-      message = Store.users[fbID]['data'][content[currentState]["referenceStore"]];
+      message = store.user['data'][content[currentState]["referenceStore"]];
     }
 
     currentState = content[currentState].nextMessage
@@ -61,7 +61,7 @@ module.exports = {
       Store.flushFlags(fbID);
 
     } else if (currentState === "STEP:LAST_STEP"){
-      Store.users[fbID]['state'].forEach(function(state){
+      store.user['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = state;
         }
@@ -70,7 +70,7 @@ module.exports = {
 
     if (message === "retry"){
       let newCurrentState;
-      Store.users[fbID]['state'].forEach(function(state){
+      store.user['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = newCurrentState;
           newCurrentState = state;
@@ -86,7 +86,7 @@ module.exports = {
       Store.appendState(currentState, fbID);
 
     } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
-      let lastStateIndex = Store.users[fbID]['state'].length;
+      let lastStateIndex = store.user['state'].length;
       currentState = Store.users['state'][lastStateIndex - 2];
       Store.appendState(currentState, fbID);
 

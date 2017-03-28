@@ -11,12 +11,12 @@ module.exports = {
 
   digest(currentFrame, message, fbID){
     return new Promise(function(resolve, reject){
-      const time = store.users[fbID]['data'][currentFrame["responseKey"]];
+      const time = store.user['data'][currentFrame["responseKey"]];
 
       if (!testTime(time)){
-        store.users[fbID]['flags'].push("ERROR:INVALID_TIME");
+        store.user['flags'].push("ERROR:INVALID_TIME");
       }
-      store.users[fbID]['data'][currentFrame["responseKey"]] = time;
+      store.user['data'][currentFrame["responseKey"]] = time;
 
       resolve();
     })
