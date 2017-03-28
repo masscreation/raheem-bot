@@ -26,7 +26,8 @@ module.exports = {
                     'flags':    [],
                     'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
                     'archived': {},
-                    'active':   null
+                    'active':   null,
+                    'test':     false
                   });
         }
       });
