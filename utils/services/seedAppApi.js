@@ -53,7 +53,6 @@ module.exports = {
       if(!error && response.statusCode == 200) {
         let response = JSON.parse(body);
         if (response.data.id) {
-          console.log("NEW INCIDENT", JSON.stringify(response))
           let id = response.data.id;
           Store.saveActiveSurveyId(fbID, id);
         }
