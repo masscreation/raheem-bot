@@ -20,6 +20,7 @@ module.exports = {
           console.log('SAVED USER: ', reply)
           resolve(JSON.parse(reply));
         } else {
+          console.log('ERROR, ERROR! ', err);
           console.log('NEW USER');
           resolve({ 'dbID':     dbID,
                     'data':     {},
