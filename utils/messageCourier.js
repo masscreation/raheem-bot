@@ -6,6 +6,7 @@ const messageThread = require("./messageThread");
 const scriptEngine = require("./scriptEngine");
 const Store = require("./store");
 const RedisService = require("./services/redis");
+const SeedAppService = require("./services/seedAppApi");
 
 let currentState, outgoingMessage, output;
 
