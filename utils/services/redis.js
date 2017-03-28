@@ -28,7 +28,8 @@ module.exports = {
                     'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
                     'archived': {},
                     'active':   null,
-                    'test':     false
+                    'test':     false,
+                    'currentSurveyID': null
                   });
         }
       });
