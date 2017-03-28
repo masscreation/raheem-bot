@@ -112,12 +112,6 @@ module.exports = {
       //   SeedAppService.createIncident(fbID);
       // }
 
-    } else {
-      if (Store.isNotTest(fbID)) {
-        SeedAppService.logIncidentData(fbID);
-      } else {
-        console.log("SKIPPING, TEST")
-      }
     }
   },
 

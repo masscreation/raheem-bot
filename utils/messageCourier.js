@@ -46,11 +46,15 @@ module.exports = {
 
         let outgoingMessages = messageThread.set(currentState, message, fbID);
 
+        if (Store.isNotTest(fbID)) {
+          SeedAppService.logIncidentData(fbID)
+        } else {
+          console.log("SKIPPING, TEST")
+        }
         RedisService.saveUserBlob(fbID, Store.getUser(fbID))
         .then(function() {
           resolve(outgoingMessages);
         });
-
       }
     });
   }

@@ -30,7 +30,7 @@ class StoreInterface {
 
   saveActiveSurveyId(fbID, surveyID) {
     this.users[fbID]["currentSurveyID"] = surveyID;
-    console.log('IDDDDDD', this.users[fbID]["currentSurveyID"]);
+    console.log('SAVE ACTIVE ID', this.users[fbID]["currentSurveyID"]);
   }
 
   getData(fbID) {
