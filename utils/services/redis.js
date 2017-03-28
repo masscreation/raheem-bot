@@ -22,6 +22,7 @@ module.exports = {
             resolve(JSON.parse(blob));
           });
         } else {
+          console.log("COULDNT FIND BLOB")
           resolve({ 'dbID':     dbID,
                     'data':     {},
                     'flags':    [],
