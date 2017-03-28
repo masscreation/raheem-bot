@@ -1,12 +1,12 @@
 "use strict";
 //
-// if (process.env.REDISTOGO_URL) {
-//   let rtg = require("url").parse(process.env.REDISTOGO_URL);
-//   client = require("redis").createClient(rtg.port, rtg.hostname);
-//   client.auth(rtg.auth.split(":")[1]);
-// } else {
-//   client = require("redis").createClient();
-// }
+if (process.env.REDISTOGO_URL) {
+  let rtg = require("url").parse(process.env.REDISTOGO_URL);
+  client = require("redis").createClient(rtg.port, rtg.hostname);
+  client.auth(rtg.auth.split(":")[1]);
+} else {
+  client = require("redis").createClient();
+}
 
 class StoreInterface {
 
@@ -15,67 +15,75 @@ class StoreInterface {
   }
 
   setUser(dbID, fbID) {
-    if (!this.users[fbID]){
-      this.users[fbID] = { 'dbID':     dbID,
-                           'data':     {},
-                           'flags':    [],
-                           'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
-                           'archived': {},
-                           'active':   null
-                          }
+    client.exists(fbID, function(err, reply) {
+      if (reply === 1) {
+        this.user = JSON.parse(client.hmget(fbID));
+      } else {
+        this.user = { 'dbID': dbID,
+                      'data':     {},
+                      'flags':    [],
+                      'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                      'archived': {},
+                      'active':   null
+                    }
+      }
     }
     console.log('SET USER', this.users[fbID])
   }
 
+  endTurn(fbID) {
+    client.hmset(fbID, JSON.stringify(this.user));
+  }
+
   getActiveSurveyId(fbID) {
-    return this.users[fbID]["currentSurveyID"];
+    return this.user["currentSurveyID"];
   }
 
   saveActiveSurveyId(fbID, surveyID) {
-    this.users[fbID]["currentSurveyID"] = surveyID;
+    this.user["currentSurveyID"] = surveyID;
   }
 
   getData(fbID) {
-    return this.users[fbID]['data'];
+    return this.user['data'];
   }
 
   getUserID(fbID) {
-    return this.users[fbID]['dbID'];
+    return this.user['dbID'];
   }
 
   getDatapoint(key, fbID) {
-    return this.users[fbID]['data'][key];
+    return this.user['data'][key];
   }
 
   saveDatapoint(key, value, fbID) {
-    return this.users[fbID]['data'][key] = value;
+    return this.user['data'][key] = value;
   }
 
   appendState(frame, fbID) {
-    let state = this.users[fbID]['state']
+    let state = this.user['state']
     state.push(frame);
   }
 
   getState(fbID) {
-    let state = this.users[fbID]['state'];
+    let state = this.user['state'];
     return state[state.length - 1];
   }
 
   resetState(fbID) {
-    this.users[fbID]['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
-    this.users[fbID]['data'] = {};
-    return this.users[fbID]['state'][0];
+    this.user['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
+    this.user['data'] = {};
+    return this.user['state'][0];
   }
 
   saveData(fbID) {
-    this.users[fbID]['active'] = this.data;
+    this.user['active'] = this.data;
   }
 
   archiveData(fbID, surveyID) {
-    if (!this.users[fbID]['archived']){
-      this.users[fbID]['archived'] = {};
+    if (!this.user['archived']){
+      this.user['archived'] = {};
     }
-    this.users[fbID]['archived'][surveyID] = this.users[fbID]['data'];
+    this.user['archived'][surveyID] = this.user['data'];
   }
 
   addFlag(fbID) {
