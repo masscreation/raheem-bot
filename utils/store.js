@@ -5,7 +5,7 @@ class StoreInterface {
   constructor(data) {
   }
 
-  setUser(blob) {
+  setUser(fbID, blob) {
     this.user = blob;
   }
 
