@@ -223,18 +223,33 @@ let prepareIncidentPayload = function(fbID) {
   }
 
   //ADD START TIME TO DATE (FINISH DATE PARSING)
-  data['INITIAL_CONTACT'] ? payload['incident_type_name'] = data['INITIAL_CONTACT'] : null
+  data['INITIAL_CONTACT'] ? payload['incident_type_name'] = data['INITIAL_CONTACT'] : null;
   data['DATE_OF_INCIDENT'] ?  payload['start_time'] = data['DATE_OF_INCIDENT'] : null;
   data['ENCOUNTER_SENTIMENT'] ? payload['rating'] = parseInt(data['ENCOUNTER_SENTIMENT']) : null;
   data['FURTHER_DESCRIPTION'] ? payload['description'] = data['FURTHER_DESCRIPTION'] : null;
   data['ENCOUNTER_LOCATION'] ? payload['latitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["lat"] : null;
   data['ENCOUNTER_LOCATION'] ? payload['longitude'] = JSON.parse(data['ENCOUNTER_LOCATION'])["long"] : null;
   data !== {} ? payload['metadata'] = JSON.stringify(data) : null;
-  payload['reactions_list'] = [];
-  data['USER_REACTION'] ? payload['reactions_list'].push(data['USER_REACTION']) : null;
-  data['OFFICER_DISPOSITION'] ? payload['reactions_list'].push(data['OFFICER_DISPOSITION']) : null;
-  payload['tags_list'] = [];
-  data['CONTACT_OUTCOME'] ? payload['tags_list'].push(data['CONTACT_OUTCOME']) : null;
-
+  let reactions_list = [];
+  data['USER_REACTION'] ? reactions_list.push(data['USER_REACTION']) : null;
+  data['OFFICER_DISPOSITION'] ? reactions_list.push(data['OFFICER_DISPOSITION']) : null;
+  payload['reactions_list'] = '';
+  for (let i = 0; i < reactions_list.length; i++) {
+    if (reactions_list[i + 1]) {
+      payload['reactions_list'] += `${reactions_list[i]}, `;
+    } else {
+      payload['reactions_list'] += reactions_list[i];
+    }
+  }
+  let tags_list = [];
+  data['CONTACT_OUTCOME'] ? tags_list.push(data['CONTACT_OUTCOME']) : null;
+  payload['tags_list'] = '';
+  for (let i = 0; i < tags_list.length; i++) {
+    if (tags_list[i + 1]) {
+      payload['tags_list'] += `${tags_list[i]}, `;
+    } else {
+      payload['tags_list'] += tags_list[i];
+    }
+  }
   return payload
 }
