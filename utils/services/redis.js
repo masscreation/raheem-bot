@@ -15,22 +15,33 @@ module.exports = {
   getUserBlob(dbID, fbID) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.get(strID, function(err, reply) {
-        if (reply) {
-          console.log('SAVED USER: ', reply)
-          resolve(JSON.parse(reply));
-        } else {
-          console.log('ERROR, ERROR! ', err);
-          console.log('NEW USER');
-          resolve({ 'dbID':     dbID,
-                    'data':     {},
-                    'flags':    [],
-                    'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
-                    'archived': {},
-                    'active':   null
-                  });
-        }
-      });
+      client.exists(strID, function(err, reply)) {
+        console.log('SAVED USER: ', reply);
+        console.log('ERROR, ERROR! ', err);
+        resolve({ 'dbID':     dbID,
+                  'data':     {},
+                  'flags':    [],
+                  'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+                  'archived': {},
+                  'active':   null
+                });
+      }
+      // client.get(strID, function(err, reply) {
+      //   if (reply) {
+      //     console.log('SAVED USER: ', reply)
+      //     resolve(JSON.parse(reply));
+      //   } else {
+      //     console.log('ERROR, ERROR! ', err);
+      //     console.log('NEW USER');
+      //     resolve({ 'dbID':     dbID,
+      //               'data':     {},
+      //               'flags':    [],
+      //               'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
+      //               'archived': {},
+      //               'active':   null
+      //             });
+      //   }
+      // });
     });
   },
 
