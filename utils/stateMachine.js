@@ -43,7 +43,7 @@ module.exports = {
     }
 
     if (content[currentState]["referenceStore"]){
-      message = store.user['data'][content[currentState]["referenceStore"]];
+      message = Store.user['data'][content[currentState]["referenceStore"]];
     }
 
     currentState = content[currentState].nextMessage
