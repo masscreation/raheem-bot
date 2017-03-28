@@ -53,6 +53,7 @@ module.exports = {
       if(!error && response.statusCode == 200) {
         if (JSON.parse(body)["data"]["id"]) {
           let id = JSON.parse(body)["data"]["id"];
+          console.log("BAAAAHDY", body);
           Store.saveActiveSurveyId(fbID, id);
         }
       }
