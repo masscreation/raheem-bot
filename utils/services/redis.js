@@ -13,14 +13,15 @@ if (process.env.REDISTOGO_URL) {
 module.exports = {
 
   getUserBlob(dbID, fbID) {
-    console.log("GETTING USER BLOB")
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
       client.exists(strID, function(err, reply) {
         if (reply === 1) {
-          user = JSON.parse(client.hmget(strID));
-          console.log('OLD USER: ', user)
-          resolve(user);
+          console.log('USER EXISTS')
+          client.hmget(strID, function(err, user) {
+            console.log('OLD USER: ', user)
+            resolve(user);
+          });
         } else {
           user = { 'dbID':     dbID,
                     'data':     {},
