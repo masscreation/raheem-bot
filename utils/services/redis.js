@@ -54,6 +54,11 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
       client.set(strID, JSON.stringify(blob), function(err, reply){
+        if (err) {
+          console.log("ERROR: ", err)
+        } else {
+          console.log("REPLY: ", reply)
+        }
         resolve();
       });
     });
