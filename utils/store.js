@@ -17,8 +17,8 @@ class StoreInterface {
     return this.user['test'];
   }
 
-  setTest(fbID) {
-    this.user['test'] = true;
+  setTest(fbID, bool) {
+    this.user['test'] = bool;
   }
 
   getActiveSurveyId(fbID) {
