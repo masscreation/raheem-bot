@@ -17,12 +17,6 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (currentState === 'STEP:FINAL_INFO' && Store.isNotTest(fbID)){
-      SeedAppService.logIncidentData(fbID);
-      SeedAppService.updateUser(fbID);
-      SeedAppService.closeIncident(fbID);
-    }
-
     if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS" && Store.isNotTest(fbID)) {
       SeedAppService.createOfficer(fbID);
     }
@@ -107,6 +101,13 @@ module.exports = {
         //   SeedAppService.createIncident(fbID);
         // }
 
+      }
+
+      if (currentState === 'STEP:END_THANK_YOU' && Store.isNotTest(fbID)){
+        SeedAppService.logIncidentData(fbID);
+        SeedAppService.updateUser(fbID);
+        SeedAppService.setTest(fbID, true);
+        SeedAppService.closeIncident(fbID);
       }
 
       if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
