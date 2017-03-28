@@ -17,13 +17,19 @@ module.exports = {
   next(message, fbID) {
     currentState = Store.getState(fbID);
 
-    if (currentState === 'STEP:FINAL_INFO'){
+    if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
+      Store.setTest(fbID);
+    }
+
+    if (currentState === 'STEP:FINAL_INFO' && Store.isNotTest(fbID)){
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
       SeedAppService.closeIncident(fbID);
+    } else {
+      console.log('SKIPPING: TEST')
     }
 
-    if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS") {
+    if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS" && Store.isNotTest(fbID)) {
       SeedAppService.createOfficer(fbID);
     }
 
@@ -94,15 +100,21 @@ module.exports = {
       console.log('RESETTING CONVERSATION')
       currentState = Store.resetState(fbID);
       Store.appendState(currentState, fbID);
-      SeedAppService.createIncident(fbID)
+      if (Store.isNotTest(fbID)) {
+        SeedAppService.createIncident(fbID);
+      }
 
     } else if (isString(message) && message.toLowerCase() === "new report"){
       currentState = Store.resetState(fbID);
       Store.appendState(currentState, fbID);
-      SeedAppService.createIncident(fbID)
+      if (Store.isNotTest(fbID)) {
+        SeedAppService.createIncident(fbID);
+      }
 
     } else {
-      SeedAppService.logIncidentData(fbID);
+      if (Store.isNotTest(fbID)) {
+        SeedAppService.logIncidentData(fbID);
+      }
     }
   },
 

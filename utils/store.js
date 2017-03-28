@@ -13,6 +13,14 @@ class StoreInterface {
     return this.user;
   }
 
+  isNotTest(fbID) {
+    return this.users[fbID]['test'];
+  }
+
+  setTest(fbID) {
+    this.users[fbID]['test'] = true;
+  }
+
   getActiveSurveyId(fbID) {
     return this.user["currentSurveyID"];
   }
@@ -50,6 +58,7 @@ class StoreInterface {
   resetState(fbID) {
     this.user['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
     this.user['data'] = {};
+    this.user['test'] = false;
     return this.user['state'][0];
   }
 
