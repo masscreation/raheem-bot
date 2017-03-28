@@ -18,19 +18,23 @@ class StoreInterface {
 
   setUser(dbID, fbID) {
     let strID = JSON.stringify(fbID);
+    let user;
     client.exists(strID, function(err, reply) {
       if (reply === 1) {
-        this.user = JSON.parse(client.hmget(strID));
+        user = JSON.parse(client.hmget(strID));
+        console.log('OLD USER: ', user)
       } else {
-        this.user = { 'dbID':     dbID,
+        user = { 'dbID':     dbID,
                       'data':     {},
                       'flags':    [],
                       'state':    ['STEP:1_GET_STARTED_PAYLOAD'],
                       'archived': {},
                       'active':   null
                     }
+        console.log('NEW USER: ', user)
       }
     });
+    this.user = user;
     console.log('SET USER', this.user)
   }
 
