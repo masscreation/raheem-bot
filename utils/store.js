@@ -1,6 +1,7 @@
 "use strict";
 //
 let client;
+
 if (process.env.REDISTOGO_URL) {
   let rtg = require("url").parse(process.env.REDISTOGO_URL);
   client = require("redis").createClient(rtg.port, rtg.hostname);
@@ -29,7 +30,7 @@ class StoreInterface {
                     }
       }
     });
-    console.log('SET USER', this.users[fbID])
+    console.log('SET USER', this.user)
   }
 
   endTurn(fbID) {
