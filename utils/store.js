@@ -24,7 +24,7 @@ class StoreInterface {
   }
 
   getActiveSurveyId(fbID) {
-    console.log('IDDDDDD', this.users[fbID]["currentSurveyID"]);
+    console.log('FIND ID: ', this.users[fbID]["currentSurveyID"]);
     return this.users[fbID]["currentSurveyID"];
   }
 
