@@ -37,7 +37,7 @@ module.exports = {
     }
 
     if (content[currentState]["referenceStore"]){
-      message = store.users[fbID]['data'][content[currentState]["referenceStore"]];
+      message = Store.users[fbID]['data'][content[currentState]["referenceStore"]];
     }
 
     currentState = content[currentState].nextMessage
