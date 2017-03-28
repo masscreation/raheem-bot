@@ -23,8 +23,6 @@ class StoreInterface {
   }
 
   getActiveSurveyId(fbID) {
-    console.log('GET SURVEY', fbID)
-    console.log('GET SURVEY', JSON.stringify(this.users[fbID]))
     return this.users[fbID]["currentSurveyID"];
   }
 

@@ -51,9 +51,8 @@ module.exports = {
       method: 'POST'
     }, function(error, response, body) {
       if(!error && response.statusCode == 200) {
-        let response = JSON.parse(body);
-        if (response.data.id) {
-          let id = response.data.id;
+        if (JSON.parse(body)["data"]["id"]) {
+          let id = JSON.parse(body)["data"]["id"];
           Store.saveActiveSurveyId(fbID, id);
         }
       }
