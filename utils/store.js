@@ -9,6 +9,10 @@ class StoreInterface {
     this.user = blob;
   }
 
+  getUser(fbID) {
+    return this.user;
+  }
+
   getActiveSurveyId(fbID) {
     return this.user["currentSurveyID"];
   }

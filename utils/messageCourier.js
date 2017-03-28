@@ -46,7 +46,7 @@ module.exports = {
 
         let outgoingMessages = messageThread.set(currentState, message, fbID);
 
-        RedisService.saveUserBlob(fbID, this.user)
+        RedisService.saveUserBlob(fbID, Store.getUser(fbID))
         .then(function() {
           resolve(outgoingMessages);
         });

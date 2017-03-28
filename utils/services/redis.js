@@ -33,10 +33,10 @@ module.exports = {
     });
   },
 
-  saveUserBlob(fbID) {
+  saveUserBlob(fbID, blob) {
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
-      client.hmset(strID, JSON.stringify(this.user), function(err, reply){
+      client.hmset(strID, JSON.stringify(blob), function(err, reply){
         resolve();
       });
     });
