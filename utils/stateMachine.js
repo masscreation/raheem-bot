@@ -94,7 +94,7 @@ module.exports = {
 
     } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
       let lastStateIndex = store.users[fbID]['state'].length;
-      currentState = store.users[fbID]s['state'][lastStateIndex - 2];
+      currentState = store.users[fbID]['state'][lastStateIndex - 2];
       Store.appendState(currentState, fbID);
 
     } else if (isString(message) && message.toLowerCase() === "restart" || message === greetingVar){
