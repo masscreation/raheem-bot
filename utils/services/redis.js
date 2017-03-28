@@ -12,7 +12,7 @@ if (process.env.REDISTOGO_URL) {
 
 module.exports = {
 
-  getUserBlob(fbID) {
+  getUserBlob(dbID, fbID) {
     console.log("GETTING USER BLOB")
     return new Promise(function(resolve, reject) {
       let strID = JSON.stringify(fbID);
