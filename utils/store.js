@@ -14,7 +14,7 @@ class StoreInterface {
   }
 
   isNotTest(fbID) {
-    return this.user['test'];
+    return !this.user['test'];
   }
 
   setTest(fbID, bool) {
