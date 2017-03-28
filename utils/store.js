@@ -11,6 +11,7 @@ class StoreInterface {
   }
 
   getUser(fbID) {
+    console.log("GET USER: ", this.users[fbID])
     return this.users[fbID];
   }
 
