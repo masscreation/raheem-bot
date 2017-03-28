@@ -17,8 +17,10 @@ module.exports = {
       let strID = JSON.stringify(fbID);
       client.get(strID, function(err, reply) {
         if (reply) {
+          console.log('SAVED USER: ', reply)
           resolve(JSON.parse(reply));
         } else {
+          console.log('NEW USER');
           resolve({ 'dbID':     dbID,
                     'data':     {},
                     'flags':    [],
