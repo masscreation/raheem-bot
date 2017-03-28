@@ -28,8 +28,6 @@ module.exports = {
       SeedAppService.logIncidentData(fbID);
       SeedAppService.updateUser(fbID);
       SeedAppService.closeIncident(fbID);
-    } else {
-      console.log('SKIPPING: TEST')
     }
 
     if (currentState === "STEP:FURTHER_ENCOUNTER_DETAILS" && Store.isNotTest(fbID)) {
@@ -117,6 +115,8 @@ module.exports = {
     } else {
       if (Store.isNotTest(fbID)) {
         SeedAppService.logIncidentData(fbID);
+      } else {
+        console.log("SKIPPING, TEST")
       }
     }
   },
