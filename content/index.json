@@ -14,22 +14,25 @@
   "STEP:MAIN_MENU": {
     "type": "button",
     "anchor": true,
-    "text": "What would you like to do?",
+    "text": "I can help you file an actual report, or we can just do a test drive. Which one?",
     "options": [{
-        "title": "Fill out a report",
+        "title": "File a report",
         "data": "report"
       },
       {
-        "title": "Just try me out",
+        "title": "Test drive",
         "data": "test"
       }
     ],
-    "nextMessage": "STEP:GREETING"
+    "nextMessage": {
+      "report": "STEP:GREETING",
+      "test": "STEP:CONFIRM_TEST"
+    }
   },
 
-  "STEP:GREETING": {
+  "STEP:CONFIRM_TEST": {
     "type": "button",
-    "text": "Alright. Go ahead and try me out. None of your responses will be recorded. To file a report click on “File a report” in the persistent menu.",
+    "text": "Alright. We’ll go through a sample report and I won’t save any of your responses. If you change your mind, choose “File a report” in the menu.",
     "options": [{
         "title": "Ok",
         "data": "ok"
@@ -86,7 +89,7 @@
   "STEP:GREETING_CONT": {
     "type": "message",
     "waitForUser": false,
-    "text": "Good. Let’s try to keep it that way. I’m going to ask you questions to get an idea of what went on. Right now any information is for testing purposes only. In the future, the data will be put together to show what’s happening in our communities.",
+    "text": "Good. Let’s try to keep it that way. I’m going to ask you questions to get an idea of what went on. In the future, the data will be put together to show what’s happening in our communities.",
     "nextMessage": "STEP:DATE_QUERY"
   },
 
