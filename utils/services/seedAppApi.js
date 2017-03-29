@@ -80,23 +80,25 @@ module.exports = {
   },
 
   closeIncident(fbID) {
-    let incidentId = Store.getActiveSurveyId(fbID);
+    return new Promise(function(resolve, reject) {
 
-    if (incidentId) {
-      request({
-        uri: `https://www.raheem.ai/api/v1/incidents/${incidentId}`,
-        qs: {
-              completed: true,
-              write_key: SEED_BOT_WRITE_KEY
-            },
-        rejectUnauthorized: false,
-        method: 'PATCH'
-      }, function(error, response, body) {
-        Store.archiveData(fbID, JSON.parse(body)["data"]["id"]);
-        if(!error && response.statusCode == 200) {
-        }
-      });
-    }
+      let incidentId = Store.getActiveSurveyId(fbID);
+
+      if (incidentId) {
+        request({
+          uri: `https://www.raheem.ai/api/v1/incidents/${incidentId}`,
+          qs: {
+                completed: true,
+                write_key: SEED_BOT_WRITE_KEY
+              },
+          rejectUnauthorized: false,
+          method: 'PATCH'
+        }, function(error, response, body) {
+          Store.archiveData(fbID, JSON.parse(body)["data"]["id"]);
+          resolve();
+        });
+      }
+    });
   },
 
   sendAttachment(url, fbID) {

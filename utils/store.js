@@ -75,6 +75,7 @@ class StoreInterface {
     if (!this.users[fbID]['archived']){
       this.users[fbID]['archived'] = {};
     }
+    this.users[fbID]['currentSurveyID'] = null;
     this.users[fbID]['archived'][surveyID] = this.users[fbID]['data'];
   }
 

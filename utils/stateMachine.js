@@ -104,10 +104,11 @@ module.exports = {
       }
 
       if (currentState === 'STEP:END_THANK_YOU' && Store.isNotTest(fbID)){
-        SeedAppService.logIncidentData(fbID);
         SeedAppService.updateUser(fbID);
         SeedAppService.setTest(fbID, true);
-        SeedAppService.closeIncident(fbID);
+        SeedAppService.closeIncident(fbID).then(function() {
+          resolve();
+        });
       }
 
       if (currentState === 'STEP:MAIN_MENU' && message === 'test') {
