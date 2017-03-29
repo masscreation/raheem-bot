@@ -55,7 +55,7 @@ module.exports = {
       Store.flushFlags(fbID);
 
     } else if (currentState === "STEP:LAST_STEP"){
-      store.users[fbID]['state'].forEach(function(state){
+      Store.users[fbID]['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = state;
         }
@@ -64,7 +64,7 @@ module.exports = {
 
     if (message === "retry"){
       let newCurrentState;
-      store.users[fbID]['state'].forEach(function(state){
+      Store.users[fbID]['state'].forEach(function(state){
         if (content[state]["anchor"] && content[state]["anchor"] === true){
           currentState = newCurrentState;
           newCurrentState = state;
@@ -82,8 +82,8 @@ module.exports = {
         Store.appendState(currentState, fbID);
 
       } else if (isString(message) && message === "resume" && currentState !== "NAV_MENU"){
-        let lastStateIndex = store.users[fbID]['state'].length;
-        currentState = store.users[fbID]['state'][lastStateIndex - 2];
+        let lastStateIndex = Store.users[fbID]['state'].length;
+        currentState = Store.users[fbID]['state'][lastStateIndex - 2];
         Store.appendState(currentState, fbID);
 
       } else if (isString(message) && message.toLowerCase() === "restart" || message === greetingVar){
@@ -107,6 +107,7 @@ module.exports = {
         SeedAppService.updateUser(fbID);
         SeedAppService.setTest(fbID, true);
         SeedAppService.closeIncident(fbID).then(function() {
+
           resolve();
         });
       }
