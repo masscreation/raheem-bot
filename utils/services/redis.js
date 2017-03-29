@@ -30,7 +30,7 @@ module.exports = {
                     'archived': {},
                     'active':   null,
                     'test':     false,
-                    'currentSurveyID': null
+                    'currentSurveyID': 'none'
                   });
         }
       });

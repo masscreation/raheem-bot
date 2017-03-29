@@ -63,7 +63,7 @@ class StoreInterface {
   resetState(fbID) {
     this.users[fbID]['state'] = ['STEP:1_GET_STARTED_PAYLOAD'];
     this.users[fbID]['data'] = {};
-    this.users[fbID]['test'] = false;
+    this.users[fbID]['currentSurveyID'] = 'none';
     return this.users[fbID]['state'][0];
   }
 
@@ -75,7 +75,7 @@ class StoreInterface {
     if (!this.users[fbID]['archived']){
       this.users[fbID]['archived'] = {};
     }
-    this.users[fbID]['currentSurveyID'] = null;
+    this.users[fbID]['currentSurveyID'] = 'none';
     this.users[fbID]['archived'][surveyID] = this.users[fbID]['data'];
   }
 
